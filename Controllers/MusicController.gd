@@ -170,9 +170,10 @@ func get_state():
 func current_track():
 	return _tracklist[_current_track]
 
+
 func find_track(search_string):
 	if search_string.empty():
-		push_error("MusicController::search_track() -> Search term can't be null.")
+		push_error("MusicController::find_track() -> Search term can't be null.")
 		return -1
 	
 	for index in range(0,_tracklist.size() - 1):
@@ -180,3 +181,11 @@ func find_track(search_string):
 			return index
 	
 	return -1
+
+
+func set_volume(value : int):
+	if value < 0 or value > 0:
+		push_error("MusicController::set_volume() -> Volume must be in range of 0 to 100.")
+		return -1
+	
+	

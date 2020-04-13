@@ -21,7 +21,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-MusicManager="*res://Controllers/MusicController.tscn"
+MusicController="*res://Controllers/MusicController.tscn"
 
 [display]
 
