@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SSD_Mission_2.ogg-04e974580fea5f61a89a27440a848bcb.oggstr"
+
+[deps]
+
+source_file="res://Resources/Audio/Musics/SSD_Mission_2.ogg"
+dest_files=[ "res://.import/SSD_Mission_2.ogg-04e974580fea5f61a89a27440a848bcb.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
