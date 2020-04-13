@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SSD_Outro.ogg-ff836b3f773f9dba7d3046c8ce42a2b8.oggstr"
+
+[deps]
+
+source_file="res://Resources/Audio/Musics/SSD_Outro.ogg"
+dest_files=[ "res://.import/SSD_Outro.ogg-ff836b3f773f9dba7d3046c8ce42a2b8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
