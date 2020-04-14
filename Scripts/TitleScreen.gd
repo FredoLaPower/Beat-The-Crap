@@ -3,7 +3,7 @@ extends Node2D
 
 func _ready():
 	MusicController.disallow_mixed_resources()
-	MusicController.set_resource_path("res://Resources/Audio/Musics/")
+	MusicController.set_resource_path("res://Assets/Audio/Musics/")
 	
 	MusicController.add_track("SSD_Intro.ogg")
 	MusicController.add_track("SSD_Mission_1.ogg")
@@ -13,7 +13,8 @@ func _ready():
 	MusicController.add_track("SSD_Mission_5.ogg")
 	MusicController.add_track("SSD_Mission_6.ogg")
 	MusicController.add_track("SSD_Outro.ogg")
-
+	
+	$HSlider.value = MusicController.get_volume()
 
 func _on_Pause_pressed():
 	if MusicController.get_state() == "Paused":
@@ -41,3 +42,7 @@ func _on_Play_pressed():
 	
 	$Title.text = "Title : " +MusicController.current_track()
 	$State.text = "State : " + MusicController.get_state()
+
+
+func _on_HSlider_value_changed(value):
+	MusicController.set_volume(value)
