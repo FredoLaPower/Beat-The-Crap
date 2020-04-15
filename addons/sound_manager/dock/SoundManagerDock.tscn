@@ -3,6 +3,10 @@
 [ext_resource path="res://addons/sound_manager/dock/SoundManagerDock.gd" type="Script" id=1]
 [ext_resource path="res://addons/sound_manager/dock/assets/folder_icon.svg" type="Texture" id=2]
 
+
+
+
+
 [node name="SoundManager" type="ScrollContainer"]
 anchor_bottom = 1.0
 margin_right = 365.0

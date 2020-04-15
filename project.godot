@@ -9,19 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
+"base": "Reference",
 "class": "SoundManagerModule",
 "language": "GDScript",
 "path": "res://addons/sound_manager/module/internal_scripts/SoundManager_config.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://classes/finite_state_machine.gd"
 } ]
 _global_script_class_icons={
-"SoundManagerModule": ""
+"SoundManagerModule": "",
+"StateMachine": ""
 }
 
 [application]
 
 config/name="Beat-the- Crap"
-run/main_scene="res://TitleScreen.tscn"
+run/main_scene="res://scenes/stage_1/stage_1.tscn"
 config/icon="res://icon.png"
 
 [autoload]
