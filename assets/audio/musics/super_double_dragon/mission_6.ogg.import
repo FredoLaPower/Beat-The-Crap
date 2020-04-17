@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mission_6.ogg-72f08ea6ec8d85fe62195a35b96bdcc3.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/musics/super_double_dragon/mission_6.ogg"
+dest_files=[ "res://.import/mission_6.ogg-72f08ea6ec8d85fe62195a35b96bdcc3.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

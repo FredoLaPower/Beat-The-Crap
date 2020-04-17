@@ -27,10 +27,9 @@ export(String) var START_STATE
 # PRIVATE
 #------------------------------
 var _current_state: String = ""
-var _state_dictionary = {} # No static typing for dictionary
 var _previous_state: String = ""
-var _states_stack = [] # Use to store hierachy of states
-var _is_active: bool = false
+var _state_dictionary = {} # No static typing for dictionary
+var _states_stack = [] # Use to store the hierachy of states
 
 
 #------------------------------
@@ -46,53 +45,50 @@ var _is_active: bool = false
 #------------------------------
 # VIRTUAL
 #------------------------------
-func _ready(): # is  used to initiate the state machine
+func _ready():
+#	__add_state("Idle", $Idle)
+#	__initialize()
 	pass
 
-
-func _physics_process(delta): # is used to update the current state
+# Process the current state logic
+func _physics_process(delta):
 	_state_dictionary[_states_stack[0]].update(delta)
 
 
-func _input(event): # is used to manage input for the current state
+# Forward input to the current state
+func _input(event):
 	_state_dictionary[_states_stack[0]].input(event)
 
 
 #------------------------------
 # PRIVATE
 #------------------------------
+func __initialize():
+	# Subscribe to state signals
+	for child in get_children():
+		child.connect("finished", self, "__change_state")
+	
+	# Initialize state machine
+	__change_state(START_STATE)
+
+
 func __add_state(state_name: String, state_node_path: Node):
 	_state_dictionary[state_name] = state_node_path
 
 
 func __change_state(new_state: String):
-	if _state_dictionary[new_state] == null:
-		push_error("StateMachine::__change_state() -> The state '%s' doesn't exist." % new_state)
-		return
-	
+	# Exit previous state
 	if _states_stack.size() != 0:
-		_state_dictionary[_states_stack[0]].exit() # we exit current state
-		_states_stack.pop_front() # we pop out the current state from the stack
+		_state_dictionary[_current_state].exit()
+		_states_stack.pop_front()
 	
-	if _states_stack.size() == 0: # if the stack is empty we push the new state
-		_states_stack.push_front(new_state)
+	# Enter new state
+	_current_state = new_state
+	_states_stack.push_front(new_state)
+	_state_dictionary[new_state].enter()
 	
-	elif _states_stack[0] != new_state: # if the next state in the stacj is different from the new one with push the new state
-		_states_stack.push_front(new_state)
-	
-	_current_state = _states_stack[0]
-	
-	_state_dictionary[_states_stack[0]].enter() # we enter the new state
-	
+	# Broadcast change of state
 	emit_signal("state_changed", _current_state)
-
-
-func __initialize():
-	if START_STATE == "":
-		push_error("FiniteStateMachine::initialize() -> 'Start State' is not declared in the parent node.")
-		return
-	
-	__change_state(START_STATE)
 
 
 #------------------------------

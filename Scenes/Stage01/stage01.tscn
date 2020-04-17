@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/graphics/stages/stage_1/stage_1_layer_fg.png" type="Texture" id=1]
+[ext_resource path="res://assets/graphics/stages/stage_1/stage_1_layer_bg.png" type="Texture" id=2]
+[ext_resource path="res://objects/billy/billy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Stage01/stage01.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Stage01/Pushdown.gd" type="Script" id=5]
+[ext_resource path="res://assets/fonts/robot.otf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 12
+font_data = ExtResource( 6 )
+
+[node name="Stage01" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Pushdown" type="Panel" parent="HUD"]
+margin_right = 65.0
+margin_bottom = 65.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/Pushdown"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 63.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 1 )
+text = "Pushdown"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stack" type="Label" parent="HUD/Pushdown"]
+margin_left = 2.0
+margin_top = 18.0
+margin_right = 63.0
+margin_bottom = 34.0
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Foreground" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="stage_1_layer_fg" type="Sprite" parent="Foreground"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Ground" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Billy" parent="Ground" instance=ExtResource( 3 )]
+position = Vector2( 90, 190 )
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="stage_1_layer_bg" type="Sprite" parent="Background"]
+position = Vector2( 0.792862, 0.396423 )
+texture = ExtResource( 2 )
+centered = false

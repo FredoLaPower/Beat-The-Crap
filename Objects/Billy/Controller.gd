@@ -7,6 +7,3 @@ func _ready():
 	__add_state("Jump", $Jump)
 	
 	__initialize()
-	
-	for child in get_children():
-		child.connect("finished", self, "__change_state")

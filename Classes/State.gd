@@ -20,9 +20,6 @@ signal finished(next_state)
 #------------------------------
 # PUBLIC
 #------------------------------
-func update(delta):
-	pass
-
 
 func enter():
 	pass
@@ -30,6 +27,10 @@ func enter():
 
 func exit():
 	pass
+
+func update(delta):
+	pass
+
 
 func input(event):
 	pass
