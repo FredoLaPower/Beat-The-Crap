@@ -2,6 +2,8 @@ extends "res://Classes/FiniteStateMachine.gd"
 
 
 func _ready():
+	_is_in_debug_mode = true
+	
 	__add_state("Idle", $Idle)
 	__add_state("Walk", $Walk)
 	__add_state("Jump", $Jump)

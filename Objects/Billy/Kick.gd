@@ -8,5 +8,6 @@ func enter():
 	owner.get_node("Animations/AnimationPlayer").play("Kick")
 
 
-func _on_animation_finished(_anim_name):
-	emit_signal("finished", "Idle")
+func _on_animation_finished(anim_name):
+	if anim_name == "Kick":
+		emit_signal("finished", "Previous")

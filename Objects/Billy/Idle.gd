@@ -6,15 +6,15 @@ func input(event):
 		return
 	
 	if event.is_action_pressed("ui_jump"):
-		emit_signal("finished", "Jump")
+		emit_signal("finished", "sub_Jump")
 		return
 	
 	if event.is_action_pressed("ui_punch"):
-		emit_signal("finished", "Punch")
+		emit_signal("finished", "sub_Punch")
 		return
 	
 	if event.is_action_pressed("ui_kick"):
-		emit_signal("finished", "Kick")
+		emit_signal("finished", "sub_Kick")
 		return
 
 func enter():

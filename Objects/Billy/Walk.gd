@@ -8,5 +8,5 @@ func _input(event):
 	if event.is_action_released("ui_right"):
 		emit_signal("finished", "Idle")
 	
-	if event.is_action_pressed("ui_up"):
-		pass
+	if event.is_action_pressed("ui_jump"):
+		emit_signal("finished", "sub_Jump")
