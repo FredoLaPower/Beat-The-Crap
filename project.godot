@@ -9,25 +9,31 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
-"class": "SoundManagerModule",
+"base": "Node",
+"class": "MyClass",
 "language": "GDScript",
-"path": "res://addons/sound_manager/module/internal_scripts/SoundManager_config.gd"
+"path": "res://Classes/ClassTemplate.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://Classes/State.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://classes/finite_state_machine.gd"
+"path": "res://Classes/FiniteStateMachine.gd"
 } ]
 _global_script_class_icons={
-"SoundManagerModule": "",
+"MyClass": "",
+"State": "",
 "StateMachine": ""
 }
 
 [application]
 
-config/name="Beat-the- Crap"
-run/main_scene="res://scenes/stage_1/stage_1.tscn"
+config/name="Fat and Furious"
+run/main_scene="res://Scenes/Main/Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -38,7 +44,7 @@ MusicController="*res://Controllers/MusicController/MusicController.tscn"
 
 window/size/width=400
 window/size/height=225
-window/size/resizable=false
+window/size/always_on_top=true
 window/size/test_width=800
 window/size/test_height=450
 window/stretch/mode="2d"

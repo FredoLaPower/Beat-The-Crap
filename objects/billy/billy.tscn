@@ -1,15 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=1]
-[ext_resource path="res://objects/billy/billy_fsm_moves.gd" type="Script" id=2]
-[ext_resource path="res://objects/billy/billy_fsm_actions.gd" type="Script" id=3]
-[ext_resource path="res://objects/billy/billy.gd" type="Script" id=4]
+[ext_resource path="res://Objects/Billy/Idle.gd" type="Script" id=2]
+[ext_resource path="res://Objects/Billy/Jump.gd" type="Script" id=3]
+[ext_resource path="res://Objects/Billy/Billy.gd" type="Script" id=4]
+[ext_resource path="res://Objects/Billy/Walk.gd" type="Script" id=5]
+[ext_resource path="res://Objects/Billy/Controller.gd" type="Script" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("BillySpritesheet:frame")
+tracks/0/path = NodePath("Spritesheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -21,11 +23,27 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
+resource_name = "Jump"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spritesheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 10, 9, 8 ]
+}
+
+[sub_resource type="Animation" id=3]
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("BillySpritesheet:frame")
+tracks/0/path = NodePath("Spritesheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -42,20 +60,46 @@ script = ExtResource( 4 )
 
 [node name="Animations" type="Node2D" parent="."]
 
-[node name="BillySpritesheet" type="Sprite" parent="Animations"]
+[node name="Spritesheet" type="Sprite" parent="Animations"]
 position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 vframes = 6
 hframes = 8
 
-[node name="BillyAnimationPlayer" type="AnimationPlayer" parent="Animations"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
 anims/Idle = SubResource( 1 )
-anims/Walk = SubResource( 5 )
+anims/Jump = SubResource( 2 )
+anims/Walk = SubResource( 3 )
 
-[node name="StateMachines" type="Node2D" parent="."]
+[node name="Controller" type="Node" parent="."]
+script = ExtResource( 6 )
+START_STATE = "Idle"
 
-[node name="Moves" type="Node2D" parent="StateMachines"]
+[node name="Idle" type="Node" parent="Controller"]
 script = ExtResource( 2 )
 
-[node name="Actions" type="Node2D" parent="StateMachines"]
+[node name="Walk" type="Node" parent="Controller"]
+script = ExtResource( 5 )
+
+[node name="Jump" type="Node" parent="Controller"]
 script = ExtResource( 3 )
+
+[node name="State" type="Label" parent="."]
+margin_left = -29.5674
+margin_top = -75.7419
+margin_right = 29.4326
+margin_bottom = -61.7419
+text = "You wana"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stack" type="Label" parent="."]
+margin_left = -30.2637
+margin_top = 10.7334
+margin_right = 28.7363
+margin_bottom = 24.7334
+text = "You wana"
+__meta__ = {
+"_edit_use_anchors_": false
+}

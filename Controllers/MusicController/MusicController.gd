@@ -1,23 +1,24 @@
-extends AudioStreamPlayer
+# class_name  MusicController
 
+extends AudioStreamPlayer
 
 #------------------------------------------------------------
 # PRIVATE MEMBERS
 #------------------------------------------------------------
 
 
-var _tracklist       = []   # Array of resource path strings
-var _current_track   = 0    # Index in arrays starts from 0
-var _resource_path   = ""   # Common path where all the files are stored (optional if _mixed_resources = truer)
+var _tracklist = []   # Array of resource path strings
+var _current_track = 0    # Index in arrays starts from 0
+var _resource_path = ""   # Common path where all the files are stored (optional if _mixed_resources = truer)
 var _mixed_resources = true # If mixed resources is set to true both _resource_path and _file_extension will be ignored
-var _state           = "Stopped"
-var _bus             = ""
+var _state = "Stopped"
+var _bus = ""
 
 
 func _ready():
-	autoplay      = false
+	autoplay = false
 	stream_paused = false
-	playing       = false
+	playing = false
 
 #------------------------------------------------------------
 # METHODS
@@ -27,7 +28,7 @@ func _ready():
 #------------------------------
 # Config
 #------------------------------
-func set_resource_path(resource_path : String):
+func set_resource_path(resource_path: String):
 	if _mixed_resources:
 		push_warning("MusicController::set_resource_path() -> Mixed resources is set to true.")
 	
@@ -38,7 +39,7 @@ func set_resource_path(resource_path : String):
 	var directory = Directory.new();
 	
 	if not directory.dir_exists(resource_path):
-		push_error("MusicController::set_resource_path() -> Directory not found : " + resource_path)
+		push_error("MusicController::set_resource_path() -> Directory not found: " + resource_path)
 		return
 	
 	_resource_path = resource_path
@@ -52,7 +53,7 @@ func disallow_mixed_resources():
 	_mixed_resources = false
 
 
-func set_bus(bus_name : String):
+func set_bus(bus_name: String):
 	_bus = bus_name
 	bus = bus
 
@@ -60,7 +61,7 @@ func set_bus(bus_name : String):
 #------------------------------
 # Play controls
 #------------------------------
-func play_track(resource_path : String, add_resource_path = false):
+func play_track(resource_path: String, add_resource_path: bool = false):
 	if resource_path.empty():
 		push_error("MusicController::play_track() -> Resource path can't be null.")
 		return
@@ -73,7 +74,7 @@ func play_track(resource_path : String, add_resource_path = false):
 		path = resource_path
 	
 	if not File.new().file_exists(path):
-		push_error("MusicController::play_track() -> File not found : " + path)
+		push_error("MusicController::play_track() -> File not found: " + path)
 		return
 	
 	var track = load(path) 
@@ -95,18 +96,18 @@ func stop_track():
 
 func pause():
 	stream_paused = true
-	_state        = "Paused"
+	_state = "Paused"
 
 
 func unpause():
 	stream_paused = false
-	_state        = "Unpaused"
+	_state = "Unpaused"
 
 
 #------------------------------
 # Volume control
 #------------------------------
-func set_volume(value : float):
+func set_volume(value: float):
 	if value < 0 or value > 100:
 		push_error("MusicController::set_volume() -> Volumne must be in range of 0 to 100.")
 		return
@@ -122,7 +123,7 @@ func get_volume() -> int:
 #------------------------------
 # Playlist Management
 #------------------------------
-func add_track(resource_path : String):
+func add_track(resource_path: String):
 	if resource_path.empty():
 		push_error("MusicController::add_track() -> Resource path can't be null.")
 		return
@@ -137,7 +138,7 @@ func add_track(resource_path : String):
 	_tracklist.append(path)
 
 
-func remove_track(resource_path : String):
+func remove_track(resource_path: String):
 	if resource_path.empty():
 		push_error("MusicController::remove_track() -> Resource path can't be null.")
 		return
@@ -165,7 +166,7 @@ func clear_tracklist():
 #------------------------------
 # Playlist controls
 #------------------------------
-func play_track_number(number : int):
+func play_track_number(number: int):
 	if number < 0 or number > _tracklist.size():
 		push_error("MusicController::play_track_number() -> Track number is outside of the tracklist boundaries.")
 		return

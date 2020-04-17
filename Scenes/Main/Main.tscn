@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Objects/Billy/Billy.tscn" type="PackedScene" id=5]
+
+[node name="Main" type="Node2D"]
+
+[node name="Billy" parent="." instance=ExtResource( 5 )]
+position = Vector2( 192.066, 150.772 )
