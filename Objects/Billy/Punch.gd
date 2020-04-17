@@ -5,7 +5,7 @@ func _ready():
 
 
 func enter():
-	owner.get_node("Animations/AnimationPlayer").play("Jump")
+	owner.get_node("Animations/AnimationPlayer").play("Punch")
 
 
 func _on_animation_finished(_anim_name):

@@ -34,3 +34,6 @@ func update(delta):
 
 func input(event):
 	pass
+
+func _on_animation_finished(anim_name):
+	pass
