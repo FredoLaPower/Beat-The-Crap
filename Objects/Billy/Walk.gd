@@ -1,10 +1,10 @@
 extends "res://Classes/State.gd"
 
 
-func enter():
+func state_enter():
 	owner.get_node("Animations/AnimationPlayer").play("Walk")
 
-func _input(event):
+func state_input(event):
 	if event.is_action_released("ui_right"):
 		emit_signal("finished", "Idle")
 	

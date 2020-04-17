@@ -21,18 +21,18 @@ signal finished(next_state)
 # PUBLIC
 #------------------------------
 
-func enter():
+func state_enter():
 	pass
 
 
-func exit():
+func state_exit():
 	pass
 
-func update(delta):
+func state_update(delta):
 	pass
 
 
-func input(event):
+func state_input(event):
 	pass
 
 func _on_animation_finished(anim_name):
