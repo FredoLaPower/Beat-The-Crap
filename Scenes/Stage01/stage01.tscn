@@ -17,6 +17,30 @@ font_data = ExtResource( 6 )
 [node name="Stage01" type="Node2D"]
 script = ExtResource( 4 )
 
+[node name="Foreground" type="CanvasLayer" parent="."]
+layer = 10
+follow_viewport_enable = true
+
+[node name="stage_1_layer_fg" type="Sprite" parent="Foreground"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -10
+follow_viewport_enable = true
+
+[node name="stage_1_layer_bg" type="Sprite" parent="Background"]
+position = Vector2( 0.792862, 0.396423 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Ground" type="CanvasLayer" parent="."]
+layer = 0
+follow_viewport_enable = true
+
+[node name="Billy" parent="Ground" instance=ExtResource( 3 )]
+position = Vector2( 90, 190 )
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Pushdown" type="Panel" parent="HUD"]
@@ -47,24 +71,3 @@ custom_fonts/font = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Foreground" type="CanvasLayer" parent="."]
-layer = 10
-
-[node name="stage_1_layer_fg" type="Sprite" parent="Foreground"]
-texture = ExtResource( 1 )
-centered = false
-
-[node name="Ground" type="CanvasLayer" parent="."]
-layer = 0
-
-[node name="Billy" parent="Ground" instance=ExtResource( 3 )]
-position = Vector2( 90, 190 )
-
-[node name="Background" type="CanvasLayer" parent="."]
-layer = -10
-
-[node name="stage_1_layer_bg" type="Sprite" parent="Background"]
-position = Vector2( 0.792862, 0.396423 )
-texture = ExtResource( 2 )
-centered = false

@@ -8,11 +8,6 @@ func enter():
 	owner.get_node("Animations/AnimationPlayer").play("Jump")
 
 
-func update(delta):
-	#appliquer la physique
-	pass
-
-
 func _on_animation_finished(anim_name):
 	if anim_name == "Jump":
 		emit_signal("finished", "Previous")

@@ -32,6 +32,11 @@ var _states_stack = [] # Use to store the hierachy of states
 var _is_in_debug_mode: bool = false
 var _is_paused: bool = false
 
+# Input Manager
+
+var _input_dictionary = {} # [input_name, state, value]
+var _input_history = [] # [input_name, timestamp]
+
 #------------------------------
 # PUBLIC
 #------------------------------
@@ -57,7 +62,7 @@ func _physics_process(delta):
 
 
 # Forward input to the current state
-func _input(event):
+func _input(event):	
 	_state_dictionary[_states_stack[0]].handle_input(event)
 
 
@@ -107,11 +112,22 @@ func __change_state(new_state: String):
 	emit_signal("state_changed", _current_state)
 	
 	if _is_in_debug_mode:
-		__debug(new_state)
+		__debug("fsm", new_state)
 
-func __debug(trace: String = ""):
-	print("trace = %s | _current_state = %s | _states_stack = %s" % [trace, _current_state, _states_stack])
 
+func __listen_input(input_name: String):
+	_input_dictionary[input_name] = {"state": "", "value": 0}
+
+
+func __track_input():
+	pass
+
+
+func __debug(type: String, trace: String = ""):
+	if (type == "fsm"):
+		print("trace = %s | _current_state = %s | _states_stack = %s" % [trace, _current_state, _states_stack])
+	elif (type == "input"):
+		print("trace = %s | _input_dictionary = %s | _input_history = %s" % [trace, _input_dictionary, _input_history])
 
 #------------------------------
 # PUBLIC
@@ -141,3 +157,15 @@ func _unpause():
 	
 	set_physics_process(true)
 	set_process_input(true)
+
+
+func input_is_pressed():
+	pass
+
+
+func input_is_released():
+	pass
+
+
+func get_input_value():
+	pass
