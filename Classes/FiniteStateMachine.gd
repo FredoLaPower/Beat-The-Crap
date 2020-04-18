@@ -30,6 +30,7 @@ var _current_state: String = ""
 var _state_dictionary = {} # No static typing for dictionary
 var _states_stack = [] # Use to store the hierachy of states
 var _is_in_debug_mode: bool = false
+var _is_paused: bool = false
 
 #------------------------------
 # PUBLIC
@@ -49,19 +50,21 @@ func _ready():
 #	__initialize()
 	pass
 
+
 # Process the current state logic
 func _physics_process(delta):
-	_state_dictionary[_states_stack[0]].state_update(delta)
+	_state_dictionary[_states_stack[0]].update(delta)
 
 
 # Forward input to the current state
 func _input(event):
-	_state_dictionary[_states_stack[0]].state_input(event)
+	_state_dictionary[_states_stack[0]].handle_input(event)
 
 
 #------------------------------
 # PRIVATE
 #------------------------------
+# Initialize the state machine
 func __initialize():
 	# Subscribe to state signals
 	for child in get_children():
@@ -71,12 +74,14 @@ func __initialize():
 	__change_state(START_STATE)
 
 
+# Add a new state to the state machine
 func __add_state(state_name: String, state_node_path: Node):
 	_state_dictionary[state_name] = state_node_path
 
 
+# Manage state machine logic
 func __change_state(new_state: String):
-	#Avoid infinite loop at startup
+	#Avoid infinite loop at startup or pause
 	if new_state == _current_state:
 		return
 	
@@ -85,7 +90,7 @@ func __change_state(new_state: String):
 		new_state = new_state.replace("sub_", "")
 	elif _states_stack.size() > 0:
 		#Exit previous state
-		_state_dictionary[_current_state].state_exit()
+		_state_dictionary[_current_state].exit()
 		_states_stack.pop_front()
 	
 	# Return to previous state
@@ -96,7 +101,7 @@ func __change_state(new_state: String):
 	
 	# Enter new state
 	_current_state = new_state
-	_state_dictionary[new_state].state_enter()
+	_state_dictionary[new_state].enter()
 	
 	# Broadcast change of state
 	emit_signal("state_changed", _current_state)
@@ -106,13 +111,33 @@ func __change_state(new_state: String):
 
 func __debug(trace: String = ""):
 	print("trace = %s | _current_state = %s | _states_stack = %s" % [trace, _current_state, _states_stack])
-	
+
 
 #------------------------------
 # PUBLIC
 #------------------------------
+# Return the current state
 func get_state():
 	return _current_state
 
+
+# Return the state machine stack
 func get_states_stack():
 	return _states_stack
+
+func is_paused():
+	return _is_paused
+
+
+func pause():
+	_is_paused = true
+	
+	set_physics_process(false)
+	set_process_input(false)
+
+
+func _unpause():
+	_is_paused = false
+	
+	set_physics_process(true)
+	set_process_input(true)
