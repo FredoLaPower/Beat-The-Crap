@@ -53,7 +53,7 @@ func _process(delta):
 
 
 # Forward input to the current state
-func _input(event):	
+func _input(event):
 	_state_dictionary[_states_stack[0]].handle_input(event)
 
 

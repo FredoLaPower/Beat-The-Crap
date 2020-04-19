@@ -2,11 +2,6 @@ extends "res://Classes/State.gd"
 
 var _start_position_y: float = 0
 
-
-func initialize():
-	get_node(ANIMATION_PLAYER).connect("animation_finished", self, "_on_animation_finished")
-
-
 func enter():
 	get_node(ANIMATION_PLAYER).play("Jump")
 	_start_position_y = owner.position.y
