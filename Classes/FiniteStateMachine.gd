@@ -22,6 +22,9 @@ signal state_changed(new_state)
 # EXPORT
 #------------------------------
 export(String) var START_STATE
+export(NodePath) var ANIMATION_PLAYER
+export(NodePath) var SPRITE_SHEET
+
 
 #------------------------------
 # PRIVATE
@@ -40,7 +43,8 @@ var _input_history = [] # [input_name, timestamp]
 #------------------------------
 # PUBLIC
 #------------------------------
-
+var AnimationPlayer: Node
+var SpriteSheet: Node
 
 
 #------------------------------------------------------------
@@ -50,11 +54,6 @@ var _input_history = [] # [input_name, timestamp]
 #------------------------------
 # VIRTUAL
 #------------------------------
-func _ready():
-#	__add_state("Idle", $Idle)
-#	__initialize()
-	pass
-
 
 # Process the current state logic
 func _physics_process(delta):
@@ -69,32 +68,19 @@ func _input(event):
 #------------------------------
 # PRIVATE
 #------------------------------
-# Initialize the state machine
-func __initialize():
-	# Subscribe to state signals
-	for child in get_children():
-		child.connect("finished", self, "__change_state")
-	
-	# Initialize state machine
-	__change_state(START_STATE)
-
-
 # Add a new state to the state machine
-func __add_state(state_name: String, state_node_path: Node):
-	_state_dictionary[state_name] = state_node_path
+func __add_state(state_name: String, state_node: Node):
+	_state_dictionary[state_name] = state_node
 
 
 # Manage state machine logic
-func __change_state(new_state: String):
+func __change_state(new_state: String, is_sub_state: bool = false):
 	#Avoid infinite loop at startup or pause
 	if new_state == _current_state:
 		return
 	
-	# stack states
-	if new_state.find("sub_") != -1:
-		new_state = new_state.replace("sub_", "")
-	elif _states_stack.size() > 0:
-		#Exit previous state
+	#Exit previous state
+	if ! is_sub_state && _states_stack.size() > 0:
 		_state_dictionary[_current_state].exit()
 		_states_stack.pop_front()
 	
@@ -129,19 +115,35 @@ func __debug(type: String, trace: String = ""):
 	elif (type == "input"):
 		print("trace = %s | _input_dictionary = %s | _input_history = %s" % [trace, _input_dictionary, _input_history])
 
+
 #------------------------------
 # PUBLIC
 #------------------------------
+# Initialize the state machine
+func initialize():
+	# Store animation and sprite nodes
+	AnimationPlayer = get_node(ANIMATION_PLAYER)
+	SpriteSheet = get_node(SPRITE_SHEET)
+	
+	# Subscribe to state signals and initialize states
+	for child in get_children():
+		child.connect("finished", self, "__change_state")
+		child.initialize()
+	
+	# Initialize state machine
+	__change_state(START_STATE)
+
+
 # Return the current state
-func get_state():
+func get_state() -> String:
 	return _current_state
 
 
 # Return the state machine stack
-func get_states_stack():
+func get_states_stack() -> Array:
 	return _states_stack
 
-func is_paused():
+func is_paused() -> bool:
 	return _is_paused
 
 

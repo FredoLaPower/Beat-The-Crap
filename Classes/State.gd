@@ -21,6 +21,10 @@ signal finished(next_state)
 # PUBLIC
 #------------------------------
 
+func initialize():
+	pass
+
+
 func enter():
 	pass
 

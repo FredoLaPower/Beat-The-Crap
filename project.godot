@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Classes/Character.gd"
+}, {
 "base": "Node",
 "class": "MyClass",
 "language": "GDScript",
-"path": "res://Classes/ClassTemplate.gd"
+"path": "res://Classes/template.gd"
+}, {
+"base": "Node2D",
+"class": "Stage",
+"language": "GDScript",
+"path": "res://Classes/Stage.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -25,7 +35,9 @@ _global_script_classes=[ {
 "path": "res://Classes/FiniteStateMachine.gd"
 } ]
 _global_script_class_icons={
+"Character": "",
 "MyClass": "",
+"Stage": "",
 "State": "",
 "StateMachine": ""
 }
@@ -74,6 +86,30 @@ ui_focus_next={
 ui_focus_prev={
 "deadzone": 0.5,
 "events": [  ]
+}
+ui_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":-1.0,"script":null)
+ ]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
+ ]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
+ ]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
+ ]
 }
 ui_page_up={
 "deadzone": 0.5,

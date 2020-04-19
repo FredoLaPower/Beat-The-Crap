@@ -10,8 +10,10 @@
 [ext_resource path="res://objects/billy/Kick.gd" type="Script" id=8]
 [ext_resource path="res://objects/billy/Punch.gd" type="Script" id=9]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Idle"
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12, 27 )
+
+[sub_resource type="Animation" id=2]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Spritesheet:frame")
@@ -26,8 +28,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Jump"
+[sub_resource type="Animation" id=3]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Spritesheet:frame")
@@ -42,8 +43,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 10, 9, 8 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Kick"
+[sub_resource type="Animation" id=4]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Spritesheet:frame")
@@ -58,8 +58,7 @@ tracks/0/keys = {
 "values": [ 16, 17, 18, 19, 25, 26, 27, 19 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "Punch"
+[sub_resource type="Animation" id=5]
 length = 1.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Spritesheet:frame")
@@ -74,7 +73,7 @@ tracks/0/keys = {
 "values": [ 32, 33, 34, 35, 36, 37, 38, 39, 42, 43, 44 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -90,38 +89,28 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6 ]
 }
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=7]
 size = 12
 font_data = ExtResource( 7 )
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 12, 27 )
-
 [node name="Billy" type="KinematicBody2D"]
 script = ExtResource( 4 )
+MAX_SPEED = Vector2( 100, 50 )
+JUMP_FORCE = 300
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, -100 )
 current = true
 
-[node name="Animations" type="Node2D" parent="."]
-
-[node name="Spritesheet" type="Sprite" parent="Animations"]
-position = Vector2( 0, -32 )
-texture = ExtResource( 1 )
-vframes = 6
-hframes = 8
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
-anims/Idle = SubResource( 1 )
-anims/Jump = SubResource( 2 )
-anims/Kick = SubResource( 3 )
-anims/Punch = SubResource( 4 )
-anims/Walk = SubResource( 5 )
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -27 )
+shape = SubResource( 1 )
 
 [node name="Controller" type="Node" parent="."]
 script = ExtResource( 6 )
 START_STATE = "Idle"
+ANIMATION_PLAYER = NodePath("../Animations/AnimationPlayer")
+SPRITE_SHEET = NodePath("../Animations/Spritesheet")
 
 [node name="Idle" type="Node" parent="Controller"]
 script = ExtResource( 2 )
@@ -138,19 +127,30 @@ script = ExtResource( 8 )
 [node name="Punch" type="Node" parent="Controller"]
 script = ExtResource( 9 )
 
+[node name="Animations" type="Node2D" parent="."]
+
+[node name="Spritesheet" type="Sprite" parent="Animations"]
+position = Vector2( 0, -32 )
+texture = ExtResource( 1 )
+vframes = 6
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
+anims/Idle = SubResource( 2 )
+anims/Jump = SubResource( 3 )
+anims/Kick = SubResource( 4 )
+anims/Punch = SubResource( 5 )
+anims/Walk = SubResource( 6 )
+
 [node name="State" type="Label" parent="."]
 margin_top = -70.0
 margin_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -27 )
-shape = SubResource( 7 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = -20.0096

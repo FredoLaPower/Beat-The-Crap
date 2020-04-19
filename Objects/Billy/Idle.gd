@@ -1,7 +1,7 @@
 extends "res://Classes/State.gd"
 
 func enter():
-	owner.get_node("Animations/AnimationPlayer").play("Idle")
+	get_parent().AnimationPlayer.play("Idle")
 
 
 func handle_input(event):
@@ -10,13 +10,13 @@ func handle_input(event):
 		return
 	
 	if event.is_action_pressed("ui_jump"):
-		emit_signal("finished", "sub_Jump")
+		emit_signal("finished", "Jump", true)
 		return
 	
 	if event.is_action_pressed("ui_punch"):
-		emit_signal("finished", "sub_Punch")
+		emit_signal("finished", "Punch", true)
 		return
 	
 	if event.is_action_pressed("ui_kick"):
-		emit_signal("finished", "sub_Kick")
+		emit_signal("finished", "Kick", true)
 		return
