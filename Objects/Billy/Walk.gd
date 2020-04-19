@@ -1,7 +1,8 @@
 extends "res://Classes/State.gd"
 
+
 func enter():
-	get_parent().AnimPlayer.play("Walk")
+	get_node(ANIMATION_PLAYER).play("Walk")
 
 
 func update(delta):

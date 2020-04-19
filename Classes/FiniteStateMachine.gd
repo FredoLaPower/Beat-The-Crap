@@ -22,8 +22,6 @@ signal state_changed(new_state)
 # EXPORT
 #------------------------------
 export(String) var START_STATE
-export(NodePath) var ANIMATION_PLAYER
-export(NodePath) var SPRITE_SHEET
 
 
 #------------------------------
@@ -39,12 +37,6 @@ var _is_paused: bool = false
 
 var _input_dictionary = {} # [input_name, state, value]
 var _input_history = [] # [input_name, timestamp]
-
-#------------------------------
-# PUBLIC
-#------------------------------
-var AnimPlayer: Node
-var SpriteSheet: Node
 
 
 #------------------------------------------------------------
@@ -121,10 +113,6 @@ func __debug(type: String, trace: String = ""):
 #------------------------------
 # Initialize the state machine
 func initialize():
-	# Store animation and sprite nodes
-	AnimPlayer = get_node(ANIMATION_PLAYER)
-	SpriteSheet = get_node(SPRITE_SHEET)
-	
 	# Subscribe to state signals and initialize states
 	for child in get_children():
 		child.connect("finished", self, "__change_state")

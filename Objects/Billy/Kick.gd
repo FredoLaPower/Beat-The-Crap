@@ -1,11 +1,11 @@
 extends "res://Classes/State.gd"
 
 func initialize():
-	get_parent().AnimPlayer.connect("animation_finished", self, "_on_animation_finished")
+	get_node(ANIMATION_PLAYER).connect("animation_finished", self, "_on_animation_finished")
 
 
 func enter():
-	get_parent().AnimPlayer.play("Kick")
+	get_node(ANIMATION_PLAYER).play("Kick")
 	owner.velocity = Vector2.ZERO
 
 

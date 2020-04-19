@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Billy/Idle.gd" type="Script" id=2]
@@ -16,7 +16,7 @@ extents = Vector2( 12, 27 )
 [sub_resource type="Animation" id=2]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Spritesheet:frame")
+tracks/0/path = NodePath("SpriteSheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -27,12 +27,35 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Collider:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -27 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Collider:shape:extents")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 12, 27 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 length = 0.6
-loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Spritesheet:frame")
+tracks/0/path = NodePath("SpriteSheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -43,11 +66,35 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 8, 9, 10, 10, 9, 8 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Collider:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, -31 ), Vector2( 1, -33 ), Vector2( 1, -38 ), Vector2( 1, -33 ), Vector2( 3, -31 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Collider:shape:extents")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 15, 31 ), Vector2( 12, 23 ), Vector2( 12, 18 ), Vector2( 12, 23 ), Vector2( 15, 31 ) ]
+}
 
 [sub_resource type="Animation" id=4]
 length = 0.8
 tracks/0/type = "value"
-tracks/0/path = NodePath("Spritesheet:frame")
+tracks/0/path = NodePath("SpriteSheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -62,7 +109,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=5]
 length = 1.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Spritesheet:frame")
+tracks/0/path = NodePath("SpriteSheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -75,10 +122,49 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=6]
+resource_name = "SETUP"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Collider:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Collider:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -27 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Collider:shape:extents")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 12, 27 ) ]
+}
+
+[sub_resource type="Animation" id=7]
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Spritesheet:frame")
+tracks/0/path = NodePath("SpriteSheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -90,7 +176,7 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6 ]
 }
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=8]
 size = 12
 font_data = ExtResource( 7 )
 
@@ -98,7 +184,7 @@ font_data = ExtResource( 7 )
 script = ExtResource( 4 )
 MAX_SPEED = Vector2( 100, 50 )
 JUMP_FORCE = 300
-SPRITE_SHEET = NodePath("Animations/Spritesheet")
+SPRITE_SHEET = NodePath("Animations/SpriteSheet")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -27 )
@@ -111,46 +197,49 @@ current = true
 [node name="Controller" type="Node" parent="."]
 script = ExtResource( 6 )
 START_STATE = "Idle"
-ANIMATION_PLAYER = NodePath("../Animations/AnimationPlayer")
-SPRITE_SHEET = NodePath("../Animations/Spritesheet")
 
 [node name="Idle" type="Node" parent="Controller"]
 script = ExtResource( 2 )
+ANIMATION_PLAYER = NodePath("../../Animations/AnimationPlayer")
 
 [node name="Walk" type="Node" parent="Controller"]
 script = ExtResource( 5 )
+ANIMATION_PLAYER = NodePath("../../Animations/AnimationPlayer")
 
 [node name="Jump" type="Node" parent="Controller"]
 script = ExtResource( 3 )
+ANIMATION_PLAYER = NodePath("../../Animations/AnimationPlayer")
 
 [node name="Kick" type="Node" parent="Controller"]
 script = ExtResource( 8 )
+ANIMATION_PLAYER = NodePath("../../Animations/AnimationPlayer")
 
 [node name="Punch" type="Node" parent="Controller"]
 script = ExtResource( 9 )
+ANIMATION_PLAYER = NodePath("../../Animations/AnimationPlayer")
 
 [node name="Animations" type="Node2D" parent="."]
 
-[node name="Spritesheet" type="Sprite" parent="Animations"]
+[node name="SpriteSheet" type="Sprite" parent="Animations"]
 position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 vframes = 6
 hframes = 8
-frame = 9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
 anims/Idle = SubResource( 2 )
 anims/Jump = SubResource( 3 )
 anims/Kick = SubResource( 4 )
 anims/Punch = SubResource( 5 )
-anims/Walk = SubResource( 6 )
+anims/SETUP = SubResource( 6 )
+anims/Walk = SubResource( 7 )
 
 [node name="State" type="Label" parent="."]
 margin_top = -70.0
 margin_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

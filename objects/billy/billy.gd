@@ -4,8 +4,6 @@ extends "res://Classes/Character.gd"
 func _ready():
 	# Subscribe to Controller signal
 	$Controller.connect("state_changed", self, "_on_Controller_state_changed")
-	_character_gravity = owner.GRAVITY
-	
 	$Controller.initialize()
 
 func _process(delta):

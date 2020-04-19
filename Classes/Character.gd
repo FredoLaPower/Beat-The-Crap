@@ -19,15 +19,10 @@ export(int) var JUMP_FORCE = 0
 export(NodePath) var SPRITE_SHEET
 
 #------------------------------
-# PRIVATE
-#------------------------------
-var _character_gravity: int = 0
-
-#------------------------------
 # PUBLIC
 #------------------------------
 var velocity: Vector2 = Vector2.ZERO
-var is_looking_left: bool =false
+var is_looking_left: bool = false
 
 
 #------------------------------------------------------------
@@ -36,11 +31,6 @@ var is_looking_left: bool =false
 func _physics_process(delta):
 	move_and_slide(velocity, Vector2.UP)
 
+
 func _process(delta):
 	get_node(SPRITE_SHEET).flip_h = is_looking_left
-
-#------------------------------
-# PUBLIC
-#------------------------------
-func get_gravity():
-	return _character_gravity
