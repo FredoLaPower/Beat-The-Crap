@@ -1,7 +1,7 @@
 extends "res://Classes/State.gd"
 
 func enter():
-	get_parent().AnimationPlayer.play("Walk")
+	get_parent().AnimPlayer.play("Walk")
 
 
 func update(delta):
@@ -11,10 +11,10 @@ func update(delta):
 	owner.velocity.x = x_input * owner.MAX_SPEED.x
 	owner.velocity.y = -y_input * owner.MAX_SPEED.y
 	
-	get_parent().SpriteSheet.flip_h = x_input < 0
-	
-	if x_input != 0:
-		owner.direction.x = x_input
+	if x_input < 0:
+		owner.is_looking_left = true
+	elif x_input > 0:
+		owner.is_looking_left = false
 	
 	if x_input == 0 && y_input == 0:
 		emit_signal("finished","Idle")

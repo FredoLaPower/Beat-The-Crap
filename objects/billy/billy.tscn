@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Billy/Idle.gd" type="Script" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://assets/fonts/robot.otf" type="DynamicFontData" id=7]
 [ext_resource path="res://objects/billy/Kick.gd" type="Script" id=8]
 [ext_resource path="res://objects/billy/Punch.gd" type="Script" id=9]
-[ext_resource path="res://objects/billy/AnimationPlayer.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 27 )
@@ -31,6 +30,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 length = 0.6
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Spritesheet:frame")
 tracks/0/interp = 1
@@ -100,13 +100,13 @@ MAX_SPEED = Vector2( 100, 50 )
 JUMP_FORCE = 300
 SPRITE_SHEET = NodePath("Animations/Spritesheet")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 0, -100 )
-current = true
-
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -27 )
 shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, -100 )
+current = true
 
 [node name="Controller" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -136,6 +136,7 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 vframes = 6
 hframes = 8
+frame = 9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
 anims/Idle = SubResource( 2 )
@@ -143,7 +144,6 @@ anims/Jump = SubResource( 3 )
 anims/Kick = SubResource( 4 )
 anims/Punch = SubResource( 5 )
 anims/Walk = SubResource( 6 )
-script = ExtResource( 10 )
 
 [node name="State" type="Label" parent="."]
 margin_top = -70.0

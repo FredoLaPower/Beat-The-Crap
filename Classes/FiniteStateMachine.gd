@@ -43,7 +43,7 @@ var _input_history = [] # [input_name, timestamp]
 #------------------------------
 # PUBLIC
 #------------------------------
-var AnimationPlayer: Node
+var AnimPlayer: Node
 var SpriteSheet: Node
 
 
@@ -122,7 +122,7 @@ func __debug(type: String, trace: String = ""):
 # Initialize the state machine
 func initialize():
 	# Store animation and sprite nodes
-	AnimationPlayer = get_node(ANIMATION_PLAYER)
+	AnimPlayer = get_node(ANIMATION_PLAYER)
 	SpriteSheet = get_node(SPRITE_SHEET)
 	
 	# Subscribe to state signals and initialize states

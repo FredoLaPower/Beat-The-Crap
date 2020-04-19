@@ -1,7 +1,7 @@
 extends "res://Classes/State.gd"
 
 func enter():
-	get_parent().AnimationPlayer.play("Idle")
+	get_parent().AnimPlayer.play("Idle")
 	owner.velocity = Vector2.ZERO
 
 
