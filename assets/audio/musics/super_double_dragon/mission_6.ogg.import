@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/mission_6.ogg-72f08ea6ec8d85fe62195a35b96bdcc3.oggstr"
+path="res://.import/mission_6.ogg-dc730634c21cc50ba823ce7cdb355c85.oggstr"
 
 [deps]
 
-source_file="res://assets/audio/musics/super_double_dragon/mission_6.ogg"
-dest_files=[ "res://.import/mission_6.ogg-72f08ea6ec8d85fe62195a35b96bdcc3.oggstr" ]
+source_file="res://Assets/Audio/Musics/super_double_dragon/mission_6.ogg"
+dest_files=[ "res://.import/mission_6.ogg-dc730634c21cc50ba823ce7cdb355c85.oggstr" ]
 
 [params]
 

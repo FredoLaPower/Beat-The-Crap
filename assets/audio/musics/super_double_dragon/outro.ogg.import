@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/outro.ogg-e295f28143b92f233333075dbcc3d233.oggstr"
+path="res://.import/outro.ogg-24cebd43a9123c14e27551c475750712.oggstr"
 
 [deps]
 
-source_file="res://assets/audio/musics/super_double_dragon/outro.ogg"
-dest_files=[ "res://.import/outro.ogg-e295f28143b92f233333075dbcc3d233.oggstr" ]
+source_file="res://Assets/Audio/Musics/super_double_dragon/outro.ogg"
+dest_files=[ "res://.import/outro.ogg-24cebd43a9123c14e27551c475750712.oggstr" ]
 
 [params]
 

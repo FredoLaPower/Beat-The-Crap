@@ -18,7 +18,3 @@ func _ready():
 	__add_state("Jump", $Jump)
 	__add_state("Punch", $Punch)
 	__add_state("Kick", $Kick)
-
-
-func _physics_process(delta):
-		owner.velocity = owner.move_and_slide(owner.velocity, Vector2.UP)

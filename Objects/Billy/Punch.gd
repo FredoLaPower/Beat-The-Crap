@@ -6,7 +6,7 @@ func initialize():
 
 func enter():
 	get_parent().AnimationPlayer.play("Punch")
-
+	owner.velocity = Vector2.ZERO
 
 func _on_animation_finished(anim_name):
 	if anim_name == "Punch":

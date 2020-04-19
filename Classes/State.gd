@@ -11,7 +11,7 @@ extends Node
 # SIGNALS
 #------------------------------------------------------------
 signal finished(next_state)
-
+signal animate(anim_name)
 
 #------------------------------------------------------------
 # METHODS

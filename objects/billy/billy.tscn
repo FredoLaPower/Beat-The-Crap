@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Billy/Idle.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/fonts/robot.otf" type="DynamicFontData" id=7]
 [ext_resource path="res://objects/billy/Kick.gd" type="Script" id=8]
 [ext_resource path="res://objects/billy/Punch.gd" type="Script" id=9]
+[ext_resource path="res://objects/billy/AnimationPlayer.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 27 )
@@ -97,6 +98,7 @@ font_data = ExtResource( 7 )
 script = ExtResource( 4 )
 MAX_SPEED = Vector2( 100, 50 )
 JUMP_FORCE = 300
+SPRITE_SHEET = NodePath("Animations/Spritesheet")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, -100 )
@@ -141,6 +143,7 @@ anims/Jump = SubResource( 3 )
 anims/Kick = SubResource( 4 )
 anims/Punch = SubResource( 5 )
 anims/Walk = SubResource( 6 )
+script = ExtResource( 10 )
 
 [node name="State" type="Label" parent="."]
 margin_top = -70.0
@@ -153,10 +156,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = -20.0096
-margin_top = 6.2206
-margin_right = 19.9904
-margin_bottom = 20.2206
+margin_left = 33.9984
+margin_top = -53.6037
+margin_right = 73.9984
+margin_bottom = -39.6037
 __meta__ = {
 "_edit_use_anchors_": false
 }

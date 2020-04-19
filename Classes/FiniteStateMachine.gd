@@ -56,7 +56,7 @@ var SpriteSheet: Node
 #------------------------------
 
 # Process the current state logic
-func _physics_process(delta):
+func _process(delta):
 	_state_dictionary[_states_stack[0]].update(delta)
 
 
