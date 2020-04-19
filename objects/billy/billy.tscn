@@ -183,16 +183,12 @@ font_data = ExtResource( 7 )
 [node name="Billy" type="KinematicBody2D"]
 script = ExtResource( 4 )
 MAX_SPEED = Vector2( 100, 50 )
-JUMP_FORCE = 300
+JUMP_FORCE = 400
 SPRITE_SHEET = NodePath("Animations/SpriteSheet")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -27 )
 shape = SubResource( 1 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 0, -100 )
-current = true
 
 [node name="Controller" type="Node" parent="."]
 script = ExtResource( 6 )
