@@ -1,11 +1,11 @@
 extends "res://Classes/State.gd"
 
 
-func enter():
+func enter() -> void:
 	get_node(ANIMATION_PLAYER).play("Walk")
 
 
-func update(delta):
+func update(_delta: float):
 	var x_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	var y_input = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
 	
@@ -21,7 +21,7 @@ func update(delta):
 		emit_signal("finished","Idle")
 
 
-func handle_input(event):
+func handle_input(event: InputEvent)  -> void:
 	if event.get_action_strength("ui_jump"):
 		emit_signal("finished", "Jump", true)
 	

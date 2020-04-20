@@ -1,8 +1,6 @@
 extends "res://Classes/FiniteStateMachine.gd"
 
-func _ready():
-	_is_in_debug_mode = false
-	
+func _ready() -> void:
 #	__listen_input("ui_left")
 #	__listen_input("ui_up")
 #	__listen_input("ui_right")
@@ -10,8 +8,6 @@ func _ready():
 #	__listen_input("ui_jump")
 #	__listen_input("ui_punch")
 #	__listen_input("ui_kick")
-#
-#	__debug("input")
 	
 	__add_state("Idle", $Idle)
 	__add_state("Walk", $Walk)

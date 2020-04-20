@@ -28,7 +28,7 @@ func _ready():
 #------------------------------
 # Config
 #------------------------------
-func set_resource_path(resource_path: String):
+func set_resource_path(resource_path: String) -> void:
 	if _mixed_resources:
 		push_warning("MusicController::set_resource_path() -> Mixed resources is set to true.")
 	
@@ -45,15 +45,11 @@ func set_resource_path(resource_path: String):
 	_resource_path = resource_path
 
 
-func allow_mixed_resources():
-	_mixed_resources = true
+func allow_mixed_resources(value: bool) -> void:
+	_mixed_resources = value
 
 
-func disallow_mixed_resources():
-	_mixed_resources = false
-
-
-func set_bus(bus_name: String):
+func set_bus(bus_name: String) -> void:
 	_bus = bus_name
 	bus = bus
 
@@ -61,7 +57,7 @@ func set_bus(bus_name: String):
 #------------------------------
 # Play controls
 #------------------------------
-func play_track(resource_path: String, add_resource_path: bool = false):
+func play_track(resource_path: String, add_resource_path: bool = false) -> void:
 	if resource_path.empty():
 		push_error("MusicController::play_track() -> Resource path can't be null.")
 		return
@@ -88,18 +84,18 @@ func play_track(resource_path: String, add_resource_path: bool = false):
 	play()
 
 
-func stop_track():
+func stop_track() -> void:
 	_state = "Stopped"
 	
 	stop()
 
 
-func pause():
+func pause() -> void:
 	stream_paused = true
 	_state = "Paused"
 
 
-func unpause():
+func unpause() -> void:
 	stream_paused = false
 	_state = "Unpaused"
 
@@ -107,7 +103,7 @@ func unpause():
 #------------------------------
 # Volume control
 #------------------------------
-func set_volume(value: float):
+func set_volume(value: float) -> void:
 	if value < 0 or value > 100:
 		push_error("MusicController::set_volume() -> Volumne must be in range of 0 to 100.")
 		return
@@ -123,7 +119,7 @@ func get_volume() -> int:
 #------------------------------
 # Playlist Management
 #------------------------------
-func add_track(resource_path: String):
+func add_track(resource_path: String) -> void:
 	if resource_path.empty():
 		push_error("MusicController::add_track() -> Resource path can't be null.")
 		return
@@ -138,7 +134,7 @@ func add_track(resource_path: String):
 	_tracklist.append(path)
 
 
-func remove_track(resource_path: String):
+func remove_track(resource_path: String) -> void:
 	if resource_path.empty():
 		push_error("MusicController::remove_track() -> Resource path can't be null.")
 		return
@@ -159,14 +155,14 @@ func remove_track(resource_path: String):
 	_tracklist.remove(index)
 
 
-func clear_tracklist():
+func clear_tracklist() -> void:
 	_tracklist.clear()
 
 
 #------------------------------
 # Playlist controls
 #------------------------------
-func play_track_number(number: int):
+func play_track_number(number: int) -> void:
 	if number < 0 or number > _tracklist.size():
 		push_error("MusicController::play_track_number() -> Track number is outside of the tracklist boundaries.")
 		return
@@ -176,14 +172,14 @@ func play_track_number(number: int):
 	listen_to_tracklist()
 
 
-func listen_to_tracklist():
+func listen_to_tracklist() -> void:
 	if _tracklist.size() == 0:
 		push_error("MusicController::play_tracklist() -> tracklist is empty.")
 		return
 	play_track(_tracklist[_current_track])
 
 
-func next_track(autoplay = true):
+func next_track(autoplay = true) -> void:
 	_current_track += 1
 	
 	if _current_track > _tracklist.size() - 1:
@@ -193,7 +189,7 @@ func next_track(autoplay = true):
 		listen_to_tracklist()
 
 
-func previous_track(autoplay = true):
+func previous_track(autoplay = true) -> void:
 	_current_track -= 1
 	
 	if _current_track < 0:
@@ -203,7 +199,7 @@ func previous_track(autoplay = true):
 		listen_to_tracklist()
 
 
-func find_track(search_string):
+func find_track(search_string) -> int:
 	if search_string.empty():
 		push_error("MusicController::find_track() -> Search term can't be null.")
 		return -1
@@ -218,16 +214,16 @@ func find_track(search_string):
 #------------------------------
 # Display
 #------------------------------
-func get_state():
+func get_state() -> String:
 	return _state
 
 
-func current_track():
+func current_track() -> String:
 	return _tracklist[_current_track]
 
 
-func number_of_tracks():
+func number_of_tracks() -> int:
 	return _tracklist.size() + 1
 
-func get_tracklist():
+func get_tracklist() -> Array:
 	return _tracklist

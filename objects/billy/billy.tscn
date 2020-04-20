@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Billy/Idle.gd" type="Script" id=2]
@@ -6,12 +6,11 @@
 [ext_resource path="res://Objects/Billy/Billy.gd" type="Script" id=4]
 [ext_resource path="res://Objects/Billy/Walk.gd" type="Script" id=5]
 [ext_resource path="res://Objects/Billy/Controller.gd" type="Script" id=6]
-[ext_resource path="res://assets/fonts/robot.otf" type="DynamicFontData" id=7]
 [ext_resource path="res://objects/billy/Kick.gd" type="Script" id=8]
 [ext_resource path="res://objects/billy/Punch.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12, 27 )
+extents = Vector2( 10, 1 )
 
 [sub_resource type="Animation" id=2]
 length = 0.1
@@ -26,30 +25,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Collider:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -27 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../Collider:shape:extents")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 12, 27 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -66,33 +41,9 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 8, 9, 10, 10, 9, 8 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Collider:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 3, -31 ), Vector2( 1, -33 ), Vector2( 1, -38 ), Vector2( 1, -33 ), Vector2( 3, -31 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../Collider:shape:extents")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 15, 31 ), Vector2( 12, 23 ), Vector2( 12, 18 ), Vector2( 12, 23 ), Vector2( 15, 31 ) ]
-}
 
 [sub_resource type="Animation" id=4]
-length = 0.8
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteSheet:frame")
 tracks/0/interp = 1
@@ -100,14 +51,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 16, 17, 18, 19, 25, 26, 27, 19 ]
+"values": [ 16, 17, 18, 19 ]
 }
 
 [sub_resource type="Animation" id=5]
-length = 1.1
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteSheet:frame")
 tracks/0/interp = 1
@@ -115,52 +66,13 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 32, 33, 34, 35, 36, 37, 38, 39, 42, 43, 44 ]
+"values": [ 32, 33, 34 ]
 }
 
 [sub_resource type="Animation" id=6]
-resource_name = "SETUP"
-tracks/0/type = "value"
-tracks/0/path = NodePath("../Collider:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Collider:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -27 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../Collider:shape:extents")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 12, 27 ) ]
-}
-
-[sub_resource type="Animation" id=7]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -176,18 +88,16 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6 ]
 }
 
-[sub_resource type="DynamicFont" id=8]
-size = 12
-font_data = ExtResource( 7 )
-
 [node name="Billy" type="KinematicBody2D"]
+collision_mask = 96
 script = ExtResource( 4 )
 MAX_SPEED = Vector2( 100, 50 )
-JUMP_FORCE = 400
+JUMP_FORCE = 300
 SPRITE_SHEET = NodePath("Animations/SpriteSheet")
+STATE_MACHINE = NodePath("Controller")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -27 )
+position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
 [node name="Controller" type="Node" parent="."]
@@ -221,30 +131,11 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 vframes = 6
 hframes = 8
+frame = 19
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
 anims/Idle = SubResource( 2 )
 anims/Jump = SubResource( 3 )
 anims/Kick = SubResource( 4 )
 anims/Punch = SubResource( 5 )
-anims/SETUP = SubResource( 6 )
-anims/Walk = SubResource( 7 )
-
-[node name="State" type="Label" parent="."]
-margin_top = -70.0
-margin_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 2
-custom_fonts/font = SubResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="."]
-margin_left = 33.9984
-margin_top = -53.6037
-margin_right = 73.9984
-margin_bottom = -39.6037
-__meta__ = {
-"_edit_use_anchors_": false
-}
+anims/Walk = SubResource( 6 )

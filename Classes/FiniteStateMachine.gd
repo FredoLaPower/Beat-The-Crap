@@ -30,7 +30,6 @@ export(String) var START_STATE
 var _current_state: String = ""
 var _state_dictionary = {} # No static typing for dictionary
 var _states_stack = [] # Use to store the hierachy of states
-var _is_in_debug_mode: bool = false
 var _is_paused: bool = false
 
 # Input Manager
@@ -48,12 +47,12 @@ var _input_history = [] # [input_name, timestamp]
 #------------------------------
 
 # Process the current state logic
-func _process(delta):
+func _physics_process(delta: float) -> void:
 	_state_dictionary[_states_stack[0]].update(delta)
 
 
 # Forward input to the current state
-func _input(event):
+func _input(event: InputEvent) -> void:
 	_state_dictionary[_states_stack[0]].handle_input(event)
 
 
@@ -61,12 +60,12 @@ func _input(event):
 # PRIVATE
 #------------------------------
 # Add a new state to the state machine
-func __add_state(state_name: String, state_node: Node):
+func __add_state(state_name: String, state_node: Node) -> void:
 	_state_dictionary[state_name] = state_node
 
 
 # Manage state machine logic
-func __change_state(new_state: String, is_sub_state: bool = false):
+func __change_state(new_state: String, is_sub_state: bool = false) -> void:
 	#Avoid infinite loop at startup or pause
 	if new_state == _current_state:
 		return
@@ -88,20 +87,17 @@ func __change_state(new_state: String, is_sub_state: bool = false):
 	
 	# Broadcast change of state
 	emit_signal("state_changed", _current_state)
-	
-	if _is_in_debug_mode:
-		__debug("fsm", new_state)
 
 
-func __listen_input(input_name: String):
+func __listen_input(input_name: String) -> void:
 	_input_dictionary[input_name] = {"state": "", "value": 0}
 
 
-func __track_input():
+func __track_input() -> void:
 	pass
 
 
-func __debug(type: String, trace: String = ""):
+func __debug(type: String, trace: String = "") -> void:
 	if (type == "fsm"):
 		print("trace = %s | _current_state = %s | _states_stack = %s" % [trace, _current_state, _states_stack])
 	elif (type == "input"):
@@ -112,7 +108,7 @@ func __debug(type: String, trace: String = ""):
 # PUBLIC
 #------------------------------
 # Initialize the state machine
-func initialize():
+func initialize() -> void:
 	# Subscribe to state signals and initialize states
 	for child in get_children():
 		child.connect("finished", self, "__change_state")
@@ -135,27 +131,20 @@ func is_paused() -> bool:
 	return _is_paused
 
 
-func pause():
-	_is_paused = true
+func pause(value: bool) -> void:
+	_is_paused = value
 	
-	set_physics_process(false)
-	set_process_input(false)
+	set_physics_process(!value)
+	set_process_input(!value)
 
 
-func _unpause():
-	_is_paused = false
-	
-	set_physics_process(true)
-	set_process_input(true)
-
-
-func input_is_pressed():
+func input_is_pressed() -> void:
 	pass
 
 
-func input_is_released():
+func input_is_released() -> void:
 	pass
 
 
-func get_input_value():
+func get_input_value() -> void:
 	pass

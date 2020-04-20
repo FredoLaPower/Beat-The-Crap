@@ -1,8 +1,5 @@
 extends "res://Classes/Stage.gd"
 
-func _ready():
+func _ready() -> void:
 	$Camera.initialize()
-	
-	#MusicController.play_track(MUSIC)
-	
-	pass
+	MusicController.play_track(MUSIC)
