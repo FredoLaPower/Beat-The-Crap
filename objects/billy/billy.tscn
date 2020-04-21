@@ -97,6 +97,7 @@ SPRITE_SHEET = NodePath("Animations/SpriteSheet")
 STATE_MACHINE = NodePath("Controller")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
+modulate = Color( 1, 0, 1, 1 )
 position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 

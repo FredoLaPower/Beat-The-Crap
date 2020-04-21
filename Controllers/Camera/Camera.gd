@@ -21,22 +21,10 @@ func _ready() -> void:
 			"position": {"x": COLLIDER_THICKNESS - _half_viewport.x, "y": 0}
 		},
 		
-		"ScrollUp": {
-			"callback": "_scroll_up",
-			"extents": {"x": VIEWPORT.x, "y": COLLIDER_THICKNESS},
-			"position": {"x": 0, "y": 10 - _half_viewport.y}
-		},
-		
 		"ScrollRight": {
 			"callback": "_scroll_right",
 			"extents": {"x": COLLIDER_THICKNESS, "y": VIEWPORT.y},
 			"position": {"x": _half_viewport.x - COLLIDER_THICKNESS, "y": 0}
-		},
-		
-		"ScrollDown": {
-			"callback": "_scroll_down",
-			"extents": {"x": VIEWPORT.x, "y": COLLIDER_THICKNESS},
-			"position": {"x": 0, "y": _half_viewport.y - COLLIDER_THICKNESS}
 		}
 	}
 
@@ -87,11 +75,3 @@ func _scroll_right(_body: Node) -> void:
 		__tween(Vector2(position.x + _half_viewport.x, position.y))
 	else:
 		__tween(Vector2(LIMITS_MAX.x - _half_viewport.x, position.y))
-
-
-func _scroll_up(_body: Node):
-	pass
-
-
-func _scroll_down(_body: Node):
-	pass

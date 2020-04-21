@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/Stage01/Stage01.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Stage01/Pushdown.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/robot.otf" type="DynamicFontData" id=6]
-[ext_resource path="res://Controllers/Camera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Controllers/Camera/Camera.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 6 )
@@ -93,6 +93,7 @@ LIMITS_MIN = Vector2( 0, 225 )
 collision_layer = 64
 
 [node name="Collider" type="CollisionShape2D" parent="Colliders/LimitLeft"]
+modulate = Color( 1, 0, 0, 1 )
 position = Vector2( -10, 112.5 )
 shape = SubResource( 3 )
 
@@ -100,6 +101,7 @@ shape = SubResource( 3 )
 collision_layer = 64
 
 [node name="Collider" type="CollisionShape2D" parent="Colliders/LimitRight"]
+modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 1210, 112.5 )
 shape = SubResource( 3 )
 
@@ -107,6 +109,7 @@ shape = SubResource( 3 )
 collision_layer = 64
 
 [node name="Collider" type="CollisionShape2D" parent="Colliders/LimitTop"]
+modulate = Color( 0, 0, 1, 1 )
 position = Vector2( 600, 140 )
 shape = SubResource( 4 )
 
@@ -114,5 +117,6 @@ shape = SubResource( 4 )
 collision_layer = 64
 
 [node name="Collider" type="CollisionShape2D" parent="Colliders/LimitBottom"]
+modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 600, 235 )
 shape = SubResource( 5 )
