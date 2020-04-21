@@ -154,6 +154,8 @@ ui_kick={
 2d_physics/layer_6="Camera"
 2d_physics/layer_7="Boundaries"
 2d_physics/layer_8="Obstacles"
+2d_physics/layer_9="Damage"
+2d_physics/layer_10="Motion"
 
 [rendering]
 

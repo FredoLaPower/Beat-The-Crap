@@ -13,9 +13,9 @@ func update(_delta: float):
 	owner.velocity.y = -y_input * owner.MAX_SPEED.y
 	
 	if x_input < 0:
-		owner.is_looking_left = true
+		owner.flip_character(true)
 	elif x_input > 0:
-		owner.is_looking_left = false
+		owner.flip_character(false)
 	
 	if x_input == 0 && y_input == 0:
 		emit_signal("finished","Idle")

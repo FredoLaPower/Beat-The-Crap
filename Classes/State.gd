@@ -10,6 +10,7 @@ extends Node
 #------------------------------------------------------------
 # SIGNALS
 #------------------------------------------------------------
+# warning-ignore:unused_signal
 signal finished(next_state, is_sub_state)
 
 

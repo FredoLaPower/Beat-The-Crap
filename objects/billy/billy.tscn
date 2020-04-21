@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Billy/Idle.gd" type="Script" id=2]
@@ -6,11 +6,12 @@
 [ext_resource path="res://Objects/Billy/Billy.gd" type="Script" id=4]
 [ext_resource path="res://Objects/Billy/Walk.gd" type="Script" id=5]
 [ext_resource path="res://Objects/Billy/Controller.gd" type="Script" id=6]
+[ext_resource path="res://Objects/Billy/Motion.gd" type="Script" id=7]
 [ext_resource path="res://objects/billy/Kick.gd" type="Script" id=8]
 [ext_resource path="res://objects/billy/Punch.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 1 )
+extents = Vector2( 12, 27 )
 
 [sub_resource type="Animation" id=2]
 length = 0.1
@@ -56,6 +57,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 16, 17, 18, 19 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Boxes/Damage/Collider:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Boxes/Damage/Collider:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 17, -50 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 length = 0.3
@@ -70,6 +95,42 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 32, 33, 34 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Boxes/Damage/Collider:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Boxes/Damage/Collider:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 25, -50 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Boxes/Damage/Collider:shape:extents")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 4, 5 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -88,17 +149,23 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6 ]
 }
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 4, 5 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 12, 4 )
+
 [node name="Billy" type="KinematicBody2D"]
-collision_mask = 96
+collision_mask = 32
 script = ExtResource( 4 )
 MAX_SPEED = Vector2( 100, 50 )
 JUMP_FORCE = 300
 SPRITE_SHEET = NodePath("Animations/SpriteSheet")
 STATE_MACHINE = NodePath("Controller")
+DAMAGE_BOX = NodePath("Boxes/Damage")
 
-[node name="Collider" type="CollisionShape2D" parent="."]
-modulate = Color( 1, 0, 1, 1 )
-position = Vector2( 0, 1 )
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -27 )
 shape = SubResource( 1 )
 
 [node name="Controller" type="Node" parent="."]
@@ -132,7 +199,6 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 vframes = 6
 hframes = 8
-frame = 19
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
 anims/Idle = SubResource( 2 )
@@ -140,3 +206,32 @@ anims/Jump = SubResource( 3 )
 anims/Kick = SubResource( 4 )
 anims/Punch = SubResource( 5 )
 anims/Walk = SubResource( 6 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 20.3251
+margin_top = -51.4956
+margin_right = 60.3251
+margin_bottom = -37.4956
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Boxes" type="Node2D" parent="."]
+
+[node name="Damage" type="Area2D" parent="Boxes"]
+collision_layer = 256
+collision_mask = 0
+
+[node name="Collider" type="CollisionShape2D" parent="Boxes/Damage"]
+position = Vector2( 25, -50 )
+shape = SubResource( 7 )
+
+[node name="Motion" type="Area2D" parent="Boxes"]
+collision_layer = 512
+collision_mask = 64
+script = ExtResource( 7 )
+
+[node name="Collider" type="CollisionShape2D" parent="Boxes/Motion"]
+modulate = Color( 1, 0, 1, 1 )
+shape = SubResource( 8 )
+[connection signal="body_entered" from="Boxes/Motion" to="Boxes/Motion" method="_on_Motion_body_entered"]

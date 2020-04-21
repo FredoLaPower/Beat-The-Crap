@@ -31,6 +31,7 @@ func _ready() -> void:
 func initialize() -> void:
 	# Subscribe to Area2Ds and prepare colliders
 	for area in _areas:
+# warning-ignore:return_value_discarded
 		get_node(area).connect("body_entered", self, _areas[area].callback)
 		get_node(area + "/Collider").get_shape().set_extents(Vector2(_areas[area].extents.x, _areas[area].extents.y))
 		get_node(area + "/Collider").position = Vector2(_areas[area].position.x, _areas[area].position.y)
@@ -63,7 +64,6 @@ func _scroll_left(_body: Node) -> void:
 		print("here: %s > %s" %[position.x, LIMITS_MIN.x + _half_viewport.x])
 		__tween(Vector2(position.x - _half_viewport.x, position.y))
 	else:
-		print("limit")
 		__tween(Vector2(LIMITS_MIN.x + _half_viewport.x, position.y))
 
 
