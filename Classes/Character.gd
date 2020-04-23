@@ -16,7 +16,7 @@ extends KinematicBody2D
 export(Vector2) var MAX_SPEED = Vector2(0, 0)
 export(int) var JUMP_FORCE = 0
 export(NodePath) var HORIZON_CONTAINER
-export(NodePath) var PIVOT_CONTAINER
+
 
 #------------------------------
 # PRIVATE
@@ -31,6 +31,8 @@ var _flags = {
 # PUBLIC
 #------------------------------
 var velocity: Vector2 = Vector2.ZERO
+var AnimPlayer: Node = null
+var _anim_player_path: String = ""
 
 
 #------------------------------------------------------------
@@ -41,7 +43,7 @@ var velocity: Vector2 = Vector2.ZERO
 # VIRTUAL
 #------------------------------
 
-func _ready() -> void:	
+func _ready() -> void:
 	# Subscribe to Controller signal
 	$Controller.initialize()
 
@@ -51,6 +53,7 @@ func _ready() -> void:
 	
 	_initialize()
 
+
 # warning-ignore:unused_argument
 func _physics_process(delta: float) -> void:
 	velocity = move_and_slide(velocity, Vector2.UP)
@@ -59,6 +62,7 @@ func _physics_process(delta: float) -> void:
 #------------------------------
 # PRIVATE
 #------------------------------
+
 func _initialize() -> void:
 	pass
 
@@ -71,6 +75,7 @@ func _crossing_horizon(body: Node, is_crossing_horizon: bool) -> void:
 #------------------------------
 # PUBLIC
 #------------------------------
+
 func get_flag(flag_name: String) -> bool:
 	return _flags[flag_name]
 
@@ -79,6 +84,6 @@ func flip_character(is_looking_left: bool = false) -> void:
 		_flags["is_looking_left"] = is_looking_left
 		
 		if is_looking_left:
-			get_node(PIVOT_CONTAINER).scale.x = -1
+			$Pivot.scale.x = -1
 		else:
-			get_node(PIVOT_CONTAINER).scale.x = 1
+			$Pivot.scale.x = 1

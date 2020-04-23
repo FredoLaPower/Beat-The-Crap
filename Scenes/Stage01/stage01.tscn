@@ -57,7 +57,9 @@ layer = 0
 follow_viewport_enable = true
 
 [node name="Billy" parent="Ground" instance=ExtResource( 3 )]
-position = Vector2( 30, 170 )
+position = Vector2( 50, 170 )
+MAX_SPEED = Vector2( 100, 50 )
+JUMP_FORCE = 300
 HORIZON_CONTAINER = NodePath("../../Colliders/Areas")
 
 [node name="Area2D" type="Area2D" parent="Ground"]

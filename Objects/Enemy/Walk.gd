@@ -1,8 +1,7 @@
 extends "res://Classes/State.gd"
 
-
 func enter() -> void:
-	owner.get_node("Pivot/Animation/AnimationPlayer").play("Walk")
+	get_node(ANIMATION_PLAYER).play("Walk")
 
 
 # warning-ignore:unused_argument
@@ -36,3 +35,7 @@ func handle_input(event: InputEvent)  -> void:
 	if event.get_action_strength("ui_kick"):
 		emit_signal("finished", "Kick", true)
 		return
+
+
+func _entered_horizon() -> void:
+	pass

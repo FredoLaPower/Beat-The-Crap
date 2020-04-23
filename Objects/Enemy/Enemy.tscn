@@ -172,9 +172,11 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6 ]
 }
 
-[node name="Billy" type="KinematicBody2D"]
+[node name="Enemy" type="KinematicBody2D"]
 collision_mask = 40
 script = ExtResource( 4 )
+MAX_SPEED = Vector2( 100, 50 )
+JUMP_FORCE = 300
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 modulate = Color( 1, 0, 1, 1 )
@@ -220,15 +222,15 @@ modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0, -33 )
 shape = SubResource( 5 )
 
-[node name="Animation" type="Node2D" parent="Pivot"]
+[node name="Animations" type="Node2D" parent="Pivot"]
 
-[node name="SpriteSheet" type="Sprite" parent="Pivot/Animation"]
+[node name="SpriteSheet" type="Sprite" parent="Pivot/Animations"]
 position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 vframes = 6
 hframes = 8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/Animation"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/Animations"]
 anims/Idle = SubResource( 6 )
 anims/Jump = SubResource( 7 )
 anims/Kick = SubResource( 8 )
@@ -241,20 +243,20 @@ START_STATE = "Idle"
 
 [node name="Idle" type="Node" parent="Controller"]
 script = ExtResource( 2 )
-ANIMATION_PLAYER = NodePath("../../Pivot/Animation/AnimationPlayer")
+ANIMATION_PLAYER = NodePath("../../../Enemy/Pivot/Animations/AnimationPlayer")
 
 [node name="Walk" type="Node" parent="Controller"]
 script = ExtResource( 5 )
-ANIMATION_PLAYER = NodePath("../../Pivot/Animation/AnimationPlayer")
+ANIMATION_PLAYER = NodePath("../../../Enemy/Pivot/Animations/AnimationPlayer")
 
 [node name="Jump" type="Node" parent="Controller"]
 script = ExtResource( 3 )
-ANIMATION_PLAYER = NodePath("../../Pivot/Animation/AnimationPlayer")
+ANIMATION_PLAYER = NodePath("../../../Enemy/Pivot/Animations/AnimationPlayer")
 
 [node name="Kick" type="Node" parent="Controller"]
 script = ExtResource( 8 )
-ANIMATION_PLAYER = NodePath("../../Pivot/Animation/AnimationPlayer")
+ANIMATION_PLAYER = NodePath("../../../Enemy/Pivot/Animations/AnimationPlayer")
 
 [node name="Punch" type="Node" parent="Controller"]
 script = ExtResource( 9 )
-ANIMATION_PLAYER = NodePath("../../Pivot/Animation/AnimationPlayer")
+ANIMATION_PLAYER = NodePath("../../../Enemy/Pivot/Animations/AnimationPlayer")

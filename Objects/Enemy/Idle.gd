@@ -1,10 +1,8 @@
 extends "res://Classes/State.gd"
 
-
 func enter() -> void:
+	get_node(ANIMATION_PLAYER).play("Idle")
 	owner.velocity = Vector2.ZERO
-	owner.get_node("Pivot/Animation/AnimationPlayer").play("Idle")
-
 
 # warning-ignore:unused_argument
 func update(delta: float) -> void:
@@ -14,7 +12,6 @@ func update(delta: float) -> void:
 		if x_input != 0 || y_input != 0:
 			emit_signal("finished", "Walk")
 			return
-
 
 func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_jump"):
