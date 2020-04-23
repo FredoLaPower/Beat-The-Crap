@@ -1,14 +1,7 @@
-extends "res://Classes/FiniteStateMachine.gd"
+extends "res://Classes/StateMachine.gd"
+
 
 func _ready() -> void:
-#	__listen_input("ui_left")
-#	__listen_input("ui_up")
-#	__listen_input("ui_right")
-#	__listen_input("ui_down")
-#	__listen_input("ui_jump")
-#	__listen_input("ui_punch")
-#	__listen_input("ui_kick")
-	
 	__add_state("Idle", $Idle)
 	__add_state("Walk", $Walk)
 	__add_state("Jump", $Jump)

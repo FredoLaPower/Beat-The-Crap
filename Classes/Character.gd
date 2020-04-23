@@ -2,7 +2,7 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name Character
+class_name PlayerCharacter
 
 extends KinematicBody2D
 
@@ -31,8 +31,6 @@ var _flags = {
 # PUBLIC
 #------------------------------
 var velocity: Vector2 = Vector2.ZERO
-var AnimPlayer: Node = null
-var _anim_player_path: String = ""
 
 
 #------------------------------------------------------------

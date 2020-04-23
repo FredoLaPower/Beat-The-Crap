@@ -2,7 +2,7 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name StateMachine
+class_name PlayerStateMachine
 
 extends Node
 
@@ -32,7 +32,6 @@ var _states_stack = [] # Use to store the hierachy of states
 var _is_paused: bool = false
 
 # Input Manager
-
 var _input_dictionary = {} # [input_name, state, value]
 var _input_history = [] # [input_name, timestamp]
 
@@ -52,7 +51,7 @@ func _physics_process(delta: float) -> void:
 
 # Forward input to the current state
 func _input(event: InputEvent) -> void:
-	_state_dictionary[_states_stack[0]].handle_input(event)
+		_state_dictionary[_states_stack[0]].handle_input(event)
 
 
 #------------------------------

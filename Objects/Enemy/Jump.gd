@@ -1,12 +1,14 @@
 extends "res://Classes/State.gd"
 
+
 var _start_position_y: float = 0
+
 
 func enter() -> void:
 	_start_position_y = owner.position.y
 	owner.velocity.y = -owner.JUMP_FORCE
 	
-	get_node(ANIMATION_PLAYER).play("Jump")
+	owner.get_node("Pivot/Animation/AnimationPlayer").play("Jump")
 
 
 func update(delta: float) -> void:	

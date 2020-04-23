@@ -7,7 +7,7 @@ func initialize() -> void:
 
 
 func enter() -> void:
-	owner.AnimPlayer.play("Kick")
+	owner.get_node("Pivot/Animation/AnimationPlayer").play("Kick")
 	owner.velocity = Vector2.ZERO
 
 
