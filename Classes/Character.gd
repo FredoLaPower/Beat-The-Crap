@@ -14,10 +14,7 @@ extends KinematicBody2D
 # EXPORT
 #------------------------------
 export(Vector2) var MAX_SPEED = Vector2(0, 0)
-export(Vector2) var START_POSITION
 export(int) var JUMP_FORCE = 0
-export(NodePath) var SPRITE_SHEET
-export(NodePath) var STATE_MACHINE
 export(NodePath) var HORIZON_CONTAINER
 export(NodePath) var PIVOT_CONTAINER
 
@@ -44,13 +41,10 @@ var velocity: Vector2 = Vector2.ZERO
 # VIRTUAL
 #------------------------------
 
-func _ready() -> void:
-	#Player positioon
-	position = START_POSITION
-	
+func _ready() -> void:	
 	# Subscribe to Controller signal
-	get_node(STATE_MACHINE).initialize()
-	
+	$Controller.initialize()
+
 	for child in get_node(HORIZON_CONTAINER).get_children():
 		# warning-ignore:return_value_discarded
 		child.connect("horizon_crossed", self, "_crossing_horizon")
@@ -69,9 +63,9 @@ func _initialize() -> void:
 	pass
 
 
+# warning-ignore:unused_argument
 func _crossing_horizon(body: Node, is_crossing_horizon: bool) -> void:
 	_flags["is_crossing_horizon"] = is_crossing_horizon
-
 
 
 #------------------------------

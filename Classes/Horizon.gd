@@ -15,18 +15,6 @@ signal horizon_crossed(body, state)
 
 
 #------------------------------------------------------------
-# PROPERTIES
-#------------------------------------------------------------
-
-#------------------------------
-# EXPORT
-#------------------------------
-
-export(Vector2) var EXTENTS
-export(Vector2) var POSITION
-
-
-#------------------------------------------------------------
 # METHODS
 #------------------------------------------------------------
 
@@ -34,10 +22,6 @@ export(Vector2) var POSITION
 # PRIVATE
 #------------------------------
 func _ready():
-	$Collider.get_shape().set_extents(EXTENTS)
-	
-	position = POSITION
-	
 	# warning-ignore:return_value_discarded
 	connect("body_entered", self, "_playe_entered")
 	

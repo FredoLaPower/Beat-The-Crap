@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/graphics/stages/stage_1/stage_1_layer_fg.png" type="Texture" id=1]
 [ext_resource path="res://assets/graphics/stages/stage_1/stage_1_layer_bg.png" type="Texture" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/fonts/robot.otf" type="DynamicFontData" id=6]
 [ext_resource path="res://Controllers/Camera/Camera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Stage01/Area2D.gd" type="Script" id=8]
-[ext_resource path="res://Objects/Horizon/Horizon.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Classes/Horizon.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Stage01/Flags.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -26,6 +26,9 @@ extents = Vector2( 10, 112.5 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 620, 10 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 600, 10 )
 
 [node name="Stage01" type="Node2D"]
 script = ExtResource( 4 )
@@ -54,7 +57,7 @@ layer = 0
 follow_viewport_enable = true
 
 [node name="Billy" parent="Ground" instance=ExtResource( 3 )]
-START_POSITION = Vector2( 50, 175 )
+position = Vector2( 30, 170 )
 HORIZON_CONTAINER = NodePath("../../Colliders/Areas")
 
 [node name="Area2D" type="Area2D" parent="Ground"]
@@ -164,7 +167,11 @@ shape = SubResource( 5 )
 
 [node name="Areas" type="Node2D" parent="Colliders"]
 
-[node name="Horizon" parent="Colliders/Areas" instance=ExtResource( 9 )]
-EXTENTS = Vector2( 610, 10 )
-POSITION = Vector2( 610, 140 )
+[node name="Horizon" type="Area2D" parent="Colliders/Areas"]
+position = Vector2( 600, 140 )
+collision_layer = 16
+script = ExtResource( 9 )
+
+[node name="Collider" type="CollisionShape2D" parent="Colliders/Areas/Horizon"]
+shape = SubResource( 6 )
 [connection signal="area_shape_entered" from="Ground/Area2D" to="Ground/Area2D" method="_on_Area2D_area_shape_entered"]
