@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Billy/Idle.gd" type="Script" id=2]
@@ -6,14 +6,25 @@
 [ext_resource path="res://Objects/Billy/Billy.gd" type="Script" id=4]
 [ext_resource path="res://Objects/Billy/Walk.gd" type="Script" id=5]
 [ext_resource path="res://Objects/Billy/Controller.gd" type="Script" id=6]
-[ext_resource path="res://Objects/Billy/Motion.gd" type="Script" id=7]
 [ext_resource path="res://objects/billy/Kick.gd" type="Script" id=8]
 [ext_resource path="res://objects/billy/Punch.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12, 27 )
+extents = Vector2( 12, 1 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4, 5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4, 5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 4.5, 5 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 8, 11 )
+
+[sub_resource type="Animation" id=6]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteSheet:frame")
@@ -28,7 +39,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=7]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteSheet:frame")
@@ -43,7 +54,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 10, 9, 8 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=8]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteSheet:frame")
@@ -58,19 +69,19 @@ tracks/0/keys = {
 "values": [ 16, 17, 18, 19 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Boxes/Damage/Collider:disabled")
+tracks/1/path = NodePath("../Boxes/Kick/Collider:shape:extents")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true, false, true ]
+"values": [ Vector2( 4, 5 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Boxes/Damage/Collider:position")
+tracks/2/path = NodePath("../Boxes/Kick/Collider:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -81,8 +92,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [ Vector2( 17, -50 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Boxes/Kick/Collider:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=9]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteSheet:frame")
@@ -97,19 +120,19 @@ tracks/0/keys = {
 "values": [ 32, 33, 34 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Boxes/Damage/Collider:disabled")
+tracks/1/path = NodePath("../Boxes/Punch/Collider:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false, true ]
+"values": [ false, true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Boxes/Damage/Collider:position")
+tracks/2/path = NodePath("../Boxes/Punch/Collider:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -121,7 +144,7 @@ tracks/2/keys = {
 "values": [ Vector2( 25, -50 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../Boxes/Damage/Collider:shape:extents")
+tracks/3/path = NodePath("../Boxes/Punch/Collider:shape:extents")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -129,11 +152,11 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 4, 5 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=10]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -149,24 +172,73 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6 ]
 }
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 4, 5 )
-
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 12, 4 )
-
 [node name="Billy" type="KinematicBody2D"]
-collision_mask = 32
+collision_mask = 40
 script = ExtResource( 4 )
 MAX_SPEED = Vector2( 100, 50 )
 JUMP_FORCE = 300
-SPRITE_SHEET = NodePath("Animations/SpriteSheet")
+SPRITE_SHEET = NodePath("Pivot/Animations/SpriteSheet")
 STATE_MACHINE = NodePath("Controller")
-DAMAGE_BOX = NodePath("Boxes/Damage")
+PIVOT_CONTAINER = NodePath("Pivot")
 
-[node name="HitBox" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -27 )
+[node name="Collider" type="CollisionShape2D" parent="."]
+modulate = Color( 1, 0, 1, 1 )
 shape = SubResource( 1 )
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Boxes" type="Node2D" parent="Pivot"]
+
+[node name="Punch" type="Area2D" parent="Pivot/Boxes"]
+collision_layer = 256
+collision_mask = 514
+
+[node name="Collider" type="CollisionShape2D" parent="Pivot/Boxes/Punch"]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( 25, -50.0649 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="Kick" type="Area2D" parent="Pivot/Boxes"]
+collision_layer = 2
+collision_mask = 512
+
+[node name="Collider" type="CollisionShape2D" parent="Pivot/Boxes/Kick"]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( 17, -50 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="Head" type="Area2D" parent="Pivot/Boxes"]
+
+[node name="Collider" type="CollisionShape2D" parent="Pivot/Boxes/Head"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( -0.5, -49 )
+shape = SubResource( 4 )
+
+[node name="Body" type="Area2D" parent="Pivot/Boxes"]
+collision_layer = 256
+collision_mask = 0
+
+[node name="Collider" type="CollisionShape2D" parent="Pivot/Boxes/Body"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 0, -33 )
+shape = SubResource( 5 )
+
+[node name="Animations" type="Node2D" parent="Pivot"]
+
+[node name="SpriteSheet" type="Sprite" parent="Pivot/Animations"]
+position = Vector2( 0, -32 )
+texture = ExtResource( 1 )
+vframes = 6
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/Animations"]
+anims/Idle = SubResource( 6 )
+anims/Jump = SubResource( 7 )
+anims/Kick = SubResource( 8 )
+anims/Punch = SubResource( 9 )
+anims/Walk = SubResource( 10 )
 
 [node name="Controller" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -174,64 +246,20 @@ START_STATE = "Idle"
 
 [node name="Idle" type="Node" parent="Controller"]
 script = ExtResource( 2 )
-ANIMATION_PLAYER = NodePath("../../Animations/AnimationPlayer")
+ANIMATION_PLAYER = NodePath("../../Pivot/Animations/AnimationPlayer")
 
 [node name="Walk" type="Node" parent="Controller"]
 script = ExtResource( 5 )
-ANIMATION_PLAYER = NodePath("../../Animations/AnimationPlayer")
+ANIMATION_PLAYER = NodePath("../../Pivot/Animations/AnimationPlayer")
 
 [node name="Jump" type="Node" parent="Controller"]
 script = ExtResource( 3 )
-ANIMATION_PLAYER = NodePath("../../Animations/AnimationPlayer")
+ANIMATION_PLAYER = NodePath("../../Pivot/Animations/AnimationPlayer")
 
 [node name="Kick" type="Node" parent="Controller"]
 script = ExtResource( 8 )
-ANIMATION_PLAYER = NodePath("../../Animations/AnimationPlayer")
+ANIMATION_PLAYER = NodePath("../../Pivot/Animations/AnimationPlayer")
 
 [node name="Punch" type="Node" parent="Controller"]
 script = ExtResource( 9 )
-ANIMATION_PLAYER = NodePath("../../Animations/AnimationPlayer")
-
-[node name="Animations" type="Node2D" parent="."]
-
-[node name="SpriteSheet" type="Sprite" parent="Animations"]
-position = Vector2( 0, -32 )
-texture = ExtResource( 1 )
-vframes = 6
-hframes = 8
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
-anims/Idle = SubResource( 2 )
-anims/Jump = SubResource( 3 )
-anims/Kick = SubResource( 4 )
-anims/Punch = SubResource( 5 )
-anims/Walk = SubResource( 6 )
-
-[node name="Label" type="Label" parent="."]
-margin_left = 20.3251
-margin_top = -51.4956
-margin_right = 60.3251
-margin_bottom = -37.4956
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Boxes" type="Node2D" parent="."]
-
-[node name="Damage" type="Area2D" parent="Boxes"]
-collision_layer = 256
-collision_mask = 0
-
-[node name="Collider" type="CollisionShape2D" parent="Boxes/Damage"]
-position = Vector2( 25, -50 )
-shape = SubResource( 7 )
-
-[node name="Motion" type="Area2D" parent="Boxes"]
-collision_layer = 512
-collision_mask = 64
-script = ExtResource( 7 )
-
-[node name="Collider" type="CollisionShape2D" parent="Boxes/Motion"]
-modulate = Color( 1, 0, 1, 1 )
-shape = SubResource( 8 )
-[connection signal="body_entered" from="Boxes/Motion" to="Boxes/Motion" method="_on_Motion_body_entered"]
+ANIMATION_PLAYER = NodePath("../../Pivot/Animations/AnimationPlayer")

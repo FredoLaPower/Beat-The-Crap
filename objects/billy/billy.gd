@@ -9,4 +9,4 @@ extends "res://Classes/Character.gd"
 #------------------------------
 
 func _initialize() -> void:
-	$Boxes/Damage/Collider.set_disabled(true)
+	pass

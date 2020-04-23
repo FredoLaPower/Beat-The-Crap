@@ -2,9 +2,8 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name State
-
-extends Node
+class_name Horizon
+extends Area2D
 
 
 #------------------------------------------------------------
@@ -12,7 +11,7 @@ extends Node
 #------------------------------------------------------------
 
 # warning-ignore:unused_signal
-signal finished(next_state, is_sub_state)
+signal horizon_crossed(body, state)
 
 
 #------------------------------------------------------------
@@ -22,7 +21,9 @@ signal finished(next_state, is_sub_state)
 #------------------------------
 # EXPORT
 #------------------------------
-export(NodePath) var ANIMATION_PLAYER
+
+export(Vector2) var EXTENTS
+export(Vector2) var POSITION
 
 
 #------------------------------------------------------------
@@ -30,29 +31,23 @@ export(NodePath) var ANIMATION_PLAYER
 #------------------------------------------------------------
 
 #------------------------------
-# PUBLIC
+# PRIVATE
 #------------------------------
-
-func initialize() -> void:
-	pass
-
-
-func enter() -> void:
-	pass
-
-
-func exit() -> void:
-	pass
-
-# warning-ignore:unused_argument
-func update(delta: float) -> void:
-	pass
+func _ready():
+	$Collider.get_shape().set_extents(EXTENTS)
+	
+	position = POSITION
+	
+	# warning-ignore:return_value_discarded
+	connect("body_entered", self, "_playe_entered")
+	
+	# warning-ignore:return_value_discarded
+	connect("body_exited", self, "_playe_exited")
 
 
-# warning-ignore:unused_argument
-func handle_input(event: InputEvent) -> void:
-	pass
+func _playe_entered(body: Node) -> void:
+	emit_signal("horizon_crossed", body, true)
 
-# warning-ignore:unused_argument
-func _on_animation_finished(anim_name: String) -> void:
-	pass
+
+func _playe_exited(body: Node) -> void:
+	emit_signal("horizon_crossed", body, false)

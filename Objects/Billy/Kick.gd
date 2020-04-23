@@ -1,7 +1,7 @@
 extends "res://Classes/State.gd"
 
 func initialize() -> void:
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	get_node(ANIMATION_PLAYER).connect("animation_finished", self, "_on_animation_finished")
 
 

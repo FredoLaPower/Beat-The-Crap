@@ -4,7 +4,8 @@ func enter() -> void:
 	get_node(ANIMATION_PLAYER).play("Idle")
 	owner.velocity = Vector2.ZERO
 
-func update(_delta: float) -> void:
+# warning-ignore:unused_argument
+func update(delta: float) -> void:
 		var x_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 		var y_input = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
 		
