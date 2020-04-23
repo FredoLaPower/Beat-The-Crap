@@ -166,5 +166,5 @@ shape = SubResource( 5 )
 
 [node name="Horizon" parent="Colliders/Areas" instance=ExtResource( 9 )]
 EXTENTS = Vector2( 610, 10 )
-POSITION = Vector2( 610, 138 )
+POSITION = Vector2( 610, 140 )
 [connection signal="area_shape_entered" from="Ground/Area2D" to="Ground/Area2D" method="_on_Area2D_area_shape_entered"]
