@@ -1,16 +1,17 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=1]
-[ext_resource path="res://Objects/Enemy/Kick.gd" type="Script" id=2]
-[ext_resource path="res://Objects/Enemy/Idle.gd" type="Script" id=3]
-[ext_resource path="res://Objects/Enemy/Enemy.gd" type="Script" id=4]
-[ext_resource path="res://Objects/Enemy/Walk.gd" type="Script" id=5]
-[ext_resource path="res://Objects/Enemy/Controller.gd" type="Script" id=6]
-[ext_resource path="res://Objects/Enemy/Jump.gd" type="Script" id=7]
-[ext_resource path="res://Objects/Enemy/Punch.gd" type="Script" id=8]
+[ext_resource path="res://GameObjects/Characters/Billy/Walk.gd" type="Script" id=1]
+[ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=2]
+[ext_resource path="res://GameObjects/Characters/Billy/Billy.gd" type="Script" id=3]
+[ext_resource path="res://GameObjects/Characters/Billy/Jump.gd" type="Script" id=4]
+[ext_resource path="res://GameObjects/Characters/Billy/Idle.gd" type="Script" id=5]
+[ext_resource path="res://GameObjects/Characters/Billy/Controller.gd" type="Script" id=6]
+[ext_resource path="res://GameObjects/Characters/Billy/Kick.gd" type="Script" id=7]
+[ext_resource path="res://GameObjects/Characters/Billy/Punch.gd" type="Script" id=8]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12, 1 )
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.0
+height = 16.0
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 5 )
@@ -172,13 +173,13 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6 ]
 }
 
-[node name="Enemy" type="KinematicBody2D"]
-collision_layer = 513
-collision_mask = 0
-script = ExtResource( 4 )
+[node name="Billy" type="KinematicBody2D"]
+collision_mask = 3624
+script = ExtResource( 3 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 modulate = Color( 1, 0, 1, 1 )
+rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Pivot" type="Node2D" parent="."]
@@ -186,8 +187,8 @@ shape = SubResource( 1 )
 [node name="Boxes" type="Node2D" parent="Pivot"]
 
 [node name="Punch" type="Area2D" parent="Pivot/Boxes"]
-collision_layer = 256
-collision_mask = 514
+collision_layer = 2
+collision_mask = 2560
 
 [node name="Collider" type="CollisionShape2D" parent="Pivot/Boxes/Punch"]
 modulate = Color( 0, 1, 0, 1 )
@@ -197,7 +198,7 @@ disabled = true
 
 [node name="Kick" type="Area2D" parent="Pivot/Boxes"]
 collision_layer = 2
-collision_mask = 512
+collision_mask = 2560
 
 [node name="Collider" type="CollisionShape2D" parent="Pivot/Boxes/Kick"]
 modulate = Color( 0, 1, 0, 1 )
@@ -225,11 +226,12 @@ shape = SubResource( 5 )
 
 [node name="SpriteSheet" type="Sprite" parent="Pivot/Animation"]
 position = Vector2( 0, -32 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 vframes = 6
 hframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/Animation"]
+autoplay = "Idle"
 anims/Idle = SubResource( 6 )
 anims/Jump = SubResource( 7 )
 anims/Kick = SubResource( 8 )
@@ -241,16 +243,21 @@ script = ExtResource( 6 )
 START_STATE = "Idle"
 
 [node name="Idle" type="Node" parent="Controller"]
-script = ExtResource( 3 )
+script = ExtResource( 5 )
+ANIMATION_PLAYER = NodePath("../../Pivot/Animation/AnimationPlayer")
 
 [node name="Walk" type="Node" parent="Controller"]
-script = ExtResource( 5 )
+script = ExtResource( 1 )
+ANIMATION_PLAYER = NodePath("../../Pivot/Animation/AnimationPlayer")
 
 [node name="Jump" type="Node" parent="Controller"]
-script = ExtResource( 7 )
+script = ExtResource( 4 )
+ANIMATION_PLAYER = NodePath("../../Pivot/Animation/AnimationPlayer")
 
 [node name="Kick" type="Node" parent="Controller"]
-script = ExtResource( 2 )
+script = ExtResource( 7 )
+ANIMATION_PLAYER = NodePath("../../Pivot/Animation/AnimationPlayer")
 
 [node name="Punch" type="Node" parent="Controller"]
 script = ExtResource( 8 )
+ANIMATION_PLAYER = NodePath("../../Pivot/Animation/AnimationPlayer")

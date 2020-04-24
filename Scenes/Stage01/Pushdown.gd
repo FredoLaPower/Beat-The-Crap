@@ -1,7 +1,7 @@
 extends Panel
 
 
-onready var Billy = owner.get_node("Ground/Billy")
+onready var Billy = owner.get_node("Ground/Renderer/Billy")
 
 
 func _ready() -> void:

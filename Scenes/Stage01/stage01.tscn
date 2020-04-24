@@ -1,34 +1,30 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/graphics/stages/stage_1/stage_1_layer_fg.png" type="Texture" id=1]
 [ext_resource path="res://assets/graphics/stages/stage_1/stage_1_layer_bg.png" type="Texture" id=2]
-[ext_resource path="res://Objects/Billy/Billy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GameObjects/Characters/Billy/Billy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Stage01/Stage01.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Stage01/Pushdown.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/robot.otf" type="DynamicFontData" id=6]
 [ext_resource path="res://Controllers/Camera/Camera.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Stage01/Area2D.gd" type="Script" id=8]
+[ext_resource path="res://GameObjects/Objects/Mailbox/Mailbox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Classes/Horizon.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Stage01/Flags.gd" type="Script" id=10]
-[ext_resource path="res://Objects/Enemy/Enemy.tscn" type="PackedScene" id=11]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 29.846 )
-
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 12
 font_data = ExtResource( 6 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10, 112.5 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 620, 10 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 600, 10 )
 
 [node name="Stage01" type="Node2D"]
@@ -57,26 +53,22 @@ centered = false
 layer = 0
 follow_viewport_enable = true
 
-[node name="Area2D" type="Area2D" parent="Ground"]
-position = Vector2( 257.822, 159.894 )
-collision_layer = 512
-collision_mask = 2
-script = ExtResource( 8 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/Area2D"]
-shape = SubResource( 1 )
-
-[node name="Billy" parent="Ground" instance=ExtResource( 3 )]
+[node name="Renderer" type="YSort" parent="Ground"]
 position = Vector2( 81.1413, 175.863 )
+
+[node name="Billy" parent="Ground/Renderer" instance=ExtResource( 3 )]
 MAX_SPEED = Vector2( 100, 50 )
 JUMP_FORCE = 300
-HORIZON_CONTAINER = NodePath("../../Colliders/Areas")
+HORIZON_CONTAINER = NodePath("../../../Colliders/Areas")
 
-[node name="Enemy" parent="Ground" instance=ExtResource( 11 )]
-position = Vector2( 201.619, 189.021 )
-MAX_SPEED = Vector2( 80, 40 )
-JUMP_FORCE = 300
-HORIZON_CONTAINER = NodePath("../../Colliders/Areas")
+[node name="Mailbox" parent="Ground/Renderer" instance=ExtResource( 8 )]
+position = Vector2( 821.626, -19.8325 )
+
+[node name="Mailbox2" parent="Ground/Renderer" instance=ExtResource( 8 )]
+position = Vector2( 148.943, -20.935 )
+
+[node name="Mailbox3" parent="Ground/Renderer" instance=ExtResource( 8 )]
+position = Vector2( 568.128, -20.9351 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -95,7 +87,7 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = 70.0
 margin_bottom = 18.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Pushdown"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -106,7 +98,7 @@ margin_left = 2.0
 margin_top = 18.0
 margin_right = 63.0
 margin_bottom = 34.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -126,7 +118,7 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = 63.0
 margin_bottom = 18.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Flags"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -137,13 +129,14 @@ margin_left = 2.0
 margin_top = 18.0
 margin_right = 63.0
 margin_bottom = 34.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Camera" parent="." instance=ExtResource( 7 )]
 position = Vector2( 200.321, 112.5 )
+TARGET = NodePath("../Ground/Renderer/Billy")
 LIMITS_MIN = Vector2( 0, 225 )
 
 [node name="Colliders" type="Node2D" parent="."]
@@ -156,7 +149,7 @@ collision_layer = 8
 [node name="Collider" type="CollisionShape2D" parent="Colliders/StaticBodies/Left"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( -10, 112.5 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Right" type="StaticBody2D" parent="Colliders/StaticBodies"]
 collision_layer = 8
@@ -164,7 +157,7 @@ collision_layer = 8
 [node name="Collider" type="CollisionShape2D" parent="Colliders/StaticBodies/Right"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 1210, 112.5 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Bottom" type="StaticBody2D" parent="Colliders/StaticBodies"]
 collision_layer = 8
@@ -172,7 +165,7 @@ collision_layer = 8
 [node name="Collider" type="CollisionShape2D" parent="Colliders/StaticBodies/Bottom"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 600, 235 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="Areas" type="Node2D" parent="Colliders"]
 
@@ -182,5 +175,4 @@ collision_layer = 16
 script = ExtResource( 9 )
 
 [node name="Collider" type="CollisionShape2D" parent="Colliders/Areas/Horizon"]
-shape = SubResource( 6 )
-[connection signal="area_shape_entered" from="Ground/Area2D" to="Ground/Area2D" method="_on_Area2D_area_shape_entered"]
+shape = SubResource( 5 )

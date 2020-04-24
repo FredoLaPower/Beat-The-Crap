@@ -163,6 +163,7 @@ ui_kick={
 2d_physics/layer_9="Message triggers"
 2d_physics/layer_10="Enemies"
 2d_physics/layer_11="Obstacles"
+2d_physics/layer_12="Objects"
 
 [rendering]
 

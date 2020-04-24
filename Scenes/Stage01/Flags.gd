@@ -1,7 +1,7 @@
 extends Panel
 
 
-onready var Billy = owner.get_node("Ground/Billy")
+onready var Billy = owner.get_node("Ground/Renderer/Billy")
 
 
 # warning-ignore:unused_argument
