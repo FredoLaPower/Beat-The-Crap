@@ -125,6 +125,7 @@ func get_state() -> String:
 func get_states_stack() -> Array:
 	return _states_stack
 
+
 func is_paused() -> bool:
 	return _is_paused
 
