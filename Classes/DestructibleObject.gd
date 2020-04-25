@@ -8,18 +8,8 @@ extends KinematicBody2D
 
 
 #------------------------------------------------------------
-# SIGNALS
-#------------------------------------------------------------
-
-
-
-#------------------------------------------------------------
 # PROPERTIES
 #------------------------------------------------------------
-
-# Common writing convention for properties
-#     1. Use snake_case for property name
-#     2. Use static typing whenever possible
 
 #------------------------------
 # EXPORT
@@ -32,6 +22,7 @@ export(String) var START_STATE
 #------------------------------
 var _current_state: String = ""
 var _state_dictionary = {} # No static typing for dictionary
+var _threats: Array = []
 
 
 #------------------------------------------------------------
@@ -62,3 +53,22 @@ func __change_state(new_state: String) -> void:
 
 func initialize() -> void:
 	pass
+
+
+func add_threat(guid: int) -> void:
+	_threats.push_front(guid)
+	
+	print("My list of foes: %s" % _threats)
+
+
+func remove_threat(guid: int) -> void:
+	var index = _threats.find(guid)
+	
+	if index == -1:
+		return
+	
+	_threats.remove(index)
+	if _threats.size() > 0:
+		print("My list of foes: %s" % _threats)
+	else:
+		print("I'm safe...")

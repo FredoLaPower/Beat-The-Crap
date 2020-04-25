@@ -61,7 +61,6 @@ func _scroll_left(_body: Node) -> void:
 		return
 	
 	if position.x > LIMITS_MIN.x + VIEWPORT.x:
-		print("here: %s > %s" %[position.x, LIMITS_MIN.x + _half_viewport.x])
 		__tween(Vector2(position.x - _half_viewport.x, position.y))
 	else:
 		__tween(Vector2(LIMITS_MIN.x + _half_viewport.x, position.y))

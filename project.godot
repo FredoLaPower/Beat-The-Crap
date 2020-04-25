@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Classes/DestructibleObject.gd"
 }, {
-"base": "Area2D",
-"class": "Horizon",
-"language": "GDScript",
-"path": "res://Classes/Horizon.gd"
-}, {
 "base": "Node",
 "class": "MyClass",
 "language": "GDScript",
@@ -46,7 +41,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "DestructibleObject": "",
-"Horizon": "",
 "MyClass": "",
 "PlayerCharacter": "",
 "PlayerStateMachine": "",
@@ -162,7 +156,6 @@ ui_kick={
 2d_physics/layer_2="Player hit boxes"
 2d_physics/layer_3="Player Hurt boxes"
 2d_physics/layer_4="Stage limits"
-2d_physics/layer_5="Stage horizon"
 2d_physics/layer_6="Camera triggers"
 2d_physics/layer_7="Interaction triggers"
 2d_physics/layer_8="Item triggers"

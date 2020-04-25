@@ -15,7 +15,6 @@ extends KinematicBody2D
 #------------------------------
 export(Vector2) var MAX_SPEED = Vector2(0, 0)
 export(int) var JUMP_FORCE = 0
-export(NodePath) var HORIZON_CONTAINER
 
 
 #------------------------------
@@ -44,10 +43,6 @@ var velocity: Vector2 = Vector2.ZERO
 func _ready() -> void:
 	# Subscribe to Controller signal
 	$Controller.initialize()
-
-	for child in get_node(HORIZON_CONTAINER).get_children():
-		# warning-ignore:return_value_discarded
-		child.connect("horizon_crossed", self, "_crossing_horizon")
 	
 	_initialize()
 
@@ -81,7 +76,9 @@ func get_flag(flag_name: String) -> bool:
 func flip_character(is_looking_left: bool = false) -> void:
 		_flags["is_looking_left"] = is_looking_left
 		
+		$Pivot.set_rotation(0) # Fix a bug due to move and slide
+		
 		if is_looking_left:
-			$Pivot.scale.x = -1
+			$Pivot.set_scale(Vector2(-1,1))
 		else:
-			$Pivot.scale.x = 1
+			$Pivot.set_scale(Vector2(1,1))
