@@ -49,6 +49,9 @@ func _ready() -> void:
 
 # warning-ignore:unused_argument
 func _physics_process(delta: float) -> void:
+	if !get_flag("is_on_floor"):
+		$Pivot.velocity.y += Constants.GRAVITY * delta
+
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 

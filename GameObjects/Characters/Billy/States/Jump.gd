@@ -4,7 +4,7 @@ extends "res://Classes/State.gd"
 var _start_position_y: float = 0
 var _start_time: float = 0
 var _is_kicking: bool = false
-var _max_time: int = 500
+var _max_time: int = 600
 
 func enter() -> void:
 	_is_kicking = false
@@ -17,14 +17,14 @@ func enter() -> void:
 	owner.get_node("Pivot/Animation/AnimationPlayer").play("Jump")
 
 
+# warning-ignore:unused_argument
 func update(delta: float) -> void:
-	owner.get_node("Pivot").velocity.y += Constants.GRAVITY * delta
-	
 	if owner.get_node("Pivot").position.y >= _start_position_y:
 		owner.get_node("Pivot").position.y = _start_position_y
 		owner.get_node("Pivot").velocity = Vector2.ZERO
 		
 		owner.set_flag("is_on_floor", true)
+		
 		emit_signal("finished", "Previous")
 
 
