@@ -2,7 +2,7 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name PlayerStateMachine
+class_name StateMachine
 
 extends Node
 
@@ -93,13 +93,6 @@ func __listen_input(input_name: String) -> void:
 
 func __track_input() -> void:
 	pass
-
-
-func __debug(type: String, trace: String = "") -> void:
-	if (type == "fsm"):
-		print("trace = %s | _current_state = %s | _states_stack = %s" % [trace, _current_state, _states_stack])
-	elif (type == "input"):
-		print("trace = %s | _input_dictionary = %s | _input_history = %s" % [trace, _input_dictionary, _input_history])
 
 
 #------------------------------

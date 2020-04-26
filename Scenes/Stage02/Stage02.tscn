@@ -1,0 +1,176 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scenes/Stage02/Stage02.gd" type="Script" id=1]
+[ext_resource path="res://Controllers/Camera/Camera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/graphics/guitar2.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/stages/stage_2/stage_2_bg.png" type="Texture" id=6]
+[ext_resource path="res://assets/fonts/robot.otf" type="DynamicFontData" id=7]
+
+[sub_resource type="Animation" id=6]
+resource_name = "Shredding"
+length = 1.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12 ]
+}
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 12
+font_data = ExtResource( 7 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 112.5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 600, 10 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 620, 10 )
+
+[node name="Stage02" type="Node2D"]
+script = ExtResource( 1 )
+GRAVITY = 1000
+MUSIC = "res://assets/audio/musics/super_double_dragon/intro.ogg"
+
+[node name="Foreground" type="CanvasLayer" parent="."]
+layer = 10
+follow_viewport_enable = true
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -10
+follow_viewport_enable = true
+
+[node name="stage_2_bg" type="Sprite" parent="Background"]
+position = Vector2( -10, 0 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Ground" type="CanvasLayer" parent="."]
+layer = 0
+follow_viewport_enable = true
+
+[node name="Renderer" type="YSort" parent="Ground"]
+
+[node name="guitar2" type="Sprite" parent="Ground/Renderer"]
+position = Vector2( 169.138, 163.358 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+hframes = 13
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Ground/Renderer/guitar2"]
+playback_speed = 0.5
+anims/Shredding = SubResource( 6 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Pushdown" type="Panel" parent="HUD"]
+margin_left = 0.642151
+margin_top = -0.321075
+margin_right = 70.0
+margin_bottom = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/Pushdown"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 70.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 1 )
+text = "Pushdown"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stack" type="Label" parent="HUD/Pushdown"]
+margin_left = 2.0
+margin_top = 18.0
+margin_right = 63.0
+margin_bottom = 34.0
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Flags" type="Panel" parent="HUD"]
+margin_left = 250.0
+margin_top = 0.321075
+margin_right = 400.0
+margin_bottom = 65.3211
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/Flags"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 63.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 1 )
+text = "Flags"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stack" type="Label" parent="HUD/Flags"]
+margin_left = 2.0
+margin_top = 18.0
+margin_right = 63.0
+margin_bottom = 34.0
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera" parent="." instance=ExtResource( 2 )]
+position = Vector2( 200.321, 112.5 )
+TARGET = NodePath("../Ground/Renderer/guitar2")
+LIMITS_MIN = Vector2( 0, 225 )
+
+[node name="StageBoundaries" type="Node2D" parent="."]
+
+[node name="StaticBodies" type="Node2D" parent="StageBoundaries"]
+
+[node name="Left" type="StaticBody2D" parent="StageBoundaries/StaticBodies"]
+collision_layer = 8
+
+[node name="Collider" type="CollisionShape2D" parent="StageBoundaries/StaticBodies/Left"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( -10, 112.5 )
+shape = SubResource( 3 )
+
+[node name="Top" type="StaticBody2D" parent="StageBoundaries/StaticBodies"]
+position = Vector2( 600, 140 )
+collision_layer = 8
+
+[node name="Collider" type="CollisionShape2D" parent="StageBoundaries/StaticBodies/Top"]
+shape = SubResource( 4 )
+
+[node name="Right" type="StaticBody2D" parent="StageBoundaries/StaticBodies"]
+collision_layer = 8
+
+[node name="Collider" type="CollisionShape2D" parent="StageBoundaries/StaticBodies/Right"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 1210, 112.5 )
+shape = SubResource( 3 )
+
+[node name="Bottom" type="StaticBody2D" parent="StageBoundaries/StaticBodies"]
+collision_layer = 8
+
+[node name="Collider" type="CollisionShape2D" parent="StageBoundaries/StaticBodies/Bottom"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 600, 235 )
+shape = SubResource( 5 )

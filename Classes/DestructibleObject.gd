@@ -15,15 +15,15 @@ extends KinematicBody2D
 # EXPORT
 #------------------------------
 export(String) var START_STATE
+export(int) var HEALTH
 
 
 #------------------------------
 # PRIVATE
 #------------------------------
 var _current_state: String = ""
-var _state_dictionary = {} # No static typing for dictionary
 var _threats: Array = []
-
+var _current_health = 0
 
 #------------------------------------------------------------
 # METHODS
@@ -32,6 +32,12 @@ var _threats: Array = []
 #------------------------------
 # VIRTUAL
 #------------------------------
+
+func _ready():
+	_current_health = HEALTH
+	
+	$Animations/AnimationPlayer.play(START_STATE)
+
 
 # warning-ignore:unused_argument
 func _physics_process(delta):

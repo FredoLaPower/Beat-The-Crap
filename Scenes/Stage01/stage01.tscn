@@ -10,20 +10,20 @@
 [ext_resource path="res://Scenes/Stage01/Flags.gd" type="Script" id=10]
 [ext_resource path="res://GameObjects/Characters/Billy/Billy.tscn" type="PackedScene" id=11]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 12
 font_data = ExtResource( 6 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 10, 112.5 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 600, 10 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 620, 10 )
 
 [node name="Stage01" type="Node2D"]
@@ -56,21 +56,26 @@ follow_viewport_enable = true
 
 [node name="Mailbox" parent="Ground/Renderer" instance=ExtResource( 8 )]
 position = Vector2( 850, 180 )
+scale = Vector2( 3, 3 )
+HEALTH = 200
 
 [node name="Mailbox2" parent="Ground/Renderer" instance=ExtResource( 8 )]
 position = Vector2( 230, 180 )
 
 [node name="Mailbox3" parent="Ground/Renderer" instance=ExtResource( 8 )]
 position = Vector2( 620, 180 )
+scale = Vector2( 2, 2 )
+HEALTH = 200
 
 [node name="Billy" parent="Ground/Renderer" instance=ExtResource( 11 )]
-position = Vector2( 30, 180 )
+position = Vector2( 136.744, 198.643 )
 MAX_SPEED = Vector2( 150, 75 )
 JUMP_FORCE = 300
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Pushdown" type="Panel" parent="HUD"]
+visible = false
 margin_left = 0.642151
 margin_top = -0.321075
 margin_right = 70.0
@@ -85,7 +90,7 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = 70.0
 margin_bottom = 18.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Pushdown"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -96,12 +101,13 @@ margin_left = 2.0
 margin_top = 18.0
 margin_right = 63.0
 margin_bottom = 34.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Flags" type="Panel" parent="HUD"]
+visible = false
 margin_left = 250.0
 margin_top = 0.321075
 margin_right = 400.0
@@ -116,7 +122,7 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = 63.0
 margin_bottom = 18.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Flags"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -127,7 +133,7 @@ margin_left = 2.0
 margin_top = 18.0
 margin_right = 63.0
 margin_bottom = 34.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -147,14 +153,14 @@ collision_layer = 8
 [node name="Collider" type="CollisionShape2D" parent="Colliders/StaticBodies/Left"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( -10, 112.5 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Top" type="StaticBody2D" parent="Colliders/StaticBodies"]
 position = Vector2( 600, 140 )
 collision_layer = 8
 
 [node name="Collider" type="CollisionShape2D" parent="Colliders/StaticBodies/Top"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="Right" type="StaticBody2D" parent="Colliders/StaticBodies"]
 collision_layer = 8
@@ -162,7 +168,7 @@ collision_layer = 8
 [node name="Collider" type="CollisionShape2D" parent="Colliders/StaticBodies/Right"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 1210, 112.5 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Bottom" type="StaticBody2D" parent="Colliders/StaticBodies"]
 collision_layer = 8
@@ -170,4 +176,4 @@ collision_layer = 8
 [node name="Collider" type="CollisionShape2D" parent="Colliders/StaticBodies/Bottom"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 600, 235 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )

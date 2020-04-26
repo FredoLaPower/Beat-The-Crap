@@ -7,14 +7,11 @@ func enter() -> void:
 
 # warning-ignore:unused_argument
 func update(delta: float):
-	var x_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	var y_input = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
+	var x_input = Input.get_action_strength("Right") - Input.get_action_strength("Left")
+	var y_input = Input.get_action_strength("Up") - Input.get_action_strength("Down")
 	
 	owner.velocity.x = x_input * owner.MAX_SPEED.x
 	owner.velocity.y = -y_input * owner.MAX_SPEED.y
-	
-	if owner.get_flag("is_crossing_horizon") && owner.velocity.y < 0:
-		owner.velocity.y = 0
 	
 	if x_input < 0:
 		owner.flip_character(true)
@@ -26,13 +23,13 @@ func update(delta: float):
 
 
 func handle_input(event: InputEvent)  -> void:
-	if event.get_action_strength("ui_jump"):
+	if event.get_action_strength("Jump"):
 		emit_signal("finished", "Jump", true)
 	
-	if event.get_action_strength("ui_punch"):
+	if event.get_action_strength("Punch"):
 		emit_signal("finished", "Punch", true)
 		return
 	
-	if event.get_action_strength("ui_kick"):
+	if event.get_action_strength("Kick"):
 		emit_signal("finished", "Kick", true)
 		return

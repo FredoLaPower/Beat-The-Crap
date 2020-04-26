@@ -21,8 +21,7 @@ export(int) var JUMP_FORCE = 0
 # PRIVATE
 #------------------------------
 var _flags = {
-	"is_looking_left" : false,
-	"is_crossing_horizon" : false
+	"is_looking_left" : false
 }
 
 
@@ -58,11 +57,6 @@ func _physics_process(delta: float) -> void:
 
 func _initialize() -> void:
 	pass
-
-
-# warning-ignore:unused_argument
-func _crossing_horizon(body: Node, is_crossing_horizon: bool) -> void:
-	_flags["is_crossing_horizon"] = is_crossing_horizon
 
 
 #------------------------------
