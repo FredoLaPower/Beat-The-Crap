@@ -25,6 +25,8 @@ var _flags = {
 	"is_on_floor" : true
 }
 
+var _sounds = {}
+
 
 #------------------------------
 # PUBLIC
@@ -63,9 +65,17 @@ func _initialize() -> void:
 	pass
 
 
+func _add_sound(name: String, path: String):
+	_sounds[name] = path
+
+
 #------------------------------
 # PUBLIC
 #------------------------------
+
+func disable_hitboxes() -> void:
+	pass
+
 
 func get_flag(flag_name: String) -> bool:
 	return _flags[flag_name]
@@ -73,6 +83,11 @@ func get_flag(flag_name: String) -> bool:
 
 func set_flag(flag_name: String, value: bool) -> void:
 	_flags[flag_name] = value
+
+
+func play_sound(name: String):
+	$SoundPlayer.stream = load(_sounds[name])
+	$SoundPlayer.play()
 
 
 func flip_character(is_looking_left: bool = false) -> void:

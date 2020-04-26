@@ -32,7 +32,7 @@ extents = Vector2( 4.5, 5 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 8, 11 )
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=7]
 resource_name = "Flying_kick"
 length = 0.1
 tracks/0/type = "value"
@@ -72,7 +72,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Billy:frame")
@@ -86,56 +86,8 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Boxes/Punch/PunchCollider:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../Boxes/Kick/KickCollider:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("../Boxes/Punch/PunchCollider:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("../Boxes/Kick/KickCollider:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=9]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Billy:frame")
@@ -144,13 +96,13 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 8, 9, 10, 10, 9, 8 ]
+"values": [ 8, 9, 10, 9, 8 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=10]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Billy:frame")
@@ -171,10 +123,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, 0 ), Vector2( 17, -50 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 17, -50 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("../Boxes/Kick/KickCollider:disabled")
@@ -189,7 +141,7 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=11]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Billy:frame")
@@ -222,13 +174,13 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, 0 ), Vector2( 25, -50 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 25, -50 ) ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=12]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -291,8 +243,8 @@ DAMAGE = 30
 
 [node name="KickCollider" type="CollisionShape2D" parent="Pivot/Boxes/Kick"]
 modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 28, -26 )
 shape = SubResource( 4 )
-disabled = true
 
 [node name="Head" type="Area2D" parent="Pivot/Boxes"]
 collision_layer = 4
@@ -319,16 +271,15 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 vframes = 6
 hframes = 8
-frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/Animation"]
 autoplay = "Idle"
-anims/Flying_kick = SubResource( 14 )
-anims/Idle = SubResource( 15 )
-anims/Jump = SubResource( 16 )
-anims/Kick = SubResource( 17 )
-anims/Punch = SubResource( 18 )
-anims/Walk = SubResource( 19 )
+anims/Flying_kick = SubResource( 7 )
+anims/Idle = SubResource( 8 )
+anims/Jump = SubResource( 9 )
+anims/Kick = SubResource( 10 )
+anims/Punch = SubResource( 11 )
+anims/Walk = SubResource( 12 )
 
 [node name="Controller" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -350,6 +301,7 @@ script = ExtResource( 8 )
 script = ExtResource( 7 )
 
 [node name="Range" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2560
 script = ExtResource( 10 )

@@ -2,6 +2,7 @@ extends "res://Classes/State.gd"
 
 
 func enter() -> void:
+	owner.disable_hitboxes()
 	owner.get_node("Pivot/Animation/AnimationPlayer").play("Walk")
 
 

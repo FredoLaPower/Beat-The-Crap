@@ -7,8 +7,7 @@ func initialize() -> void:
 
 
 func enter() -> void:
-	owner.get_node("SoundPlayer").stream = load("res://assets/audio/sounds/woosh.wav")
-	owner.get_node("SoundPlayer").play()
+	owner.play_sound("Kick")
 	
 	owner.get_node("Pivot/Animation/AnimationPlayer").play("Kick")
 	owner.velocity = Vector2.ZERO
