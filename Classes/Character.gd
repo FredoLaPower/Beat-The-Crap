@@ -21,7 +21,8 @@ export(int) var JUMP_FORCE = 0
 # PRIVATE
 #------------------------------
 var _flags = {
-	"is_looking_left" : false
+	"is_looking_left" : false,
+	"is_on_floor" : true
 }
 
 
@@ -67,8 +68,12 @@ func get_flag(flag_name: String) -> bool:
 	return _flags[flag_name]
 
 
+func set_flag(flag_name: String, value: bool) -> void:
+	_flags[flag_name] = value
+
+
 func flip_character(is_looking_left: bool = false) -> void:
-		_flags["is_looking_left"] = is_looking_left
+		set_flag("is_looking_left", is_looking_left)
 		
 		$Pivot.set_rotation(0) # Fix a bug due to move and slide
 		

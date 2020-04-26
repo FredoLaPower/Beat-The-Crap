@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://GameObjects/Characters/Billy/Billy.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=2]
@@ -32,6 +32,46 @@ extents = Vector2( 4.5, 5 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 8, 11 )
 
+[sub_resource type="Animation" id=13]
+resource_name = "Flying_kick"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Billy:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 11 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Boxes/Kick/KickCollider:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 28, -26 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Boxes/Kick/KickCollider:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [sub_resource type="Animation" id=7]
 length = 0.1
 tracks/0/type = "value"
@@ -45,6 +85,54 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Boxes/Punch/PunchCollider:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Boxes/Kick/KickCollider:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Boxes/Punch/PunchCollider:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Boxes/Kick/KickCollider:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -205,6 +293,7 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="Boxes" type="Node2D" parent="Pivot"]
+visible = false
 
 [node name="Punch" type="Area2D" parent="Pivot/Boxes"]
 collision_layer = 2
@@ -213,9 +302,7 @@ script = ExtResource( 11 )
 DAMAGE = 20
 
 [node name="PunchCollider" type="CollisionShape2D" parent="Pivot/Boxes/Punch"]
-visible = false
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 25, -50 )
 shape = SubResource( 3 )
 disabled = true
 
@@ -226,9 +313,7 @@ script = ExtResource( 12 )
 DAMAGE = 30
 
 [node name="KickCollider" type="CollisionShape2D" parent="Pivot/Boxes/Kick"]
-visible = false
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 17, -50 )
 shape = SubResource( 4 )
 disabled = true
 
@@ -257,10 +342,10 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 vframes = 6
 hframes = 8
-frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/Animation"]
 autoplay = "Idle"
+anims/Flying_kick = SubResource( 13 )
 anims/Idle = SubResource( 7 )
 anims/Jump = SubResource( 8 )
 anims/Kick = SubResource( 9 )
@@ -280,10 +365,6 @@ script = ExtResource( 5 )
 [node name="Jump" type="Node" parent="Controller"]
 script = ExtResource( 6 )
 
-[node name="Timer" type="Timer" parent="Controller/Jump"]
-wait_time = 0.3
-one_shot = true
-
 [node name="Kick" type="Node" parent="Controller"]
 script = ExtResource( 8 )
 
@@ -296,7 +377,6 @@ collision_mask = 2560
 script = ExtResource( 10 )
 
 [node name="RangeCollider" type="CollisionShape2D" parent="Range"]
-visible = false
 modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 12 )
 

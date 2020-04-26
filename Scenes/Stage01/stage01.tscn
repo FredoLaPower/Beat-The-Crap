@@ -57,7 +57,7 @@ follow_viewport_enable = true
 [node name="Mailbox" parent="Ground/Renderer" instance=ExtResource( 8 )]
 position = Vector2( 850, 180 )
 scale = Vector2( 3, 3 )
-HEALTH = 200
+HEALTH = 300
 
 [node name="Mailbox2" parent="Ground/Renderer" instance=ExtResource( 8 )]
 position = Vector2( 230, 180 )
@@ -75,7 +75,6 @@ JUMP_FORCE = 300
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Pushdown" type="Panel" parent="HUD"]
-visible = false
 margin_left = 0.642151
 margin_top = -0.321075
 margin_right = 70.0
@@ -107,7 +106,6 @@ __meta__ = {
 }
 
 [node name="Flags" type="Panel" parent="HUD"]
-visible = false
 margin_left = 250.0
 margin_top = 0.321075
 margin_right = 400.0
