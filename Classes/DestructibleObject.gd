@@ -24,6 +24,8 @@ export(int) var HEALTH
 var _current_state: String = ""
 var _threats: Array = []
 var _current_health = 0
+var _soundboard = {}
+
 
 #------------------------------------------------------------
 # METHODS
@@ -37,6 +39,8 @@ func _ready():
 	_current_health = HEALTH
 	
 	$Animations/AnimationPlayer.play(START_STATE)
+	
+	__initialize()
 
 
 # warning-ignore:unused_argument
@@ -47,9 +51,11 @@ func _physics_process(delta):
 #------------------------------
 # PRIVATE
 #------------------------------
+func __add_sound(name: String, path: String):
+	_soundboard[name] = path
 
-# warning-ignore:unused_argument
-func __change_state(new_state: String) -> void:
+
+func __initialize() -> void:
 	pass
 
 
@@ -74,7 +80,8 @@ func remove_threat(guid: int) -> void:
 		return
 	
 	_threats.remove(index)
-	if _threats.size() > 0:
-		print("My list of foes: %s" % _threats)
-	else:
-		print("I'm safe...")
+
+
+func play_sound(name: String):
+	$SoundPlayer.stream = load(_soundboard[name])
+	$SoundPlayer.play()

@@ -1,7 +1,5 @@
 extends "res://Classes/DestructibleObject.gd"
 
-
-# warning-ignore:unused_argument
-func _process(delta):
-	if _current_state == "Destroyed":
-		return
+func __initialize() -> void:
+	__add_sound("Hit", "res://assets/audio/sounds/hit_metal.wav")
+	__add_sound("Destroyed", "res://assets/audio/sounds/metal_destroyed.wav")

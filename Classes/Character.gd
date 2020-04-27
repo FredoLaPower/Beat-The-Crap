@@ -25,7 +25,7 @@ var _flags = {
 	"is_on_floor" : true
 }
 
-var _sounds = {}
+var _soundboard = {}
 
 
 #------------------------------
@@ -46,7 +46,7 @@ func _ready() -> void:
 	# Subscribe to Controller signal
 	$Controller.initialize()
 	
-	_initialize()
+	__initialize()
 
 
 # warning-ignore:unused_argument
@@ -61,12 +61,12 @@ func _physics_process(delta: float) -> void:
 # PRIVATE
 #------------------------------
 
-func _initialize() -> void:
+func __initialize() -> void:
 	pass
 
 
-func _add_sound(name: String, path: String):
-	_sounds[name] = path
+func __add_sound(name: String, path: String):
+	_soundboard[name] = path
 
 
 #------------------------------
@@ -86,7 +86,7 @@ func set_flag(flag_name: String, value: bool) -> void:
 
 
 func play_sound(name: String):
-	$SoundPlayer.stream = load(_sounds[name])
+	$SoundPlayer.stream = load(_soundboard[name])
 	$SoundPlayer.play()
 
 

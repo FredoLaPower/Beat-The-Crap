@@ -10,13 +10,12 @@ func _on_Hurtbox_area_shape_entered(area_id, area, area_shape, self_shape):
 		
 		if owner._current_health  <= 0:
 			owner.get_node("Animations/AnimationPlayer").play("Destroyed")
+			
+			owner.play_sound("Destroyed")
 		else:
 			if owner._current_health >= int(owner.HEALTH / 2):
 				owner.get_node("Animations/AnimationPlayer").play("Hit")
 			else:
 				owner.get_node("Animations/AnimationPlayer").play("Damaged")
-		
-		owner.get_node("SoundPlayer").stream = load("res://assets/audio/sounds/hit_metal.wav")
-		owner.get_node("SoundPlayer").play()
-		
-		print("Hit by : %s of %s (-%s HP)\nHealth : %s / %s" % [area.get_name(), area.get_owner().get_name(), area.get_damage(), owner._current_health, owner.HEALTH])
+			
+			owner.play_sound("Hit")
