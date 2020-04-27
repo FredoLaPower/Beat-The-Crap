@@ -69,8 +69,6 @@ func initialize() -> void:
 
 func add_threat(guid: int) -> void:
 	_threats.push_front(guid)
-	
-	print("My list of foes: %s" % _threats)
 
 
 func remove_threat(guid: int) -> void:
