@@ -25,9 +25,7 @@ var _flags = {
 	"is_on_floor" : true
 }
 
-var _moves = {
-	"hadoken": "LDRP"
-}
+var _moves = {}
 
 var _soundboard = {}
 
@@ -69,8 +67,12 @@ func __initialize() -> void:
 	pass
 
 
-func __add_sound(name: String, path: String):
+func __add_sound(name: String, path: String) -> void:
 	_soundboard[name] = path
+
+
+func __add_move(name: String, signature: String) -> void:
+	_moves[name] = signature
 
 
 #------------------------------
