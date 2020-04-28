@@ -32,9 +32,12 @@ var _states_stack = [] # Use to store the hierachy of states
 var _is_paused: bool = false
 
 # Input Manager
-var _inputs = {} # [input_name, state]
-var _inputs_stack: Array = [] # [input_name, timestamp] only pressed and released inputs are tracked
-var _max_inputs_tracked: int = 20
+var _inputs = {} # [input_name, sid, sum]
+var _inputs_stack: Array = [] # [input_name, timestamp] only pressed inputs are tracked | removed released for now
+var _inputs_max_entries: int = 10
+var _inputs_checksum: String = ""
+var _inputs_trace: int = 500 #we track the last 500ms
+
 
 #------------------------------------------------------------
 # METHODS
@@ -51,9 +54,12 @@ func _physics_process(delta: float) -> void:
 
 # Forward input to the current state
 func _unhandled_input(event: InputEvent) -> void:
-	__track_inputs(event)
-		
+	__log_input(event)
+	__encode_inputs_stack()
+	
 	_states[_states_stack[0]].handle_input(event)
+	
+	
 
 
 #------------------------------
@@ -89,23 +95,27 @@ func __change_state(new_state: String, is_sub_state: bool = false) -> void:
 	emit_signal("state_changed", _current_state)
 
 
-func __add_input(name: String, state: String) -> void:
-	_inputs[name] = state
+func __add_input(name: String, code: String) -> void:
+	_inputs[name] = code
 
 
-func __track_inputs(event:InputEvent) -> void:
+func __log_input(event:InputEvent) -> void:
 	for input in _inputs:
 		if event.is_action_pressed(input):
-			__log_input(input, "pressed")
-		elif  event.is_action_released(input):
-			__log_input(input, "released")
+			_inputs_stack.push_back([input, OS.get_ticks_msec()])
 	
-	if _inputs_stack.size() > _max_inputs_tracked:
-		_inputs_stack.pop_back()
+	if _inputs_stack.size() > _inputs_max_entries:
+		_inputs_stack.pop_front()
 
 
-func __log_input(name: String, state: String) -> void:
-	_inputs_stack.push_front([name, state, OS.get_ticks_msec()])
+func __encode_inputs_stack() -> void:
+	var time_elapsed = OS.get_ticks_msec()
+	
+	_inputs_checksum = ""
+	
+	for input in _inputs_stack:
+		if time_elapsed - input[1] < _inputs_trace:
+			_inputs_checksum += _inputs[input[0]]
 
 
 #------------------------------
@@ -132,8 +142,8 @@ func get_states_stack() -> Array:
 	return _states_stack
 
 
-func get_inputs_stack() -> Array:
-	return _inputs_stack
+func get_encoded_inputs() -> String:
+	return _inputs_checksum
 
 
 func is_paused() -> bool:

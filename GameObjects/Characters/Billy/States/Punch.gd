@@ -8,7 +8,6 @@ func initialize() -> void:
 
 func enter() -> void:
 	owner.play_sound("Punch")
-	
 	owner.get_node("Pivot/Animation/AnimationPlayer").play("Punch")
 	owner.velocity = Vector2.ZERO
 

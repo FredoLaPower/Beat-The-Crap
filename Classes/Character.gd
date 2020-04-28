@@ -25,6 +25,10 @@ var _flags = {
 	"is_on_floor" : true
 }
 
+var _moves = {
+	"hadoken": "LDRP"
+}
+
 var _soundboard = {}
 
 
