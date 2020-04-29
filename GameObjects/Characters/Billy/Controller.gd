@@ -7,6 +7,7 @@ func _ready() -> void:
 	__add_state("Jump", $Jump)
 	__add_state("Punch", $Punch)
 	__add_state("Kick", $Kick)
+	__add_state("Hadouken", $Hadouken)
 	
 	__add_input("Up", "U")
 	__add_input("Down", "D")

@@ -20,6 +20,14 @@ signal finished(next_state, is_sub_state)
 #------------------------------------------------------------
 
 #------------------------------
+# PRIVATE
+#------------------------------
+# warning-ignore:unused_argument
+func __on_animation_finished(anim_name: String) -> void:
+	pass
+
+
+#------------------------------
 # PUBLIC
 #------------------------------
 
@@ -41,8 +49,4 @@ func update(delta: float) -> void:
 
 # warning-ignore:unused_argument
 func handle_input(event: InputEvent) -> void:
-	pass
-
-# warning-ignore:unused_argument
-func _on_animation_finished(anim_name: String) -> void:
 	pass

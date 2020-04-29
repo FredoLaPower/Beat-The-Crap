@@ -419,7 +419,7 @@ tracks/13/keys = {
 collision_layer = 2048
 collision_mask = 513
 script = ExtResource( 3 )
-START_STATE = "Intact"
+START_ANIMATION = "Intact"
 HEALTH = 100
 
 [node name="StaticCollider" type="CollisionShape2D" parent="."]

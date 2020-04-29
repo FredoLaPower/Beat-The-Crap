@@ -25,7 +25,7 @@ var _flags = {
 	"is_on_floor" : true
 }
 
-var _moves = {}
+var _special_moves = {}
 
 var _soundboard = {}
 
@@ -71,8 +71,8 @@ func __add_sound(name: String, path: String) -> void:
 	_soundboard[name] = path
 
 
-func __add_move(name: String, signature: String) -> void:
-	_moves[name] = signature
+func __add_special_move(name: String, signature: String) -> void:
+	_special_moves[name] = signature
 
 
 #------------------------------
@@ -96,12 +96,12 @@ func play_sound(name: String):
 	$SoundPlayer.play()
 
 
-func flip_character(is_looking_left: bool = false) -> void:
-		set_flag("is_looking_left", is_looking_left)
-		
-		$Pivot.set_rotation(0) # Fix a bug due to move and slide
-		
-		if is_looking_left:
-			$Pivot.set_scale(Vector2(-1,1))
-		else:
-			$Pivot.set_scale(Vector2(1,1))
+func flip_character(is_looking_left: bool) -> void:
+	set_flag("is_looking_left", is_looking_left)
+	
+	$Pivot.set_rotation(0) # Fix a bug due to move and slide
+	
+	if is_looking_left:
+		$Pivot.set_scale(Vector2(-1,1))
+	else:
+		$Pivot.set_scale(Vector2(1,1))

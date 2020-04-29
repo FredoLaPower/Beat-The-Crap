@@ -7,11 +7,13 @@ func initialize() -> void:
 
 
 func enter() -> void:
-	owner.play_sound("Kick")
-	owner.get_node("Pivot/Animation/AnimationPlayer").play("Kick")
+	owner.play_sound("Hadouken")
+	owner.get_node("Pivot/Animation/AnimationPlayer").play("Hadouken")
+	
 	owner.velocity = Vector2.ZERO
-
+	
+	owner.fire_bullet("fireball")
 
 func __on_animation_finished(anim_name: String) -> void:
-	if anim_name == "Kick":
+	if anim_name == "Hadouken":
 		emit_signal("finished", "Previous")

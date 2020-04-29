@@ -26,16 +26,18 @@ export(String) var START_STATE
 #------------------------------
 # PRIVATE
 #------------------------------
+var _is_paused: bool = false
+
+# State Manager
 var _current_state: String = ""
 var _states = {} # No static typing for dictionary
 var _states_stack = [] # Use to store the hierachy of states
-var _is_paused: bool = false
 
 # Input Manager
 var _inputs = {} # [input_name, sid, sum]
 var _inputs_stack: Array = [] # [input_name, timestamp] only pressed inputs are tracked | removed released for now
 var _inputs_max_entries: int = 10
-var _inputs_checksum: String = ""
+var _encoded_inputs: String = ""
 var _inputs_trace: int = 500 #we track the last 500ms
 
 
@@ -46,6 +48,10 @@ var _inputs_trace: int = 500 #we track the last 500ms
 #------------------------------
 # VIRTUAL
 #------------------------------
+# warning-ignore:unused_argument
+func _process(delta) -> void:
+	__encode_inputs_stack()
+
 
 # Process the current state logic
 func _physics_process(delta: float) -> void:
@@ -58,8 +64,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	__encode_inputs_stack()
 	
 	_states[_states_stack[0]].handle_input(event)
-	
-	
 
 
 #------------------------------
@@ -111,11 +115,11 @@ func __log_input(event:InputEvent) -> void:
 func __encode_inputs_stack() -> void:
 	var time_elapsed = OS.get_ticks_msec()
 	
-	_inputs_checksum = ""
+	_encoded_inputs = ""
 	
 	for input in _inputs_stack:
 		if time_elapsed - input[1] < _inputs_trace:
-			_inputs_checksum += _inputs[input[0]]
+			_encoded_inputs += _inputs[input[0]]
 
 
 #------------------------------
@@ -143,7 +147,7 @@ func get_states_stack() -> Array:
 
 
 func get_encoded_inputs() -> String:
-	return _inputs_checksum
+	return _encoded_inputs
 
 
 func is_paused() -> bool:

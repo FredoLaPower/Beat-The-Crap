@@ -9,12 +9,12 @@ func enter() -> void:
 
 # warning-ignore:unused_argument
 func update(delta: float) -> void:
-		var x_input = Input.get_action_strength("Right") - Input.get_action_strength("Left")
-		var y_input = Input.get_action_strength("Up") - Input.get_action_strength("Down")
+	var x_input = Input.get_action_strength("Right") - Input.get_action_strength("Left")
+	var y_input = Input.get_action_strength("Up") - Input.get_action_strength("Down")
 	
-		if x_input != 0 || y_input != 0:
-			emit_signal("finished", "Walk")
-			return
+	if x_input != 0 || y_input != 0:
+		emit_signal("finished", "Walk")
+		return
 
 
 func handle_input(event: InputEvent) -> void:

@@ -12,5 +12,3 @@ func _on_Area2D_body_entered(_body):
 
 func _process(_delta):
 	OS.set_window_title("%s %s | fps: %s" % [Constants.PROJET_NAME, Constants.BUILT_VERSION, Engine.get_frames_per_second()])
-	
-	#print($Ground/Renderer/Billy/Controller.get_inputs_checksum())

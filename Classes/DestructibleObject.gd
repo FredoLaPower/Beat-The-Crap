@@ -14,14 +14,13 @@ extends KinematicBody2D
 #------------------------------
 # EXPORT
 #------------------------------
-export(String) var START_STATE
+export(String) var START_ANIMATION
 export(int) var HEALTH
 
 
 #------------------------------
 # PRIVATE
 #------------------------------
-var _current_state: String = ""
 var _threats: Array = []
 var _current_health = 0
 var _soundboard = {}
@@ -38,7 +37,7 @@ var _soundboard = {}
 func _ready():
 	_current_health = HEALTH
 	
-	$Animations/AnimationPlayer.play(START_STATE)
+	$Animations/AnimationPlayer.play(START_ANIMATION)
 	
 	__initialize()
 

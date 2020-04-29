@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://GameObjects/Characters/Billy/Billy.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://GameObjects/Characters/Billy/States/Range.gd" type="Script" id=10]
 [ext_resource path="res://GameObjects/Characters/Billy/Hitboxes/Punch.gd" type="Script" id=11]
 [ext_resource path="res://GameObjects/Characters/Billy/Hitboxes/Kick.gd" type="Script" id=12]
+[ext_resource path="res://GameObjects/Characters/Billy/States/Hadouken.gd" type="Script" id=13]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -19,18 +20,6 @@ height = 16.0
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 4 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 4, 5 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 4, 5 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 4.5, 5 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 8, 11 )
 
 [sub_resource type="Animation" id=7]
 resource_name = "Flying_kick"
@@ -73,6 +62,22 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=8]
+resource_name = "Hadouken"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Billy:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 40, 41, 42, 43, 41 ]
+}
+
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Billy:frame")
@@ -87,7 +92,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Billy:frame")
@@ -102,7 +107,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 9, 8 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Billy:frame")
@@ -141,7 +146,7 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Billy:frame")
@@ -180,7 +185,7 @@ tracks/2/keys = {
 "values": [ Vector2( 25, -50 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -196,7 +201,19 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6 ]
 }
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4, 5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 4, 5 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 4.5, 5 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 8, 11 )
+
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 32, 8 )
 
 [node name="Billy" type="KinematicBody2D" groups=[
@@ -221,6 +238,25 @@ script = ExtResource( 9 )
 visible = false
 shape = SubResource( 2 )
 disabled = true
+
+[node name="Animation" type="Node2D" parent="Pivot"]
+
+[node name="Billy" type="Sprite" parent="Pivot/Animation"]
+position = Vector2( 0, -32 )
+texture = ExtResource( 2 )
+vframes = 6
+hframes = 8
+frame = 42
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/Animation"]
+autoplay = "Idle"
+anims/Flying_kick = SubResource( 7 )
+anims/Hadouken = SubResource( 8 )
+anims/Idle = SubResource( 9 )
+anims/Jump = SubResource( 10 )
+anims/Kick = SubResource( 11 )
+anims/Punch = SubResource( 12 )
+anims/Walk = SubResource( 13 )
 
 [node name="Boxes" type="Node2D" parent="Pivot"]
 
@@ -264,24 +300,6 @@ modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 0, -33 )
 shape = SubResource( 6 )
 
-[node name="Animation" type="Node2D" parent="Pivot"]
-
-[node name="Billy" type="Sprite" parent="Pivot/Animation"]
-position = Vector2( 0, -32 )
-texture = ExtResource( 2 )
-vframes = 6
-hframes = 8
-frame = 11
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/Animation"]
-autoplay = "Idle"
-anims/Flying_kick = SubResource( 7 )
-anims/Idle = SubResource( 8 )
-anims/Jump = SubResource( 9 )
-anims/Kick = SubResource( 10 )
-anims/Punch = SubResource( 11 )
-anims/Walk = SubResource( 12 )
-
 [node name="Controller" type="Node" parent="."]
 script = ExtResource( 3 )
 START_STATE = "Idle"
@@ -301,6 +319,9 @@ script = ExtResource( 8 )
 [node name="Punch" type="Node" parent="Controller"]
 script = ExtResource( 7 )
 
+[node name="Hadouken" type="Node" parent="Controller"]
+script = ExtResource( 13 )
+
 [node name="Range" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2560
@@ -308,8 +329,11 @@ script = ExtResource( 10 )
 
 [node name="RangeCollider" type="CollisionShape2D" parent="Range"]
 modulate = Color( 1, 0, 0, 1 )
-shape = SubResource( 13 )
+shape = SubResource( 14 )
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="BulletSpawnPoint" type="Position2D" parent="."]
+position = Vector2( 15, -35 )
 [connection signal="body_entered" from="Range" to="Range" method="_on_Range_body_entered"]
 [connection signal="body_exited" from="Range" to="Range" method="_on_Range_body_exited"]
