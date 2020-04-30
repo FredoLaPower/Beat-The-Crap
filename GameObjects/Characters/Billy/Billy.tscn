@@ -36,7 +36,7 @@ extents = Vector2( 4.5, 5 )
 
 [sub_resource type="RectangleShape2D" id=7]
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=8]
 resource_name = "Combo"
 length = 1.7
 tracks/0/type = "value"
@@ -123,7 +123,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Container/Sprites/SpriteSheet:frame")
@@ -176,7 +176,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Container/Sprites/SpriteSheet:frame")
@@ -191,7 +191,7 @@ tracks/0/keys = {
 "values": [ 40, 41, 42, 43, 42, 32, 34 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Container/Sprites/SpriteSheet:frame")
@@ -206,7 +206,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -222,7 +222,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 10, 9, 8 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Container/Sprites/SpriteSheet:frame")
@@ -275,7 +275,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Container/Sprites/SpriteSheet:frame")
@@ -328,7 +328,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -376,7 +376,6 @@ script = ExtResource( 9 )
 [node name="Hitboxes" type="Node2D" parent="Container/Colliders"]
 
 [node name="Punch" type="Area2D" parent="Container/Colliders/Hitboxes"]
-position = Vector2( 25, -50 )
 collision_layer = 2
 collision_mask = 2560
 script = ExtResource( 11 )
@@ -387,7 +386,6 @@ modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 3 )
 
 [node name="Kick" type="Area2D" parent="Container/Colliders/Hitboxes"]
-position = Vector2( 28, -26 )
 collision_layer = 2
 collision_mask = 2560
 script = ExtResource( 12 )
@@ -424,7 +422,6 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -32 )
 vframes = 6
 hframes = 8
-frame = 11
 
 [node name="SpawnPoints" type="Node2D" parent="Container"]
 
@@ -440,14 +437,14 @@ disabled = true
 
 [node name="Animation" type="AnimationPlayer" parent="Managers"]
 autoplay = "Idle"
-anims/Combo = SubResource( 15 )
-anims/Flying_kick = SubResource( 8 )
-anims/Hadouken = SubResource( 9 )
-anims/Idle = SubResource( 10 )
-anims/Jump = SubResource( 11 )
-anims/Kick = SubResource( 12 )
-anims/Punch = SubResource( 13 )
-anims/Walk = SubResource( 14 )
+anims/Combo = SubResource( 8 )
+anims/Flying_kick = SubResource( 9 )
+anims/Hadouken = SubResource( 10 )
+anims/Idle = SubResource( 11 )
+anims/Jump = SubResource( 12 )
+anims/Kick = SubResource( 13 )
+anims/Punch = SubResource( 14 )
+anims/Walk = SubResource( 15 )
 
 [node name="Control" type="Node" parent="Managers"]
 script = ExtResource( 3 )

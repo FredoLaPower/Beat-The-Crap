@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Assets/graphics/spritesheets/mailbox.png" type="Texture" id=1]
+[ext_resource path="res://assets/graphics/spritesheets/mailbox.png" type="Texture" id=1]
 [ext_resource path="res://GameObjects/Objects/Mailbox/Hurtbox.gd" type="Script" id=2]
 [ext_resource path="res://GameObjects/Objects/Mailbox/Mailbox.gd" type="Script" id=3]
-[ext_resource path="res://assets/graphics/spritesheets/mailbox_destroyed.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 2 )
@@ -13,7 +12,7 @@ extents = Vector2( 16, 32 )
 
 [sub_resource type="RectangleShape2D" id=3]
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=4]
 resource_name = "Damaged"
 length = 0.3
 step = 0.05
@@ -43,7 +42,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-length = 1.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Container/Colliders/Hurtboxes/Body/Collider:disabled")
@@ -79,7 +77,39 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 1 ]
+"values": [ 2 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Container/Sprites/Mailbox:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.745098 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.498039 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.25098 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("../Container/Sprites/Mailbox:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, 0, 0, 0, 16, 16, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("../Container/Sprites/Mailbox:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, 0, 0, 0.05, -8, -8, -0.05, -0.194, 0.05, 0, 1.14658, -0.05, -8, 0.03, -2, -3, -0.05, 0, 0.05, 0, 0, -0.03, -2, 0.05, 0 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.4, 0.5 )
 }
 
 [sub_resource type="Animation" id=6]
@@ -148,6 +178,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Container/Sprites/Mailbox:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Mailbox" type="KinematicBody2D" groups=[
 "Objects",
@@ -170,7 +212,7 @@ shape = SubResource( 1 )
 [node name="Hurtboxes" type="Node2D" parent="Container/Colliders"]
 
 [node name="Body" type="Area2D" parent="Container/Colliders/Hurtboxes"]
-collision_layer = 2048
+collision_layer = 0
 collision_mask = 2
 script = ExtResource( 2 )
 
@@ -183,28 +225,6 @@ shape = SubResource( 2 )
 [node name="Mailbox" type="Sprite" parent="Container/Sprites"]
 texture = ExtResource( 1 )
 offset = Vector2( 0, -32 )
-hframes = 2
-
-[node name="Destroyed" type="Node2D" parent="Container/Sprites"]
-
-[node name="Bottom" type="Sprite" parent="Container/Sprites/Destroyed"]
-visible = false
-texture = ExtResource( 4 )
-centered = false
-hframes = 3
-frame = 2
-
-[node name="Middle" type="Sprite" parent="Container/Sprites/Destroyed"]
-visible = false
-texture = ExtResource( 4 )
-centered = false
-hframes = 3
-frame = 1
-
-[node name="Top" type="Sprite" parent="Container/Sprites/Destroyed"]
-visible = false
-texture = ExtResource( 4 )
-centered = false
 hframes = 3
 
 [node name="NotUsed" type="CollisionShape2D" parent="Container"]
@@ -216,7 +236,7 @@ disabled = true
 
 [node name="Animation" type="AnimationPlayer" parent="Managers"]
 autoplay = "Intact"
-anims/Damaged = SubResource( 8 )
+anims/Damaged = SubResource( 4 )
 anims/Destroyed = SubResource( 5 )
 anims/Hit = SubResource( 6 )
 anims/Intact = SubResource( 7 )
@@ -224,3 +244,4 @@ anims/Intact = SubResource( 7 )
 [node name="Sound" type="AudioStreamPlayer" parent="Managers"]
 bus = "Sounds"
 [connection signal="area_entered" from="Container/Colliders/Hurtboxes/Body" to="Container/Colliders/Hurtboxes/Body" method="_on_Body_area_entered"]
+[connection signal="animation_finished" from="Managers/Animation" to="." method="_on_Animation_animation_finished"]

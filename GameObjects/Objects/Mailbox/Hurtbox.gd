@@ -16,3 +16,6 @@ func _on_Body_area_entered(area):
 				owner.get_node("Managers/Animation").play("Damaged")
 			
 			owner.play_sound("Hit")
+		
+		print("%s -> %s (%s dmg)" % [area.get_owner().get_name(), area.get_name(), area.get_damage()])
+		print("%s -> %s / %s HP" % [owner.get_name(), owner._current_health, owner.HEALTH])

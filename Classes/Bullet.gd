@@ -22,7 +22,7 @@ extends KinematicBody2D
 
 export(int) var SPEED = 0 #in seconds
 export(int) var LIFETIME = 0 #in seconds
-export(int) var DAMAGE = 0
+
 
 #------------------------------
 # PRIVATE
@@ -99,10 +99,6 @@ func play_sound(name: String):
 
 func stop_motion() -> void:
 	set_physics_process(false)
-
-
-func get_damage() -> int:
-	return DAMAGE
 
 
 # warning-ignore:unused_argument

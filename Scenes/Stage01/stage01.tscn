@@ -60,6 +60,15 @@ position = Vector2( 136.744, 198.643 )
 [node name="Mailbox" parent="Ground/Renderer" instance=ExtResource( 3 )]
 position = Vector2( 228.041, 186.568 )
 
+[node name="Mailbox2" parent="Ground/Renderer" instance=ExtResource( 3 )]
+position = Vector2( 435.998, 180.413 )
+
+[node name="Mailbox3" parent="Ground/Renderer" instance=ExtResource( 3 )]
+position = Vector2( 651.592, 199.958 )
+
+[node name="Mailbox4" parent="Ground/Renderer" instance=ExtResource( 3 )]
+position = Vector2( 884.325, 170.791 )
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Pushdown" type="Panel" parent="HUD"]
