@@ -8,6 +8,7 @@ func _ready() -> void:
 	__add_state("Punch", $Punch)
 	__add_state("Kick", $Kick)
 	__add_state("Hadouken", $Hadouken)
+	__add_state("Combo", $Combo)
 	
 	__add_input("Up", "U")
 	__add_input("Down", "D")
@@ -16,3 +17,4 @@ func _ready() -> void:
 	__add_input("Jump", "J")
 	__add_input("Kick", "K")
 	__add_input("Punch", "P")
+	__add_input("Special", "S")

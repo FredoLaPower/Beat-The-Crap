@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/billy.png-42de71d1fd8c28fba01d1a6cbd2b15f5.stex"
+path="res://.import/billy.png-bc5fe9e6630ec9540579acf73dcd0319.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/graphics/spritesheets/billy.png"
-dest_files=[ "res://.import/billy.png-42de71d1fd8c28fba01d1a6cbd2b15f5.stex" ]
+source_file="res://assets/graphics/spritesheets/billy.png"
+dest_files=[ "res://.import/billy.png-bc5fe9e6630ec9540579acf73dcd0319.stex" ]
 
 [params]
 

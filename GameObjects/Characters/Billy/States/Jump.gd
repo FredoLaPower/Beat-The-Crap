@@ -10,18 +10,18 @@ func enter() -> void:
 	_is_kicking = false
 	_start_time = OS.get_ticks_msec()
 	
-	_start_position_y = owner.get_node("Pivot").position.y
-	owner.get_node("Pivot").velocity.y = -owner.JUMP_FORCE
+	_start_position_y = owner.get_node("Container").position.y
+	owner.get_node("Container").velocity.y = -owner.JUMP_FORCE
 	
 	owner.set_flag("is_on_floor", false)
-	owner.get_node("Pivot/Animation/AnimationPlayer").play("Jump")
+	owner.get_node("Managers/Animation").play("Jump")
 
 
 # warning-ignore:unused_argument
 func update(delta: float) -> void:
-	if owner.get_node("Pivot").position.y >= _start_position_y:
-		owner.get_node("Pivot").position.y = _start_position_y
-		owner.get_node("Pivot").velocity = Vector2.ZERO
+	if owner.get_node("Container").position.y >= _start_position_y:
+		owner.get_node("Container").position.y = _start_position_y
+		owner.get_node("Container").velocity = Vector2.ZERO
 			
 		owner.set_flag("is_on_floor", true)
 		
@@ -33,4 +33,4 @@ func handle_input(event) -> void:
 		_is_kicking = true
 		
 		owner.play_sound("Kick")
-		owner.get_node("Pivot/Animation/AnimationPlayer").play("Flying_kick")
+		owner.get_node("Managers/Animation").play("Flying_kick")

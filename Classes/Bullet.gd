@@ -63,16 +63,16 @@ func __initialize() -> void:
 
 
 func __timeout() -> void:
-	queue_free()
+	call_deferred("queue_free")
 
 
-func __flip_bullet(is_looking_left: bool) -> void:
-	$Pivot.set_rotation(0) # Fix a bug due to move and slide
+func __flip_bullet(direction: int) -> void:
+	$Container.set_rotation(0) # Fix a bug due to move and slide
 		
-	if is_looking_left:
-		$Pivot.set_scale(Vector2(-1,1))
+	if direction == -1:
+		$Container.set_scale(Vector2(-1,1))
 	else:
-		$Pivot.set_scale(Vector2(1,1))
+		$Container.set_scale(Vector2(1,1))
 
 
 func __add_sound(name: String, path: String):
@@ -93,8 +93,8 @@ func fire(looking_left: bool) -> void:
 
 
 func play_sound(name: String):
-	$SoundPlayer.stream = load(_soundboard[name])
-	$SoundPlayer.play()
+	$Managers/Sound.stream = load(_soundboard[name])
+	$Managers/Sound.play()
 
 
 func stop_motion() -> void:
@@ -107,9 +107,10 @@ func get_damage() -> int:
 
 # warning-ignore:unused_argument
 # warning-ignore:unused_argument
-func spawn(looking_left: bool, pos: Vector2, offset: Vector2) -> void:
-	__flip_bullet(looking_left)
+func spawn(direction: int, pos: Vector2, offset: Vector2) -> void:
+	position = pos
+	$Container.position = offset
+	_velocity.x = SPEED * direction
 	
-	_velocity.x = SPEED
-	
+	__flip_bullet(direction)
 	

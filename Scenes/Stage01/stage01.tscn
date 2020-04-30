@@ -2,11 +2,11 @@
 
 [ext_resource path="res://assets/graphics/stages/stage_1/stage_1_layer_fg.png" type="Texture" id=1]
 [ext_resource path="res://assets/graphics/stages/stage_1/stage_1_layer_bg.png" type="Texture" id=2]
+[ext_resource path="res://GameObjects/Objects/Mailbox/Mailbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Stage01/Stage01.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Stage01/Pushdown.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/robot.otf" type="DynamicFontData" id=6]
 [ext_resource path="res://Controllers/Camera/Camera.tscn" type="PackedScene" id=7]
-[ext_resource path="res://GameObjects/Objects/Mailbox/Mailbox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Stage01/Flags.gd" type="Script" id=10]
 [ext_resource path="res://GameObjects/Characters/Billy/Billy.tscn" type="PackedScene" id=11]
 
@@ -54,26 +54,15 @@ follow_viewport_enable = true
 
 [node name="Renderer" type="YSort" parent="Ground"]
 
-[node name="Mailbox" parent="Ground/Renderer" instance=ExtResource( 8 )]
-position = Vector2( 850, 180 )
-scale = Vector2( 3, 3 )
-HEALTH = 300
-
-[node name="Mailbox2" parent="Ground/Renderer" instance=ExtResource( 8 )]
-position = Vector2( 230, 180 )
-
-[node name="Mailbox3" parent="Ground/Renderer" instance=ExtResource( 8 )]
-position = Vector2( 620, 180 )
-scale = Vector2( 2, 2 )
-HEALTH = 200
-
 [node name="Billy" parent="Ground/Renderer" instance=ExtResource( 11 )]
 position = Vector2( 136.744, 198.643 )
+
+[node name="Mailbox" parent="Ground/Renderer" instance=ExtResource( 3 )]
+position = Vector2( 228.041, 186.568 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Pushdown" type="Panel" parent="HUD"]
-visible = false
 margin_left = 0.642151
 margin_top = -0.321075
 margin_right = 70.0
@@ -105,7 +94,6 @@ __meta__ = {
 }
 
 [node name="Flags" type="Panel" parent="HUD"]
-visible = false
 margin_left = 250.0
 margin_top = 0.321075
 margin_right = 400.0

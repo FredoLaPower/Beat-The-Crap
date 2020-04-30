@@ -37,7 +37,7 @@ var _soundboard = {}
 func _ready():
 	_current_health = HEALTH
 	
-	$Animations/AnimationPlayer.play(START_ANIMATION)
+	$Managers/Animation.play(START_ANIMATION)
 	
 	__initialize()
 
@@ -80,5 +80,5 @@ func remove_threat(guid: int) -> void:
 
 
 func play_sound(name: String):
-	$SoundPlayer.stream = load(_soundboard[name])
-	$SoundPlayer.play()
+	$Managers/Sound.stream = load(_soundboard[name])
+	$Managers/Sound.play()

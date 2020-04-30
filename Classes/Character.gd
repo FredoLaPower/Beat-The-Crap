@@ -26,8 +26,8 @@ var _flags = {
 }
 
 var _special_moves = {}
-
 var _soundboard = {}
+var _hitboxes = {}
 
 
 #------------------------------
@@ -46,7 +46,7 @@ var velocity: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	# Subscribe to Controller signal
-	$Controller.initialize()
+	$Managers/Control.initialize()
 	
 	__initialize()
 
@@ -54,7 +54,7 @@ func _ready() -> void:
 # warning-ignore:unused_argument
 func _physics_process(delta: float) -> void:
 	if !get_flag("is_on_floor"):
-		$Pivot.velocity.y += Constants.GRAVITY * delta
+		$Container.velocity.y += Constants.GRAVITY * delta
 
 	velocity = move_and_slide(velocity, Vector2.UP)
 
@@ -75,12 +75,18 @@ func __add_special_move(name: String, signature: String) -> void:
 	_special_moves[name] = signature
 
 
+func __add_hitbox(name: String, collider: CollisionShape2D) -> void:
+	_hitboxes[name] = collider
+
+
 #------------------------------
 # PUBLIC
 #------------------------------
 
 func disable_hitboxes() -> void:
-	pass
+	for hitbox in _hitboxes:
+		_hitboxes[hitbox].disabled = true
+		_hitboxes[hitbox].get_parent().position = Vector2.ZERO
 
 
 func get_flag(flag_name: String) -> bool:
@@ -92,16 +98,26 @@ func set_flag(flag_name: String, value: bool) -> void:
 
 
 func play_sound(name: String):
-	$SoundPlayer.stream = load(_soundboard[name])
-	$SoundPlayer.play()
+	$Managers/Sound.stream = load(_soundboard[name])
+	$Managers/Sound.play()
 
 
 func flip_character(is_looking_left: bool) -> void:
 	set_flag("is_looking_left", is_looking_left)
 	
-	$Pivot.set_rotation(0) # Fix a bug due to move and slide
+	$Container.set_rotation(0) # Fix a bug due to move and slide
 	
 	if is_looking_left:
-		$Pivot.set_scale(Vector2(-1,1))
+		$Container.set_scale(Vector2(-1,1))
 	else:
-		$Pivot.set_scale(Vector2(1,1))
+		$Container.set_scale(Vector2(1,1))
+
+
+func special_move(name: String) -> bool:
+	var input_strings: Array = _special_moves[name].split("||")
+	
+	for input_string in input_strings:
+		if $Managers/Control.get_encoded_inputs().find(input_string) != -1:
+			return true
+	
+	return false
