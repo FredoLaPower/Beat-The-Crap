@@ -300,6 +300,9 @@ modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 0, -33 )
 shape = SubResource( 6 )
 
+[node name="BulletSpawnPoint" type="Position2D" parent="Pivot"]
+position = Vector2( 15, -35 )
+
 [node name="Controller" type="Node" parent="."]
 script = ExtResource( 3 )
 START_STATE = "Idle"
@@ -332,8 +335,5 @@ modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 14 )
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
-
-[node name="BulletSpawnPoint" type="Position2D" parent="."]
-position = Vector2( 15, -35 )
 [connection signal="body_entered" from="Range" to="Range" method="_on_Range_body_entered"]
 [connection signal="body_exited" from="Range" to="Range" method="_on_Range_body_exited"]

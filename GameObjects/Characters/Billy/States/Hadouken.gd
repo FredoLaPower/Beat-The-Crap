@@ -7,7 +7,7 @@ func initialize() -> void:
 
 
 func enter() -> void:
-	owner.play_sound("Hadouken")
+	#owner.play_sound("Hadouken")
 	owner.get_node("Pivot/Animation/AnimationPlayer").play("Hadouken")
 	
 	owner.velocity = Vector2.ZERO

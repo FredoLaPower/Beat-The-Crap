@@ -1,4 +1,4 @@
-extends Area2D
+extends "res://Classes/Hitbox.gd"
 
 
 # warning-ignore:unused_argument

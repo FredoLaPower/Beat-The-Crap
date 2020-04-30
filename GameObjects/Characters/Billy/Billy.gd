@@ -29,11 +29,14 @@ func fire_bullet(type: String) -> void:
 	match type:
 		"fireball":
 			bullet = Fireball.instance()
-	
+		
 	add_child(bullet)
-	bullet.position = $BulletSpawnPoint.position
 	
-	if(get_flag("is_looking_left")): #flipping character does not flip coordinates using scale
-		bullet.position.x = -bullet.position.x
+	bullet.position = $Pivot/BulletSpawnPoint.position
+	
+	if get_flag("is_looking_left"):
+		bullet.position.x = -$Pivot/BulletSpawnPoint.position.x
+		
+	bullet.get_node("Pivot/Range").position.y = - $Pivot/BulletSpawnPoint.position.y
 	
 	bullet.fire(get_flag("is_looking_left"))

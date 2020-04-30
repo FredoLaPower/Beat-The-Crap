@@ -29,7 +29,6 @@ export(int) var DAMAGE = 0
 #------------------------------
 var _velocity: Vector2 = Vector2.ZERO
 var _soundboard = {}
-var _offset: Vector2 = Vector2.ZERO
 
 #------------------------------------------------------------
 # METHODS
@@ -104,7 +103,3 @@ func stop_motion() -> void:
 
 func get_damage() -> int:
 	return DAMAGE
-
-
-func set_offset(offset: Vector2) -> void:
-	_offset = offset
