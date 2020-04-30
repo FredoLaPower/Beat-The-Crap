@@ -23,20 +23,22 @@ func special_move(name: String) -> bool:
 	
 	return false
 
+
 func fire_bullet(type: String) -> void:
-	var bullet: KinematicBody2D = null
-	
-	match type:
-		"fireball":
-			bullet = Fireball.instance()
-		
-	add_child(bullet)
-	
-	bullet.position = $Pivot/BulletSpawnPoint.position
+	var bullet: Node2D = Fireball.new()
+	var pos: Vector2 = Vector2.ZERO
+	var offset: Vector2 = Vector2.ZERO
+	var direction: int = 0
 	
 	if get_flag("is_looking_left"):
-		bullet.position.x = -$Pivot/BulletSpawnPoint.position.x
-		
-	bullet.get_node("Pivot/Range").position.y = - $Pivot/BulletSpawnPoint.position.y
+		pos.x = -$Pivot/BulletSpawnPoint.global_position.x
+	else:
+		pos.x = $Pivot/BulletSpawnPoint.global_position.x
 	
-	bullet.fire(get_flag("is_looking_left"))
+	pos.y = owner.global_position.y
+	offset.y = $Pivot/BulletSpawnPoint.global_position.y
+	direction = -1 if get_flag("is_looking_left") else 1
+	
+	Globals.Renderer.add_child(bullet)
+	
+	bullet.spawn(direction, pos, offset)

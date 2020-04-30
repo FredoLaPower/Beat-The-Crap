@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/beat_the_crap.png-58760e02fbec3c46282fd82abe1ca3e2.stex"
+path="res://.import/beat_the_crap.png-181376bbe0b4ba1050fa24cba5ac6c83.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/splash_screens/beat_the_crap.png"
-dest_files=[ "res://.import/beat_the_crap.png-58760e02fbec3c46282fd82abe1ca3e2.stex" ]
+source_file="res://Assets/graphics/splash_screens/beat_the_crap.png"
+dest_files=[ "res://.import/beat_the_crap.png-181376bbe0b4ba1050fa24cba5ac6c83.stex" ]
 
 [params]
 

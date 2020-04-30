@@ -69,7 +69,8 @@ config/icon="res://icon.png"
 [autoload]
 
 MusicController="*res://Controllers/Music/MusicController.tscn"
-Constants="*res://Classes/AutoLoad.gd"
+Constants="*res://Classes/Constants.gd"
+Globals="*res://Classes/Globals.gd"
 
 [display]
 

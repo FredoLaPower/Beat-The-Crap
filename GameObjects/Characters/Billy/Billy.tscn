@@ -21,7 +21,7 @@ height = 16.0
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 4 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 resource_name = "Flying_kick"
 length = 0.1
 tracks/0/type = "value"
@@ -61,7 +61,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=4]
 resource_name = "Hadouken"
 length = 0.9
 tracks/0/type = "value"
@@ -77,7 +77,7 @@ tracks/0/keys = {
 "values": [ 40, 41, 42, 43, 41 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=5]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Billy:frame")
@@ -92,7 +92,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=6]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Billy:frame")
@@ -107,7 +107,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 9, 8 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=7]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Billy:frame")
@@ -146,7 +146,7 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=8]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Billy:frame")
@@ -185,7 +185,7 @@ tracks/2/keys = {
 "values": [ Vector2( 25, -50 ) ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=9]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -201,16 +201,16 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6 ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 4, 5 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 4, 5 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 4.5, 5 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 8, 11 )
 
 [sub_resource type="RectangleShape2D" id=14]
@@ -250,13 +250,13 @@ frame = 42
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/Animation"]
 autoplay = "Idle"
-anims/Flying_kick = SubResource( 7 )
-anims/Hadouken = SubResource( 8 )
-anims/Idle = SubResource( 9 )
-anims/Jump = SubResource( 10 )
-anims/Kick = SubResource( 11 )
-anims/Punch = SubResource( 12 )
-anims/Walk = SubResource( 13 )
+anims/Flying_kick = SubResource( 3 )
+anims/Hadouken = SubResource( 4 )
+anims/Idle = SubResource( 5 )
+anims/Jump = SubResource( 6 )
+anims/Kick = SubResource( 7 )
+anims/Punch = SubResource( 8 )
+anims/Walk = SubResource( 9 )
 
 [node name="Boxes" type="Node2D" parent="Pivot"]
 
@@ -268,7 +268,7 @@ DAMAGE = 20
 
 [node name="PunchCollider" type="CollisionShape2D" parent="Pivot/Boxes/Punch"]
 modulate = Color( 1, 0, 0, 1 )
-shape = SubResource( 3 )
+shape = SubResource( 10 )
 disabled = true
 
 [node name="Kick" type="Area2D" parent="Pivot/Boxes"]
@@ -280,7 +280,7 @@ DAMAGE = 30
 [node name="KickCollider" type="CollisionShape2D" parent="Pivot/Boxes/Kick"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 28, -26 )
-shape = SubResource( 4 )
+shape = SubResource( 11 )
 
 [node name="Head" type="Area2D" parent="Pivot/Boxes"]
 collision_layer = 4
@@ -289,7 +289,7 @@ collision_mask = 0
 [node name="HeadCollider" type="CollisionShape2D" parent="Pivot/Boxes/Head"]
 modulate = Color( 0, 1, 0, 1 )
 position = Vector2( -0.5, -49 )
-shape = SubResource( 5 )
+shape = SubResource( 12 )
 
 [node name="Body" type="Area2D" parent="Pivot/Boxes"]
 collision_layer = 4
@@ -298,7 +298,7 @@ collision_mask = 0
 [node name="BodyCollider" type="CollisionShape2D" parent="Pivot/Boxes/Body"]
 modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 0, -33 )
-shape = SubResource( 6 )
+shape = SubResource( 13 )
 
 [node name="BulletSpawnPoint" type="Position2D" parent="Pivot"]
 position = Vector2( 15, -35 )

@@ -7,7 +7,7 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "Explode"
 length = 0.3
 tracks/0/type = "value"
@@ -23,7 +23,7 @@ tracks/0/keys = {
 "values": [ 4, 5, 6 ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -68,8 +68,8 @@ offset = Vector2( 0, -0.5 )
 hframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot"]
-anims/Explode = SubResource( 3 )
-anims/Fire = SubResource( 2 )
+anims/Explode = SubResource( 2 )
+anims/Fire = SubResource( 3 )
 
 [node name="Hitbox" type="Area2D" parent="Pivot"]
 collision_layer = 2

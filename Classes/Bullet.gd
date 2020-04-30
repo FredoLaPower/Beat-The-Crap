@@ -103,3 +103,13 @@ func stop_motion() -> void:
 
 func get_damage() -> int:
 	return DAMAGE
+
+
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
+func spawn(looking_left: bool, pos: Vector2, offset: Vector2) -> void:
+	__flip_bullet(looking_left)
+	
+	_velocity.x = SPEED
+	
+	

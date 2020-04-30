@@ -26,7 +26,7 @@ extents = Vector2( 600, 10 )
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 620, 10 )
 
-[node name="Stage01" type="Node2D"]
+[node name="Stage" type="Node2D"]
 script = ExtResource( 4 )
 GRAVITY = 1000
 MUSIC = "res://assets/audio/musics/super_double_dragon/mission_3.ogg"
@@ -138,7 +138,7 @@ __meta__ = {
 
 [node name="Camera" parent="." instance=ExtResource( 7 )]
 position = Vector2( 200.321, 112.5 )
-TARGET = NodePath("../Ground/Renderer/Billy")
+TARGET = NodePath("../../Stage/Ground/Renderer/Billy")
 LIMITS_MIN = Vector2( 0, 225 )
 
 [node name="Colliders" type="Node2D" parent="."]
