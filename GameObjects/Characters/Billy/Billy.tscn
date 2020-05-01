@@ -190,6 +190,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 40, 41, 42, 43, 42, 32, 34 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "Hadouken" ],
+"method": "play_sound"
+} ]
+}
 
 [sub_resource type="Animation" id=11]
 length = 0.1
@@ -422,6 +436,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -32 )
 vframes = 6
 hframes = 8
+frame = 43
 
 [node name="SpawnPoints" type="Node2D" parent="Container"]
 

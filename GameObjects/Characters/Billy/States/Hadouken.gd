@@ -9,7 +9,6 @@ func initialize() -> void:
 func enter() -> void:
 	owner.velocity = Vector2.ZERO
 	
-	#owner.play_sound("Hadouken")
 	owner.get_node("Managers/Animation").play("Hadouken")
 	owner.fireball()
 
