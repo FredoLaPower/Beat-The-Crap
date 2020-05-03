@@ -12,9 +12,8 @@ func enter() -> void:
 #		emit_signal("finished", "Hadouken")
 #		return
 	
+	owner.set_flag("is_in_motion", false)
 	owner.get_node("Managers/Animation").play("Punch")
-	
-	owner.velocity = Vector2.ZERO
 
 
 func __on_animation_finished(anim_name: String) -> void:

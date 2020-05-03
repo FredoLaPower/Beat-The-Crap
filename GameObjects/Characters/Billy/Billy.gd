@@ -5,6 +5,7 @@ var Fireball: PackedScene = preload("res://GameObjects/Bullets/Fireball/Fireball
 func _ready() -> void:
 	__add_flag("is_looking_left", false)
 	__add_flag("is_on_floor", true)
+	__add_flag("is_in_motion", false)
 	
 	Cache.preload_resource("sound_sample", "woosh", "res://assets/audio/sounds/sf2_woosh.wav")
 	Cache.preload_resource("sound_sample", "hadouken", "res://assets/audio/sounds/sf2_hadouken.wav")

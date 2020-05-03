@@ -2,7 +2,7 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name GameObject
+class_name StaticObject
 
 extends StaticBody2D
 

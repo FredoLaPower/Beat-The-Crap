@@ -14,15 +14,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Classes/Bullet.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "StaticBody2D",
 "class": "Destructible",
 "language": "GDScript",
 "path": "res://Classes/Destructible.gd"
-}, {
-"base": "StaticBody2D",
-"class": "GameObject",
-"language": "GDScript",
-"path": "res://Classes/StaticObject.gd"
 }, {
 "base": "Area2D",
 "class": "Hitbox",
@@ -39,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Classes/template.gd"
 }, {
-"base": "Reference",
+"base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Classes/Player.gd"
@@ -63,11 +58,15 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://Classes/StateMachine.gd"
+}, {
+"base": "StaticBody2D",
+"class": "StaticObject",
+"language": "GDScript",
+"path": "res://Classes/StaticObject.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
 "Destructible": "",
-"GameObject": "",
 "Hitbox": "",
 "KinematicObject": "",
 "MyClass": "",
@@ -75,7 +74,8 @@ _global_script_class_icons={
 "Reach": "",
 "Stage": "",
 "State": "",
-"StateMachine": ""
+"StateMachine": "",
+"StaticObject": ""
 }
 
 [application]

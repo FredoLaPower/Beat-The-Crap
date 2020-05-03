@@ -38,6 +38,9 @@ func _physics_process(delta: float) -> void:
 	if !get_flag("is_on_floor"):
 		$Container.velocity.y += Constants.GRAVITY * delta
 	
+	if !get_flag("is_in_motion"):
+		velocity = lerp(velocity, Vector2.ZERO, Constants.MOTION_ACCELERATION)
+	
 	._physics_process(delta)
 
 

@@ -3,6 +3,7 @@ extends "res://Classes/State.gd"
 
 func enter() -> void:
 	owner.disable_hitboxes()
+	owner.set_flag("is_in_motion", true)
 	owner.get_node("Managers/Animation").play("Walk")
 
 
@@ -26,14 +27,14 @@ func update(delta: float):
 
 
 func handle_input(event: InputEvent)  -> void:
-	if event.get_action_strength("Jump"):
+	if event.is_action_pressed("Jump"):
 		emit_signal("finished", "Jump", true)
 	
-	if event.get_action_strength("Punch"):
+	if event.is_action_pressed("Punch"):
 		emit_signal("finished", "Punch", true)
 		return
 	
-	if event.get_action_strength("Kick"):
+	if event.is_action_pressed("Kick"):
 		emit_signal("finished", "Kick", true)
 		return
 

@@ -7,8 +7,8 @@ func initialize() -> void:
 
 
 func enter() -> void:
+	owner.set_flag("is_in_motion", false)
 	owner.get_node("Managers/Animation").play("Kick")
-	owner.velocity = Vector2.ZERO
 
 
 func __on_animation_finished(anim_name: String) -> void:

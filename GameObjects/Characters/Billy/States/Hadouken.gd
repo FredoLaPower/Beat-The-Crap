@@ -9,6 +9,7 @@ func initialize() -> void:
 func enter() -> void:
 	owner.velocity = Vector2.ZERO
 	
+	owner.set_flag("is_in_motion", false)
 	owner.get_node("Managers/Animation").play("Hadouken")
 	owner.fireball()
 
