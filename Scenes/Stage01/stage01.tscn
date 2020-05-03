@@ -71,9 +71,6 @@ position = Vector2( 651.592, 199.958 )
 [node name="Mailbox5" parent="Ground/Renderer" instance=ExtResource( 3 )]
 position = Vector2( 565.414, 165.22 )
 
-[node name="Mailbox" parent="Ground/Renderer/Mailbox5" instance=ExtResource( 3 )]
-position = Vector2( -246.264, -1.20276 )
-
 [node name="Mailbox4" parent="Ground/Renderer" instance=ExtResource( 3 )]
 position = Vector2( 884.325, 170.791 )
 
@@ -86,6 +83,9 @@ HEALTH = 300
 position = Vector2( 1079.8, 215.134 )
 scale = Vector2( 5, 5 )
 HEALTH = 500
+
+[node name="Mailbox8" parent="Ground/Renderer" instance=ExtResource( 3 )]
+position = Vector2( 319.15, 164.017 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

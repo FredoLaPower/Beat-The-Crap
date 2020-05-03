@@ -2,7 +2,7 @@ extends "res://Classes/State.gd"
 
 
 func enter() -> void:
-	owner.velocity = Vector2.ZERO
+	#owner.velocity = Vector2.ZERO
 	
 	owner.disable_hitboxes()
 	owner.get_node("Managers/Animation").play("Idle")
@@ -12,6 +12,9 @@ func enter() -> void:
 func update(delta: float) -> void:
 	var x_input = Input.get_action_strength("Right") - Input.get_action_strength("Left")
 	var y_input = Input.get_action_strength("Up") - Input.get_action_strength("Down")
+	
+	owner.velocity.x = lerp(owner.velocity.x, 0, Constants.MOTION_ACCELERATION)
+	owner.velocity.y = lerp(owner.velocity.y, 0, Constants.MOTION_ACCELERATION)
 	
 	if x_input != 0 || y_input != 0:
 		emit_signal("finished", "Walk")

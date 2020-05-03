@@ -43,6 +43,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 1 ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "hit_metal" ],
+"method": "play_sound"
+} ]
+}
 
 [sub_resource type="Animation" id=6]
 length = 0.5
@@ -95,6 +109,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.745098 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.498039 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.25098 ), Color( 1, 1, 1, 0 ) ]
 }
+tracks/4/type = "method"
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "destroyed_metal" ],
+"method": "play_sound"
+} ]
+}
 
 [sub_resource type="Animation" id=7]
 length = 0.3
@@ -110,6 +138,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 2, 0 ), Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "hit_metal" ],
+"method": "play_sound"
+} ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -175,7 +217,7 @@ tracks/4/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="Mailbox" type="KinematicBody2D" groups=[
+[node name="Mailbox" type="StaticBody2D" groups=[
 "Objects",
 ]]
 collision_layer = 2048
@@ -188,6 +230,7 @@ HEALTH = 100
 modulate = Color( 0, 0, 1, 1 )
 position = Vector2( 0, -2 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="Reach" type="Area2D" parent="."]
 script = ExtResource( 4 )
@@ -210,13 +253,16 @@ script = ExtResource( 2 )
 [node name="Collider" type="CollisionShape2D" parent="Container/Colliders/Hurtboxes/Body"]
 position = Vector2( 0, -32 )
 shape = SubResource( 3 )
+disabled = true
 
 [node name="Sprites" type="Node2D" parent="Container"]
 
 [node name="Mailbox" type="Sprite" parent="Container/Sprites"]
+position = Vector2( 3, 0 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -32 )
 hframes = 3
+frame = 2
 
 [node name="NotUsed" type="CollisionShape2D" parent="Container"]
 visible = false

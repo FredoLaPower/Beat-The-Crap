@@ -2,7 +2,7 @@ extends "res://Classes/Player.gd"
 
 var Fireball: PackedScene = preload("res://GameObjects/Bullets/Fireball/Fireball.tscn")
 
-func __initialize() -> void:
+func _ready() -> void:
 	__add_flag("is_looking_left", false)
 	__add_flag("is_on_floor", true)
 	

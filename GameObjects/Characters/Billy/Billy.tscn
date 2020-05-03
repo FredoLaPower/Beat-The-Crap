@@ -363,7 +363,7 @@ tracks/0/keys = {
 ]]
 collision_mask = 3624
 script = ExtResource( 1 )
-MAX_SPEED = Vector2( 80, 40 )
+MAX_SPEED = Vector2( 60, 30 )
 JUMP_FORCE = 350
 
 [node name="Body" type="CollisionShape2D" parent="."]
@@ -438,7 +438,6 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -32 )
 vframes = 6
 hframes = 8
-frame = 11
 
 [node name="SpawnPoints" type="Node2D" parent="Container"]
 

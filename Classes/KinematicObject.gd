@@ -2,7 +2,7 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name GameObject
+class_name KinematicObject
 
 extends KinematicBody2D
 
@@ -42,10 +42,6 @@ var velocity: Vector2 = Vector2.ZERO
 # VIRTUAL
 #------------------------------
 
-func _ready() -> void:
-	__initialize()
-
-
 # warning-ignore:unused_argument
 func _physics_process(delta: float) -> void:
 	velocity = move_and_slide(velocity, Vector2.UP)
@@ -54,11 +50,6 @@ func _physics_process(delta: float) -> void:
 #------------------------------
 # PRIVATE
 #------------------------------
-
-func __initialize() -> void:
-	pass
-
-
 func __add_flag(name: String, value: bool) -> void:
 	_flags[name] = value
 
@@ -77,16 +68,12 @@ func disable_hitboxes(value: bool = true) -> void:
 
 
 func flip_object(axis: String, direction: int) -> void:
-	var new_scale: Vector2 = $Container.scale
-	
-	match axis:
-		"x":
-			new_scale.x = direction
-		"y":
-			new_scale.y = direction
-	
-	$Container.set_rotation(0) # Fix a bug due to move and slide
-	$Container.scale = new_scale
+	for child in $Container.get_children():
+		match axis:
+			"x":
+				child.scale.x = direction
+			"y":
+				child.scale.Y = direction
 
 
 ### FLAGS ###

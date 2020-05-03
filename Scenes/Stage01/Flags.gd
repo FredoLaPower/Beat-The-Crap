@@ -11,3 +11,4 @@ func _physics_process(delta) -> void:
 	else:
 		$Stack.text = "Safe..."
 	
+	$Label.text = "velocity: %s" % Billy.velocity

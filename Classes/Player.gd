@@ -4,7 +4,7 @@
 
 class_name Player
 
-extends "res://Classes/GameObject.gd"
+extends "res://Classes/KinematicObject.gd"
 
 #------------------------------------------------------------
 # PROPERTIES
@@ -52,17 +52,6 @@ func __add_special_move(name: String, signature: String) -> void:
 #------------------------------
 # PUBLIC
 #------------------------------
-
-func flip_character(is_looking_left: bool) -> void:
-	set_flag("is_looking_left", is_looking_left)
-	
-	$Container.set_rotation(0) # Fix a bug due to move and slide
-	
-	if is_looking_left:
-		$Container.scale = Vector2(-1,1)
-	else:
-		$Container.scale = Vector2(1,1)
-
 
 #func special_move(name: String) -> bool:
 #	var input_strings: Array = _special_moves[name].split("||")

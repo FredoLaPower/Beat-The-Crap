@@ -11,13 +11,15 @@ func update(delta: float):
 	var x_input = Input.get_action_strength("Right") - Input.get_action_strength("Left")
 	var y_input = Input.get_action_strength("Up") - Input.get_action_strength("Down")
 	
-	owner.velocity.x = x_input * owner.MAX_SPEED.x
-	owner.velocity.y = -y_input * owner.MAX_SPEED.y
+	owner.velocity.x = lerp(owner.velocity.x, x_input * owner.MAX_SPEED.x, Constants.MOTION_ACCELERATION)
+	owner.velocity.y = lerp(owner.velocity.y, -y_input * owner.MAX_SPEED.y, Constants.MOTION_ACCELERATION)
 	
-	if x_input < 0:
-		owner.flip_character(true)
-	elif x_input > 0:
-		owner.flip_character(false)
+	if x_input < 0 && !owner.get_flag("is_looking_left"):
+		owner.set_flag("is_looking_left", true)
+		owner.flip_object("x", -1)
+	elif x_input > 0 && owner.get_flag("is_looking_left"):
+		owner.set_flag("is_looking_left", false)
+		owner.flip_object("x", 1)
 	
 	if x_input == 0 && y_input == 0:
 		emit_signal("finished","Idle")
