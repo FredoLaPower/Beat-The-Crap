@@ -1,4 +1,4 @@
-extends "res://Classes/DestructibleObject.gd"
+extends "res://Classes/Destructible.gd"
 
 func __initialize() -> void:
 	__add_sound("Hit", "res://assets/audio/sounds/sf2_hit_metal.wav")

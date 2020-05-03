@@ -2,7 +2,7 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name DestructibleObject
+class_name Destructible
 
 extends KinematicBody2D
 

@@ -131,7 +131,10 @@ func initialize() -> void:
 	for child in get_children():
 		child.connect("finished", self, "__change_state")
 		child.initialize()
+		
+		_states[child.get_name()] = child
 	
+	print(_states)
 	# Initialize state machine
 	__change_state(START_STATE)
 

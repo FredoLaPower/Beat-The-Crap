@@ -1,19 +1,22 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/graphics/spritesheets/mailbox.png" type="Texture" id=1]
 [ext_resource path="res://GameObjects/Objects/Mailbox/Hurtbox.gd" type="Script" id=2]
 [ext_resource path="res://GameObjects/Objects/Mailbox/Mailbox.gd" type="Script" id=3]
+[ext_resource path="res://GameObjects/Objects/Mailbox/Range.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 2 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16, 32 )
+extents = Vector2( 24, 6 )
 
 [sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16, 32 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "Damaged"
+[sub_resource type="RectangleShape2D" id=4]
+
+[sub_resource type="Animation" id=5]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -41,7 +44,7 @@ tracks/1/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
@@ -93,7 +96,7 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.745098 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.498039 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.25098 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -109,7 +112,7 @@ tracks/0/keys = {
 "values": [ Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 2, 0 ), Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Container/Sprites/Mailbox:frame")
@@ -185,7 +188,13 @@ HEALTH = 100
 modulate = Color( 0, 0, 1, 1 )
 position = Vector2( 0, -2 )
 shape = SubResource( 1 )
-disabled = true
+
+[node name="Range" type="Area2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="Collider" type="CollisionShape2D" parent="Range"]
+modulate = Color( 1, 0, 0, 1 )
+shape = SubResource( 2 )
 
 [node name="Container" type="KinematicBody2D" parent="."]
 
@@ -200,33 +209,32 @@ script = ExtResource( 2 )
 
 [node name="Collider" type="CollisionShape2D" parent="Container/Colliders/Hurtboxes/Body"]
 position = Vector2( 0, -32 )
-shape = SubResource( 2 )
-disabled = true
+shape = SubResource( 3 )
 
 [node name="Sprites" type="Node2D" parent="Container"]
 
 [node name="Mailbox" type="Sprite" parent="Container/Sprites"]
-position = Vector2( 14.7017, 1.14658 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -32 )
 hframes = 3
-frame = 2
 
 [node name="NotUsed" type="CollisionShape2D" parent="Container"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 disabled = true
 
 [node name="Managers" type="Node" parent="."]
 
 [node name="Animation" type="AnimationPlayer" parent="Managers"]
 autoplay = "Intact"
-anims/Damaged = SubResource( 4 )
-anims/Destroyed = SubResource( 5 )
-anims/Hit = SubResource( 6 )
-anims/Intact = SubResource( 7 )
+anims/Damaged = SubResource( 5 )
+anims/Destroyed = SubResource( 6 )
+anims/Hit = SubResource( 7 )
+anims/Intact = SubResource( 8 )
 
 [node name="Sound" type="AudioStreamPlayer" parent="Managers"]
 bus = "Sounds"
+[connection signal="area_entered" from="Range" to="Range" method="_on_Range_area_entered"]
+[connection signal="area_exited" from="Range" to="Range" method="_on_Range_area_exited"]
 [connection signal="area_entered" from="Container/Colliders/Hurtboxes/Body" to="Container/Colliders/Hurtboxes/Body" method="_on_Body_area_entered"]
 [connection signal="animation_finished" from="Managers/Animation" to="." method="_on_Animation_animation_finished"]

@@ -15,9 +15,14 @@ _global_script_classes=[ {
 "path": "res://Classes/Bullet.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "DestructibleObject",
+"class": "Destructible",
 "language": "GDScript",
-"path": "res://Classes/DestructibleObject.gd"
+"path": "res://Classes/Destructible.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "GameObject",
+"language": "GDScript",
+"path": "res://Classes/GameObject.gd"
 }, {
 "base": "Area2D",
 "class": "Hitbox",
@@ -30,9 +35,9 @@ _global_script_classes=[ {
 "path": "res://Classes/template.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "PlayerCharacter",
+"class": "Player",
 "language": "GDScript",
-"path": "res://Classes/Character.gd"
+"path": "res://Classes/Player.gd"
 }, {
 "base": "Node2D",
 "class": "Stage",
@@ -51,10 +56,11 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Bullet": "",
-"DestructibleObject": "",
+"Destructible": "",
+"GameObject": "",
 "Hitbox": "",
 "MyClass": "",
-"PlayerCharacter": "",
+"Player": "",
 "Stage": "",
 "State": "",
 "StateMachine": ""
@@ -68,9 +74,10 @@ config/icon="res://icon.png"
 
 [autoload]
 
-MusicController="*res://Controllers/Music/MusicController.tscn"
-Constants="*res://Classes/Constants.gd"
-Globals="*res://Classes/Globals.gd"
+Music="*res://Singletons/Music/Music.tscn"
+Constants="*res://Singletons/Constants.gd"
+Globals="*res://Singletons/Globals.gd"
+Cache="*res://Singletons/Cache.gd"
 
 [display]
 

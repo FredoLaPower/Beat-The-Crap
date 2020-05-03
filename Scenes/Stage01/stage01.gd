@@ -3,7 +3,7 @@ extends "res://Classes/Stage.gd"
 
 func _ready() -> void:
 	$Camera.initialize()
-	#MusicController.play_track(MUSIC)
+	Music.play_track(MUSIC)
 
 
 func _process(_delta):

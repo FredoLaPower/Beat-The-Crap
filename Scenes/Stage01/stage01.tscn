@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/Stage01/Stage01.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Stage01/Pushdown.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/robot.otf" type="DynamicFontData" id=6]
-[ext_resource path="res://Controllers/Camera/Camera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Singletons/Camera/Camera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Stage01/Flags.gd" type="Script" id=10]
 [ext_resource path="res://GameObjects/Characters/Billy/Billy.tscn" type="PackedScene" id=11]
 
@@ -62,12 +62,30 @@ position = Vector2( 228.041, 186.568 )
 
 [node name="Mailbox2" parent="Ground/Renderer" instance=ExtResource( 3 )]
 position = Vector2( 435.998, 180.413 )
+scale = Vector2( 2, 2 )
+HEALTH = 200
 
 [node name="Mailbox3" parent="Ground/Renderer" instance=ExtResource( 3 )]
 position = Vector2( 651.592, 199.958 )
 
+[node name="Mailbox5" parent="Ground/Renderer" instance=ExtResource( 3 )]
+position = Vector2( 565.414, 165.22 )
+
+[node name="Mailbox" parent="Ground/Renderer/Mailbox5" instance=ExtResource( 3 )]
+position = Vector2( -246.264, -1.20276 )
+
 [node name="Mailbox4" parent="Ground/Renderer" instance=ExtResource( 3 )]
 position = Vector2( 884.325, 170.791 )
+
+[node name="Mailbox6" parent="Ground/Renderer" instance=ExtResource( 3 )]
+position = Vector2( 770.784, 174.541 )
+scale = Vector2( 3, 3 )
+HEALTH = 300
+
+[node name="Mailbox7" parent="Ground/Renderer" instance=ExtResource( 3 )]
+position = Vector2( 1079.8, 215.134 )
+scale = Vector2( 5, 5 )
+HEALTH = 500
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

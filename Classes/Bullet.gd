@@ -27,6 +27,7 @@ export(int) var LIFETIME = 0 #in seconds
 #------------------------------
 # PRIVATE
 #------------------------------
+var _release: bool = false
 var _velocity: Vector2 = Vector2.ZERO
 var _soundboard = {}
 
@@ -46,6 +47,9 @@ func _ready() -> void:
 # warning-ignore:unused_argument
 func _physics_process(delta) -> void:
 	_velocity = move_and_slide(_velocity, Vector2.UP)
+	
+	if _release:
+		call_deferred("queue_free")
 
 
 #------------------------------
@@ -63,7 +67,8 @@ func __initialize() -> void:
 
 
 func __timeout() -> void:
-	call_deferred("queue_free")
+	_release = true
+	print("released by timeout")
 
 
 func __flip_bullet(direction: int) -> void:
@@ -98,7 +103,7 @@ func play_sound(name: String):
 
 
 func stop_motion() -> void:
-	set_physics_process(false)
+	_velocity = Vector2.ZERO
 
 
 # warning-ignore:unused_argument

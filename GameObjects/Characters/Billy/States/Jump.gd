@@ -32,5 +32,4 @@ func handle_input(event) -> void:
 	if !_is_kicking && OS.get_ticks_msec() - _start_time < _max_time && event.get_action_strength("Kick"):
 		_is_kicking = true
 		
-		owner.play_sound("Kick")
 		owner.get_node("Managers/Animation").play("Flying_kick")

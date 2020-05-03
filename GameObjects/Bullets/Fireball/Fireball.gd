@@ -15,5 +15,5 @@ func disable_hitbox() -> void:
 
 func _on_Animation_animation_finished(anim_name):
 	if anim_name == "Explode":
-		call_deferred("queue_free")
-		return
+		_release = true
+		print("released by animplayer")

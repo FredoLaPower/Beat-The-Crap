@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://GameObjects/Characters/Billy/Billy.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://GameObjects/Characters/Billy/Hitboxes/Kick.gd" type="Script" id=12]
 [ext_resource path="res://GameObjects/Characters/Billy/States/Hadouken.gd" type="Script" id=13]
 [ext_resource path="res://GameObjects/Characters/Billy/Combo.gd" type="Script" id=14]
+[ext_resource path="res://GameObjects/Characters/Billy/temp.gd" type="Script" id=15]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -109,16 +110,16 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.3, 0.7, 1.1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "values": [ {
-"args": [ "Punch" ],
+"args": [ "woosh" ],
 "method": "play_sound"
 }, {
-"args": [ "Punch" ],
+"args": [ "woosh" ],
 "method": "play_sound"
 }, {
-"args": [ "Punch" ],
+"args": [ "woosh" ],
 "method": "play_sound"
 }, {
-"args": [ "Kick" ],
+"args": [ "woosh" ],
 "method": "play_sound"
 } ]
 }
@@ -171,7 +172,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ "Kick" ],
+"args": [ "woosh" ],
 "method": "play_sound"
 } ]
 }
@@ -200,7 +201,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ "Hadouken" ],
+"args": [ "hadouken" ],
 "method": "play_sound"
 } ]
 }
@@ -284,7 +285,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ "Kick" ],
+"args": [ "woosh" ],
 "method": "play_sound"
 } ]
 }
@@ -337,7 +338,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ "Punch" ],
+"args": [ "woosh" ],
 "method": "play_sound"
 } ]
 }
@@ -363,7 +364,7 @@ tracks/0/keys = {
 ]]
 collision_mask = 3624
 script = ExtResource( 1 )
-MAX_SPEED = Vector2( 100, 50 )
+MAX_SPEED = Vector2( 80, 40 )
 JUMP_FORCE = 350
 
 [node name="Body" type="CollisionShape2D" parent="."]
@@ -390,6 +391,7 @@ script = ExtResource( 9 )
 [node name="Hitboxes" type="Node2D" parent="Container/Colliders"]
 
 [node name="Punch" type="Area2D" parent="Container/Colliders/Hitboxes"]
+position = Vector2( 8, -57 )
 collision_layer = 2
 collision_mask = 2560
 script = ExtResource( 11 )
@@ -400,6 +402,7 @@ modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 3 )
 
 [node name="Kick" type="Area2D" parent="Container/Colliders/Hitboxes"]
+position = Vector2( 28, -26 )
 collision_layer = 2
 collision_mask = 2560
 script = ExtResource( 12 )
@@ -436,7 +439,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -32 )
 vframes = 6
 hframes = 8
-frame = 43
+frame = 11
 
 [node name="SpawnPoints" type="Node2D" parent="Container"]
 
@@ -488,5 +491,15 @@ script = ExtResource( 14 )
 
 [node name="Sound" type="AudioStreamPlayer" parent="Managers"]
 bus = "Sounds"
+
+[node name="Label" type="Label" parent="."]
+margin_left = -20.2423
+margin_top = -83.6484
+margin_right = 19.7577
+margin_bottom = -69.6484
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="body_entered" from="Range" to="Range" method="_on_Range_body_entered"]
 [connection signal="body_exited" from="Range" to="Range" method="_on_Range_body_exited"]

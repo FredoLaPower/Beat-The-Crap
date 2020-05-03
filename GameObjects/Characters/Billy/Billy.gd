@@ -1,16 +1,15 @@
-extends "res://Classes/Character.gd"
+extends "res://Classes/Player.gd"
 
 var Fireball: PackedScene = preload("res://GameObjects/Bullets/Fireball/Fireball.tscn")
 
 func __initialize() -> void:
-	__add_sound("Punch", "res://assets/audio/sounds/sf2_woosh.wav")
-	__add_sound("Kick", "res://assets/audio/sounds/sf2_woosh.wav")
-	__add_sound("Hadouken", "res://assets/audio/sounds/sf2_hadouken.wav")
+	__add_flag("is_looking_left", false)
+	__add_flag("is_on_floor", true)
+	
+	Cache.preload_resource("sound_sample", "woosh", "res://assets/audio/sounds/sf2_woosh.wav")
+	Cache.preload_resource("sound_sample", "hadouken", "res://assets/audio/sounds/sf2_hadouken.wav")
 	
 	__add_special_move("Hadouken", "DRP||DLP")
-	
-	__add_hitbox("Punch", $Container/Colliders/Hitboxes/Punch/Collider)
-	__add_hitbox("Kick", $Container/Colliders/Hitboxes/Kick/Collider)
 	
 	disable_hitboxes()
 
