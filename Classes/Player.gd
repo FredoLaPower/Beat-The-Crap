@@ -45,10 +45,6 @@ func _physics_process(delta: float) -> void:
 # PRIVATE
 #------------------------------
 
-func __initialize() -> void:
-	pass
-
-
 func __add_special_move(name: String, signature: String) -> void:
 	_special_moves[name] = signature
 
@@ -68,11 +64,13 @@ func flip_character(is_looking_left: bool) -> void:
 		$Container.scale = Vector2(1,1)
 
 
-func special_move(name: String) -> bool:
-	var input_strings: Array = _special_moves[name].split("||")
-	
-	for input_string in input_strings:
-		if $Managers/Control.get_encoded_inputs().find(input_string) != -1:
-			return true
-	
-	return false
+#func special_move(name: String) -> bool:
+#	var input_strings: Array = _special_moves[name].split("||")
+#
+#	print(get_encoded_inputs())
+#
+#	for input_string in input_strings:
+#		if get_encoded_inputs().find(input_string) != -1:
+#			return true
+#
+#	return false

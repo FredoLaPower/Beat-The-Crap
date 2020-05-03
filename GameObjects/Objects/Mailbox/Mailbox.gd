@@ -8,4 +8,4 @@ func __initialize() -> void:
 
 func _on_Animation_animation_finished(anim_name):
 	if anim_name == "Destroyed":
-		call_deferred("queue_free")
+		queue_free()

@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/graphics/spritesheets/mailbox.png" type="Texture" id=1]
 [ext_resource path="res://GameObjects/Objects/Mailbox/Hurtbox.gd" type="Script" id=2]
 [ext_resource path="res://GameObjects/Objects/Mailbox/Mailbox.gd" type="Script" id=3]
-[ext_resource path="res://GameObjects/Objects/Mailbox/Range.gd" type="Script" id=4]
+[ext_resource path="res://GameObjects/Objects/Mailbox/Reach.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 2 )
@@ -189,10 +189,10 @@ modulate = Color( 0, 0, 1, 1 )
 position = Vector2( 0, -2 )
 shape = SubResource( 1 )
 
-[node name="Range" type="Area2D" parent="."]
+[node name="Reach" type="Area2D" parent="."]
 script = ExtResource( 4 )
 
-[node name="Collider" type="CollisionShape2D" parent="Range"]
+[node name="Collider" type="CollisionShape2D" parent="Reach"]
 modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 2 )
 
@@ -234,7 +234,5 @@ anims/Intact = SubResource( 8 )
 
 [node name="Sound" type="AudioStreamPlayer" parent="Managers"]
 bus = "Sounds"
-[connection signal="area_entered" from="Range" to="Range" method="_on_Range_area_entered"]
-[connection signal="area_exited" from="Range" to="Range" method="_on_Range_area_exited"]
 [connection signal="area_entered" from="Container/Colliders/Hurtboxes/Body" to="Container/Colliders/Hurtboxes/Body" method="_on_Body_area_entered"]
 [connection signal="animation_finished" from="Managers/Animation" to="." method="_on_Animation_animation_finished"]

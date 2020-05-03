@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/Stage01/Stage01.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Stage01/Pushdown.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/robot.otf" type="DynamicFontData" id=6]
-[ext_resource path="res://Singletons/Camera/Camera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://GameObjects/Camera/Camera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Stage01/Flags.gd" type="Script" id=10]
 [ext_resource path="res://GameObjects/Characters/Billy/Billy.tscn" type="PackedScene" id=11]
 
