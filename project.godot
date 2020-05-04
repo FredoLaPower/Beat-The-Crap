@@ -90,7 +90,7 @@ Music="*res://Singletons/Music/Music.tscn"
 Constants="*res://Singletons/Constants.gd"
 Globals="*res://Singletons/Globals.gd"
 Cache="*res://Singletons/Cache.gd"
-Controller="*res://Singletons/Controller.gd"
+Controller="res://Classes/Controller.gd"
 
 [display]
 

@@ -7,10 +7,9 @@ func initialize() -> void:
 
 
 func enter() -> void:
-	# INPUT LAG AS OWNER RECEIVES SIGNAL AFTER THE STATE P DOESN'T GET RECORDED ON TIME
-#	if owner.special_move("Hadouken"):
-#		emit_signal("finished", "Hadouken")
-#		return
+	if owner.special_move("Hadouken"):
+		emit_signal("finished", "Hadouken")
+		return
 	
 	owner.set_flag("is_in_motion", false)
 	owner.get_node("Managers/Animation").play("Punch")

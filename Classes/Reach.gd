@@ -28,8 +28,12 @@ func _ready() -> void:
 func _body_entered(body: Node2D) -> void:
 	if is_instance_valid(owner):
 		owner.add_threat(body.get_instance_id())
+		
+		print("%s said: %s is at reach" % [owner.get_name(), body.get_name()])
 
 
 func _body_exited(body: Node2D) -> void:
 	if is_instance_valid(owner):
 		owner.remove_threat(body.get_instance_id())
+		
+		print("%s said: %s is out of reach" % [owner.get_name(), body.get_name()])

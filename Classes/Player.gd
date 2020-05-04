@@ -56,13 +56,11 @@ func __add_special_move(name: String, signature: String) -> void:
 # PUBLIC
 #------------------------------
 
-#func special_move(name: String) -> bool:
-#	var input_strings: Array = _special_moves[name].split("||")
-#
-#	print(get_encoded_inputs())
-#
-#	for input_string in input_strings:
-#		if get_encoded_inputs().find(input_string) != -1:
-#			return true
-#
-#	return false
+func special_move(name: String) -> bool:
+	var input_strings: Array = _special_moves[name].split("||")
+	
+	for input_string in input_strings:
+		if Globals.Controller.get_encoded_inputs().find(input_string) != -1:
+			return true
+
+	return false

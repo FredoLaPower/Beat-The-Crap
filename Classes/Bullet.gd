@@ -4,7 +4,7 @@
 
 class_name Bullet
 
-extends KinematicBody2D
+extends "res://Classes/KinematicObject.gd"
 
 
 #------------------------------------------------------------
@@ -68,7 +68,6 @@ func __initialize() -> void:
 
 func __timeout() -> void:
 	_release = true
-	print("released by timeout")
 
 
 func __flip_bullet(direction: int) -> void:
