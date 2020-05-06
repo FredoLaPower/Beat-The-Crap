@@ -232,6 +232,8 @@ position = Vector2( 0, -2 )
 shape = SubResource( 1 )
 
 [node name="Reach" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 529
 script = ExtResource( 4 )
 
 [node name="Collider" type="CollisionShape2D" parent="Reach"]

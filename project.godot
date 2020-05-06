@@ -215,6 +215,7 @@ Special={
 2d_physics/layer_2="Player hit boxes"
 2d_physics/layer_3="Player Hurt boxes"
 2d_physics/layer_4="Stage limits"
+2d_physics/layer_5="Bullets"
 2d_physics/layer_6="Camera triggers"
 2d_physics/layer_7="Interaction triggers"
 2d_physics/layer_8="Item triggers"

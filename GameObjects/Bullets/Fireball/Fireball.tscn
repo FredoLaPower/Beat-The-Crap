@@ -48,18 +48,16 @@ tracks/0/keys = {
 }
 
 [node name="Fireball" type="KinematicBody2D"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 16
+collision_mask = 2560
 script = ExtResource( 2 )
 SPEED = 200
 LIFETIME = 3
 
 [node name="Body" type="CollisionShape2D" parent="."]
-visible = false
 modulate = Color( 0, 0, 1, 1 )
 rotation = 1.5708
 shape = SubResource( 1 )
-disabled = true
 
 [node name="Reach" type="Area2D" parent="."]
 collision_layer = 0
