@@ -9,8 +9,10 @@ func _on_Body_area_entered(area):
 			owner.get_node("Managers/Animation").play("Destroyed")
 		else:
 			if owner._current_health >= int(owner.HEALTH / 2):
+				owner.get_node("Managers/Animation").stop()
 				owner.get_node("Managers/Animation").play("Hit")
 			else:
+				owner.get_node("Managers/Animation").stop()
 				owner.get_node("Managers/Animation").play("Damaged")
 		
 		print("%s -> %s (%s dmg)" % [area.get_owner().get_name(), area.get_name(), area.get_damage()])
