@@ -73,28 +73,9 @@ func __timeout() -> void:
 	_release = true
 
 
-func __flip_bullet(direction: int) -> void:
-	$Container.set_rotation(0) # Fix a bug due to move and slide
-		
-	if direction == -1:
-		$Container.set_scale(Vector2(-1,1))
-	else:
-		$Container.set_scale(Vector2(1,1))
-
-
 #------------------------------
 # PUBLIC
 #------------------------------
-
-func fire(looking_left: bool) -> void:
-	__flip_bullet(looking_left)
-	
-	if looking_left:
-		_velocity.x = -SPEED
-	else:
-		_velocity.x = SPEED
-
-
 func stop_motion() -> void:
 	_velocity = Vector2.ZERO
 
@@ -104,5 +85,5 @@ func spawn(direction: int, pos: Vector2, offset: Vector2) -> void:
 	$Container.position = offset
 	_velocity.x = SPEED * direction
 	
-	__flip_bullet(direction)
+	flip_object("x", direction)
 	

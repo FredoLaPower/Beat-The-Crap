@@ -17,10 +17,11 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
-height = 16.0
+height = 18.0
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 32, 8 )
+[sub_resource type="CapsuleShape2D" id=16]
+radius = 6.0
+height = 56.0
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 4, 5 )
@@ -378,7 +379,8 @@ script = ExtResource( 10 )
 
 [node name="Collider" type="CollisionShape2D" parent="Reach"]
 modulate = Color( 1, 0, 0, 1 )
-shape = SubResource( 2 )
+rotation = 1.5708
+shape = SubResource( 16 )
 
 [node name="Container" type="KinematicBody2D" parent="."]
 collision_layer = 0
@@ -386,13 +388,14 @@ collision_mask = 0
 script = ExtResource( 9 )
 
 [node name="Colliders" type="Node2D" parent="Container"]
+visible = false
 
 [node name="Hitboxes" type="Node2D" parent="Container/Colliders"]
 
 [node name="Punch" type="Area2D" parent="Container/Colliders/Hitboxes" groups=[
 "Hitboxes",
 ]]
-position = Vector2( 8, -57 )
+position = Vector2( 25, -50 )
 collision_layer = 2
 collision_mask = 2560
 script = ExtResource( 11 )
@@ -405,7 +408,6 @@ shape = SubResource( 3 )
 [node name="Kick" type="Area2D" parent="Container/Colliders/Hitboxes" groups=[
 "Hitboxes",
 ]]
-position = Vector2( 28, -26 )
 collision_layer = 2
 collision_mask = 2560
 script = ExtResource( 12 )
@@ -454,6 +456,7 @@ hframes = 8
 position = Vector2( 15, -35 )
 
 [node name="NotUsed" type="CollisionShape2D" parent="Container"]
+visible = false
 shape = SubResource( 7 )
 disabled = true
 

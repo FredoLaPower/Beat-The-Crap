@@ -59,7 +59,8 @@ follow_viewport_enable = true
 position = Vector2( 136.744, 198.643 )
 
 [node name="Mailbox" parent="Ground/Renderer" instance=ExtResource( 3 )]
-position = Vector2( 228.041, 186.568 )
+position = Vector2( 200.077, 197.693 )
+HEALTH = 1000
 
 [node name="Mailbox2" parent="Ground/Renderer" instance=ExtResource( 3 )]
 position = Vector2( 435.998, 180.413 )
@@ -143,6 +144,7 @@ __meta__ = {
 }
 
 [node name="Camera" parent="." instance=ExtResource( 7 )]
+visible = false
 position = Vector2( 200.321, 112.5 )
 TARGET = NodePath("../../Stage/Ground/Renderer/Billy")
 LIMITS_MIN = Vector2( 0, 225 )

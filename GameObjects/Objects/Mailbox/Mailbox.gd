@@ -12,6 +12,8 @@ func _ready() -> void:
 func take_damage(damage: int) -> void:
 	_current_health -= damage
 	
+	$Managers/Animation.stop()
+	
 	if _current_health  <= 0:
 		$Managers/Animation.play("Destroyed")
 	else:

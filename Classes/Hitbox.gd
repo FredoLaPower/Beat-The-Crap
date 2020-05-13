@@ -36,19 +36,11 @@ func _ready() -> void:
 # PRIVATE
 #------------------------------
 
-#------------------------------
-# PRIVATE
-#------------------------------
-
 func __area_entered(area: Area2D) -> void:
 	if owner._threats.find(area.get_owner().get_instance_id()) != -1 && area.is_in_group("Hurtboxes"):
 		area.get_owner().take_damage(DAMAGE)
 		
 		__area_entered_callback()
-		
-		print("%s hitting %s for %s dmg" % [owner.get_name(), area.get_owner().get_name(), DAMAGE])
-	else:
-		print("Just passing by %s..." % area.get_owner().get_name())
 
 
 # warning-ignore:unused_argument

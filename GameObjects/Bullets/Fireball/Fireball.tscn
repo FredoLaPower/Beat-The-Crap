@@ -8,13 +8,13 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.0
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16, 8 )
+[sub_resource type="CircleShape2D" id=6]
+radius = 16.0
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 8.0
+radius = 9.0
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Container/Fireball:frame")
@@ -43,7 +43,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -65,8 +65,8 @@ tracks/0/keys = {
 collision_layer = 16
 collision_mask = 2560
 script = ExtResource( 2 )
-SPEED = 50
-LIFETIME = 10
+SPEED = 150
+LIFETIME = 3
 
 [node name="Body" type="CollisionShape2D" parent="."]
 modulate = Color( 0, 0, 1, 1 )
@@ -80,18 +80,15 @@ script = ExtResource( 4 )
 
 [node name="Collider" type="CollisionShape2D" parent="Reach"]
 modulate = Color( 1, 0, 0, 1 )
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 
 [node name="Container" type="Node2D" parent="."]
 
-[node name="Sprites" type="Node2D" parent="Container"]
-
 [node name="Fireball" type="Sprite" parent="Container"]
-position = Vector2( -9, 0 )
+position = Vector2( -8, 0 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -0.5 )
 hframes = 7
-frame = 4
 
 [node name="Hitbox" type="Area2D" parent="Container" groups=[
 "Hitboxes",
@@ -107,8 +104,8 @@ shape = SubResource( 3 )
 [node name="Managers" type="Node" parent="."]
 
 [node name="Animation" type="AnimationPlayer" parent="Managers"]
-anims/Explode = SubResource( 5 )
-anims/Fire = SubResource( 6 )
+anims/Explode = SubResource( 4 )
+anims/Fire = SubResource( 5 )
 
 [node name="Sound" type="AudioStreamPlayer" parent="Managers"]
 bus = "Sounds"
