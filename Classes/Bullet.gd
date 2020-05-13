@@ -105,8 +105,6 @@ func stop_motion() -> void:
 	_velocity = Vector2.ZERO
 
 
-# warning-ignore:unused_argument
-# warning-ignore:unused_argument
 func spawn(direction: int, pos: Vector2, offset: Vector2) -> void:
 	position = pos
 	$Container.position = offset

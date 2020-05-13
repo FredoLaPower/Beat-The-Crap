@@ -8,3 +8,7 @@ func __initialize() -> void:
 func _on_Animation_animation_finished(anim_name):
 	if anim_name == "Explode":
 		_release = true
+
+
+func _body_entered_callback() -> void:
+	owner.get_node("").disabled = false

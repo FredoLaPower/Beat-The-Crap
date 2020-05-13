@@ -86,7 +86,7 @@ scale = Vector2( 5, 5 )
 HEALTH = 500
 
 [node name="Mailbox8" parent="Ground/Renderer" instance=ExtResource( 3 )]
-position = Vector2( 319.15, 164.017 )
+position = Vector2( 271.942, 175.142 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -148,6 +148,7 @@ TARGET = NodePath("../../Stage/Ground/Renderer/Billy")
 LIMITS_MIN = Vector2( 0, 225 )
 
 [node name="Colliders" type="Node2D" parent="."]
+visible = false
 
 [node name="StaticBodies" type="Node2D" parent="Colliders"]
 

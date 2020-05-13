@@ -12,7 +12,7 @@ extents = Vector2( 16, 2 )
 extents = Vector2( 24, 6 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 16, 24 )
+extents = Vector2( 16, 32 )
 
 [sub_resource type="RectangleShape2D" id=4]
 
@@ -227,11 +227,13 @@ START_ANIMATION = "Intact"
 HEALTH = 100
 
 [node name="Body" type="CollisionShape2D" parent="."]
+visible = false
 modulate = Color( 0, 0, 1, 1 )
 position = Vector2( 0, -2 )
 shape = SubResource( 1 )
 
 [node name="Reach" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 529
 script = ExtResource( 4 )
@@ -246,18 +248,21 @@ shape = SubResource( 2 )
 
 [node name="Hurtboxes" type="Node2D" parent="Container/Colliders"]
 
-[node name="Body" type="Area2D" parent="Container/Colliders/Hurtboxes"]
+[node name="Body" type="Area2D" parent="Container/Colliders/Hurtboxes" groups=[
+"Hurtboxes",
+]]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="Collider" type="CollisionShape2D" parent="Container/Colliders/Hurtboxes/Body"]
-position = Vector2( 0, -24 )
+position = Vector2( 0, -32 )
 shape = SubResource( 3 )
 
 [node name="Sprites" type="Node2D" parent="Container"]
 
 [node name="Mailbox" type="Sprite" parent="Container/Sprites"]
+modulate = Color( 1, 1, 1, 0.470588 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -32 )
 hframes = 3
@@ -278,5 +283,4 @@ anims/Intact = SubResource( 8 )
 
 [node name="Sound" type="AudioStreamPlayer" parent="Managers"]
 bus = "Sounds"
-[connection signal="area_entered" from="Container/Colliders/Hurtboxes/Body" to="Container/Colliders/Hurtboxes/Body" method="_on_Body_area_entered"]
 [connection signal="animation_finished" from="Managers/Animation" to="." method="_on_Animation_animation_finished"]

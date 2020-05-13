@@ -1,5 +1,6 @@
 extends "res://Classes/Stage.gd"
 
+var Fireball: PackedScene = preload("res://GameObjects/Bullets/Fireball/Fireball.tscn")
 
 func _ready() -> void:
 	$Camera.initialize()
@@ -17,3 +18,15 @@ func _ready() -> void:
 
 func _process(_delta):
 	OS.set_window_title("%s %s | fps: %s" % [Constants.PROJET_NAME, Constants.BUILT_VERSION, Engine.get_frames_per_second()])
+
+func _input(event) -> void:
+	if event.is_action_pressed("Spawn"):
+		fireball()
+
+
+func fireball() -> void:
+	var bullet: Node2D = Fireball.instance()
+	
+	Globals.Renderer.add_child(bullet)
+	
+	bullet.spawn(1, get_global_mouse_position(), Vector2.ZERO)

@@ -386,10 +386,13 @@ collision_mask = 0
 script = ExtResource( 9 )
 
 [node name="Colliders" type="Node2D" parent="Container"]
+visible = false
 
 [node name="Hitboxes" type="Node2D" parent="Container/Colliders"]
 
-[node name="Punch" type="Area2D" parent="Container/Colliders/Hitboxes"]
+[node name="Punch" type="Area2D" parent="Container/Colliders/Hitboxes" groups=[
+"Hitboxes",
+]]
 position = Vector2( 8, -57 )
 collision_layer = 2
 collision_mask = 2560
@@ -400,7 +403,9 @@ DAMAGE = 20
 modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 3 )
 
-[node name="Kick" type="Area2D" parent="Container/Colliders/Hitboxes"]
+[node name="Kick" type="Area2D" parent="Container/Colliders/Hitboxes" groups=[
+"Hitboxes",
+]]
 position = Vector2( 28, -26 )
 collision_layer = 2
 collision_mask = 2560
@@ -412,8 +417,11 @@ modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 4 )
 
 [node name="Hurtboxes" type="Node2D" parent="Container/Colliders"]
+visible = false
 
-[node name="Body" type="Area2D" parent="Container/Colliders/Hurtboxes"]
+[node name="Body" type="Area2D" parent="Container/Colliders/Hurtboxes" groups=[
+"Hurtboxes",
+]]
 collision_layer = 4
 collision_mask = 0
 
@@ -422,7 +430,9 @@ modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 0, -33 )
 shape = SubResource( 5 )
 
-[node name="Head" type="Area2D" parent="Container/Colliders/Hurtboxes"]
+[node name="Head" type="Area2D" parent="Container/Colliders/Hurtboxes" groups=[
+"Hurtboxes",
+]]
 collision_layer = 4
 collision_mask = 0
 
@@ -440,6 +450,7 @@ vframes = 6
 hframes = 8
 
 [node name="SpawnPoints" type="Node2D" parent="Container"]
+visible = false
 
 [node name="Fireball" type="Position2D" parent="Container/SpawnPoints"]
 position = Vector2( 15, -35 )
