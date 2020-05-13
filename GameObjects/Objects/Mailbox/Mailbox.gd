@@ -9,6 +9,18 @@ func _ready() -> void:
 	$Managers/Animation.play(START_ANIMATION)
 
 
+func take_damage(damage: int) -> void:
+	_current_health -= damage
+	
+	if _current_health  <= 0:
+		$Managers/Animation.play("Destroyed")
+	else:
+		if _current_health >= int(HEALTH / 2):
+			$Managers/Animation.play("Hit")
+		else:
+			$Managers/Animation.play("Damaged")
+
+
 func _on_Animation_animation_finished(anim_name):
 	if anim_name == "Destroyed":
 		queue_free()

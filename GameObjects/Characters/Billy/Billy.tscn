@@ -386,7 +386,6 @@ collision_mask = 0
 script = ExtResource( 9 )
 
 [node name="Colliders" type="Node2D" parent="Container"]
-visible = false
 
 [node name="Hitboxes" type="Node2D" parent="Container/Colliders"]
 
@@ -450,13 +449,11 @@ vframes = 6
 hframes = 8
 
 [node name="SpawnPoints" type="Node2D" parent="Container"]
-visible = false
 
 [node name="Fireball" type="Position2D" parent="Container/SpawnPoints"]
 position = Vector2( 15, -35 )
 
 [node name="NotUsed" type="CollisionShape2D" parent="Container"]
-visible = false
 shape = SubResource( 7 )
 disabled = true
 

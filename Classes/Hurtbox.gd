@@ -25,16 +25,9 @@ func _ready() -> void:
 # PRIVATE
 #------------------------------
 
+# warning-ignore:unused_argument
 func __area_entered(area: Area2D) -> void:
-	if owner._threats.find(area.get_owner().get_instance_id()) != -1 && area.is_in_group("Hitboxes"):
-		owner._current_health -= area.get_damage()
-		
-		__area_entered_callback()
-		
-		print("%s -> %s (%s dmg)" % [area.get_owner().get_name(), area.get_name(), area.get_damage()])
-		print("%s -> %s / %s HP" % [owner.get_name(), owner._current_health, owner.HEALTH])
-	else:
-		print("something entered but who cares...")
+	pass
 
 
 # warning-ignore:unused_argument

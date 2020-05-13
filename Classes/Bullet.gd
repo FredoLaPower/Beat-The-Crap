@@ -29,7 +29,7 @@ export(int) var LIFETIME = 0 #in seconds
 #------------------------------
 var _release: bool = false
 var _velocity: Vector2 = Vector2.ZERO
-var _soundboard = {}
+
 
 #------------------------------------------------------------
 # METHODS
@@ -56,6 +56,9 @@ func _physics_process(delta) -> void:
 # PRIVATE
 #------------------------------
 func __timer() -> void:
+	if LIFETIME == 0:
+		return
+	
 	var timer = Timer.new()
 	add_child(timer)
 	timer.connect("timeout", self, "__timeout")
@@ -79,10 +82,6 @@ func __flip_bullet(direction: int) -> void:
 		$Container.set_scale(Vector2(1,1))
 
 
-func __add_sound(name: String, path: String):
-	_soundboard[name] = path
-
-
 #------------------------------
 # PUBLIC
 #------------------------------
@@ -94,11 +93,6 @@ func fire(looking_left: bool) -> void:
 		_velocity.x = -SPEED
 	else:
 		_velocity.x = SPEED
-
-
-func play_sound(name: String):
-	$Managers/Sound.stream = load(_soundboard[name])
-	$Managers/Sound.play()
 
 
 func stop_motion() -> void:

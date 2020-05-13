@@ -2,7 +2,6 @@ extends "res://Classes/Hitbox.gd"
 
 
 # warning-ignore:unused_argument
-func __callback():
+func __area_entered_callback():
 	owner.stop_motion()
-	owner.play_sound("Explode")
 	owner.get_node("Managers/Animation").play("Explode")
