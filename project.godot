@@ -12,27 +12,42 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://Classes/Bullet.gd"
+"path": "res://Classes/Objects/Kinematic/Bullet.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Classes/Objects/Kinematic/Character.gd"
 }, {
 "base": "StaticBody2D",
 "class": "Destructible",
 "language": "GDScript",
-"path": "res://Classes/Destructible.gd"
+"path": "res://Classes/Objects/Static/Destructible.gd"
+}, {
+"base": "Node",
+"class": "FlagController",
+"language": "GDScript",
+"path": "res://Classes/Controllers/FlagController.gd"
 }, {
 "base": "Area2D",
 "class": "Hitbox",
 "language": "GDScript",
-"path": "res://Classes/Hitbox.gd"
+"path": "res://Classes/Colliders/Hitbox.gd"
 }, {
 "base": "Area2D",
 "class": "Hurtbox",
 "language": "GDScript",
-"path": "res://Classes/Hurtbox.gd"
+"path": "res://Classes/Colliders/Hurtbox.gd"
+}, {
+"base": "Node",
+"class": "InputController",
+"language": "GDScript",
+"path": "res://Classes/Controllers/InputContoller.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "KinematicObject",
+"class": "Kinematic",
 "language": "GDScript",
-"path": "res://Classes/KinematicObject.gd"
+"path": "res://Classes/Objects/Kinematic/Kinematic.gd"
 }, {
 "base": "Node",
 "class": "MyClass",
@@ -40,14 +55,24 @@ _global_script_classes=[ {
 "path": "res://Classes/template.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "NonPlayer",
+"language": "GDScript",
+"path": "res://Classes/Objects/Kinematic/NonPlayer.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Classes/Player.gd"
+"path": "res://Classes/Objects/Kinematic/Player.gd"
 }, {
 "base": "Area2D",
 "class": "Reach",
 "language": "GDScript",
-"path": "res://Classes/Reach.gd"
+"path": "res://Classes/Colliders/Reach.gd"
+}, {
+"base": "AudioStreamPlayer",
+"class": "SoundController",
+"language": "GDScript",
+"path": "res://Classes/Controllers/SoundController.gd"
 }, {
 "base": "Node2D",
 "class": "Stage",
@@ -57,31 +82,36 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://Classes/State.gd"
+"path": "res://Classes/StateMachine/State.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://Classes/StateMachine.gd"
+"path": "res://Classes/StateMachine/StateController.gd"
 }, {
 "base": "StaticBody2D",
-"class": "StaticObject",
+"class": "Static",
 "language": "GDScript",
-"path": "res://Classes/StaticObject.gd"
+"path": "res://Classes/Objects/Static/Static.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
+"Character": "",
 "Destructible": "",
+"FlagController": "",
 "Hitbox": "",
 "Hurtbox": "",
-"KinematicObject": "",
+"InputController": "",
+"Kinematic": "",
 "MyClass": "",
+"NonPlayer": "",
 "Player": "",
 "Reach": "",
+"SoundController": "",
 "Stage": "",
 "State": "",
 "StateMachine": "",
-"StaticObject": ""
+"Static": ""
 }
 
 [application]
@@ -96,15 +126,15 @@ Music="*res://Singletons/Music/Music.tscn"
 Constants="*res://Singletons/Constants.gd"
 Globals="*res://Singletons/Globals.gd"
 Cache="*res://Singletons/Cache.gd"
-Controller="res://Classes/Controller.gd"
+Controller="res://Classes/Controllers/InputContoller.gd"
 
 [display]
 
 window/size/width=400
 window/size/height=225
 window/size/always_on_top=true
-window/size/test_width=800
-window/size/test_height=450
+window/size/test_width=1600
+window/size/test_height=900
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -223,17 +253,19 @@ Spawn={
 [layer_names]
 
 2d_physics/layer_1="Players"
-2d_physics/layer_2="Player hit boxes"
-2d_physics/layer_3="Player Hurt boxes"
-2d_physics/layer_4="Stage limits"
+2d_physics/layer_2="Player Hitboxes"
+2d_physics/layer_3="Player Hurtboxes"
+2d_physics/layer_4="Stage Limits"
 2d_physics/layer_5="Bullets"
-2d_physics/layer_6="Camera triggers"
-2d_physics/layer_7="Interaction triggers"
-2d_physics/layer_8="Item triggers"
-2d_physics/layer_9="Message triggers"
+2d_physics/layer_6="Camera Triggers"
+2d_physics/layer_7="Interaction Triggers"
+2d_physics/layer_8="Item Triggers"
+2d_physics/layer_9="Message Triggers"
 2d_physics/layer_10="Enemies"
 2d_physics/layer_11="Obstacles"
 2d_physics/layer_12="Objects"
+2d_physics/layer_13="Enemy Hitboxes"
+2d_physics/layer_14="Enemy Hurtboxes"
 
 [rendering]
 

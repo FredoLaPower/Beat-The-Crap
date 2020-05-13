@@ -1,4 +1,4 @@
-extends "res://Classes/Destructible.gd"
+extends "res://Classes/Objects/Static/Destructible.gd"
 
 func _ready() -> void:
 	Cache.preload_resource("sound_sample", "hit_metal", "res://assets/audio/sounds/sf2_hit_metal.wav")
@@ -6,21 +6,21 @@ func _ready() -> void:
 	
 	_current_health = HEALTH
 	
-	$Managers/Animation.play(START_ANIMATION)
+	$Controllers/Animation.play(START_ANIMATION)
 
 
 func take_damage(damage: int) -> void:
 	_current_health -= damage
 	
-	$Managers/Animation.stop()
+	$Controllers/Animation.stop()
 	
 	if _current_health  <= 0:
-		$Managers/Animation.play("Destroyed")
+		$Controllers/Animation.play("Destroyed")
 	else:
 		if _current_health >= int(HEALTH / 2):
-			$Managers/Animation.play("Hit")
+			$Controllers/Animation.play("Hit")
 		else:
-			$Managers/Animation.play("Damaged")
+			$Controllers/Animation.play("Damaged")
 
 
 func _on_Animation_animation_finished(anim_name):

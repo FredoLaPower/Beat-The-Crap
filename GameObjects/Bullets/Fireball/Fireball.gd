@@ -1,9 +1,9 @@
-extends "res://Classes/Bullet.gd"
+extends "res://Classes/Objects/Kinematic/Bullet.gd"
 
 func __initialize() -> void:
-	Cache.preload_resource("sound_sample", "explode", "res://assets/audio/sounds/sf2_hard_punch.wav")
+	Cache.preload_resource("sound_sample", "fireball_explosion", "res://assets/audio/sounds/sf2_hard_punch.wav")
 
-	$Managers/Animation.play("Fire")
+	$Controllers/Animation.play("Fire")
 
 
 func _on_Animation_animation_finished(anim_name):

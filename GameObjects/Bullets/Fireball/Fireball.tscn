@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/graphics/spritesheets/fireball.png" type="Texture" id=1]
 [ext_resource path="res://GameObjects/Bullets/Fireball/Fireball.gd" type="Script" id=2]
-[ext_resource path="res://GameObjects/Bullets/Fireball/Impact.gd" type="Script" id=3]
-[ext_resource path="res://GameObjects/Bullets/Fireball/Reach.gd" type="Script" id=4]
+[ext_resource path="res://GameObjects/Bullets/Fireball/Hitbox.gd" type="Script" id=3]
+[ext_resource path="res://Classes/Colliders/Reach.gd" type="Script" id=4]
+[ext_resource path="res://Classes/Controllers/SoundController.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.0
@@ -12,7 +13,7 @@ radius = 6.0
 radius = 6.0
 height = 12.0
 
-[sub_resource type="CapsuleShape2D" id=6]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 6.0
 height = 6.0
 
@@ -31,16 +32,16 @@ tracks/0/keys = {
 "values": [ 4, 5, 6 ]
 }
 tracks/1/type = "method"
-tracks/1/path = NodePath("..")
+tracks/1/path = NodePath("SoundController")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ "explode" ],
+"args": [ "fireball_explosion" ],
 "method": "play_sound"
 } ]
 }
@@ -93,26 +94,28 @@ position = Vector2( -6, 0 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -0.5 )
 hframes = 7
+frame = 6
 
 [node name="Hitbox" type="Area2D" parent="Container" groups=[
 "Hitboxes",
 ]]
 visible = false
 collision_layer = 2
-collision_mask = 2560
+collision_mask = 10240
 script = ExtResource( 3 )
-DAMAGE = 50
+DAMAGE = 100
 
 [node name="Collider" type="CollisionShape2D" parent="Container/Hitbox"]
 rotation = 1.5708
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
-[node name="Managers" type="Node" parent="."]
+[node name="Controllers" type="Node" parent="."]
 
-[node name="Animation" type="AnimationPlayer" parent="Managers"]
+[node name="Animation" type="AnimationPlayer" parent="Controllers"]
 anims/Explode = SubResource( 4 )
 anims/Fire = SubResource( 5 )
 
-[node name="Sound" type="AudioStreamPlayer" parent="Managers"]
+[node name="SoundController" type="AudioStreamPlayer" parent="Controllers"]
 bus = "Sounds"
-[connection signal="animation_finished" from="Managers/Animation" to="." method="_on_Animation_animation_finished"]
+script = ExtResource( 5 )
+[connection signal="animation_finished" from="Controllers/Animation" to="." method="_on_Animation_animation_finished"]

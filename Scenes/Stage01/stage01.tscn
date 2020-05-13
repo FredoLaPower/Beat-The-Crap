@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/graphics/stages/stage_1/stage_1_layer_fg.png" type="Texture" id=1]
 [ext_resource path="res://assets/graphics/stages/stage_1/stage_1_layer_bg.png" type="Texture" id=2]
@@ -7,11 +7,13 @@
 [ext_resource path="res://Scenes/Stage01/Pushdown.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/robot.otf" type="DynamicFontData" id=6]
 [ext_resource path="res://GameObjects/Camera/Camera.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Classes/Controller.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/Stage01/Flags.gd" type="Script" id=10]
-[ext_resource path="res://GameObjects/Characters/Billy/Billy.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Classes/Controllers/InputContoller.gd" type="Script" id=8]
+[ext_resource path="res://GameObjects/Characters/NonPlayers/Donovan/Donovan.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Stage01/Debug.gd" type="Script" id=10]
+[ext_resource path="res://GameObjects/Characters/Players/Billy/Billy.tscn" type="PackedScene" id=11]
 
 [sub_resource type="DynamicFont" id=1]
+size = 10
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -82,10 +84,12 @@ HEALTH = 300
 
 [node name="Mailbox7" parent="Ground/Renderer" instance=ExtResource( 3 )]
 position = Vector2( 254.053, 178.194 )
-HEALTH = 500
 
 [node name="Mailbox8" parent="Ground/Renderer" instance=ExtResource( 3 )]
 position = Vector2( 537.149, 197.092 )
+
+[node name="Donovan" parent="Ground/Renderer" instance=ExtResource( 9 )]
+position = Vector2( 64.4708, 191.37 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -120,7 +124,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Flags" type="Panel" parent="HUD"]
+[node name="Debug" type="Panel" parent="HUD"]
 margin_left = 250.0
 margin_top = 0.321075
 margin_right = 400.0
@@ -130,13 +134,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Debug" type="Label" parent="HUD/Flags"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 63.0
-margin_bottom = 18.0
+[node name="Label" type="Label" parent="HUD/Debug"]
+margin_left = 2.09888
+margin_top = 1.65555
+margin_right = 70.0989
+margin_bottom = 17.6555
 custom_fonts/font = SubResource( 1 )
-text = "Flags"
+text = "Pushdown"
 __meta__ = {
 "_edit_use_anchors_": false
 }
