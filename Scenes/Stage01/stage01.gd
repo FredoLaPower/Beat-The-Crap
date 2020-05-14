@@ -2,6 +2,7 @@ extends "res://Classes/Stage.gd"
 
 var Fireball: PackedScene = preload("res://GameObjects/Bullets/Fireball/Fireball.tscn")
 
+
 func _ready() -> void:
 	$Camera.initialize()
 	#Music.play_track(MUSIC)
@@ -18,6 +19,7 @@ func _ready() -> void:
 
 func _process(_delta):
 	OS.set_window_title("%s %s | fps: %s" % [Constants.PROJET_NAME, Constants.BUILT_VERSION, Engine.get_frames_per_second()])
+
 
 func _input(event) -> void:
 	if event.is_action_pressed("Spawn"):

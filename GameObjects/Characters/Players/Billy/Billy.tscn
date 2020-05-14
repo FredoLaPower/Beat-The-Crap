@@ -1,8 +1,8 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://GameObjects/Characters/Players/Billy/Billy.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=2]
-[ext_resource path="res://Classes/Colliders/Reach.gd" type="Script" id=3]
+[ext_resource path="res://Classes/Colliders/RangeBox.gd" type="Script" id=3]
 [ext_resource path="res://GameObjects/Characters/Players/Billy/States/Idle.gd" type="Script" id=4]
 [ext_resource path="res://GameObjects/Characters/Players/Billy/States/Walk.gd" type="Script" id=5]
 [ext_resource path="res://GameObjects/Characters/Players/Billy/States/Jump.gd" type="Script" id=6]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Classes/Controllers/FlagController.gd" type="Script" id=12]
 [ext_resource path="res://GameObjects/Characters/Players/Billy/States/Hadouken.gd" type="Script" id=13]
 [ext_resource path="res://GameObjects/Characters/Players/Billy/States/Combo.gd" type="Script" id=14]
+[ext_resource path="res://Classes/Objects/Kinematic/Pivot.gd" type="Script" id=15]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -41,7 +42,7 @@ extents = Vector2( 4.5, 5 )
 resource_name = "Combo"
 length = 1.7
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Billy:frame")
+tracks/0/path = NodePath("../Pivot/Billy:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -53,7 +54,7 @@ tracks/0/keys = {
 "values": [ 32, 33, 34, 35, 36, 37, 38, 39, 42, 43, 44, 24, 17, 18, 19 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Container/Colliders/Hitboxes/Punch:position")
+tracks/1/path = NodePath("../Pivot/Colliders/Hitboxes/Punch:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -65,7 +66,7 @@ tracks/1/keys = {
 "values": [ Vector2( 25, -50 ), Vector2( 23, -42 ), Vector2( 8, -57 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Container/Colliders/Hitboxes/Punch/Collider:disabled")
+tracks/2/path = NodePath("../Pivot/Colliders/Hitboxes/Punch/Collider:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -77,7 +78,7 @@ tracks/2/keys = {
 "values": [ false, true, false, true, false, true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../Container/Colliders/Hitboxes/Kick:position")
+tracks/3/path = NodePath("../Pivot/Colliders/Hitboxes/Kick:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -89,7 +90,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 17, -48 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("../Container/Colliders/Hitboxes/Kick/Collider:disabled")
+tracks/4/path = NodePath("../Pivot/Colliders/Hitboxes/Kick/Collider:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -101,7 +102,7 @@ tracks/4/keys = {
 "values": [ false, true ]
 }
 tracks/5/type = "method"
-tracks/5/path = NodePath("SoundController")
+tracks/5/path = NodePath("SoundBox")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -127,7 +128,7 @@ tracks/5/keys = {
 [sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Billy:frame")
+tracks/0/path = NodePath("../Pivot/Billy:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -139,7 +140,7 @@ tracks/0/keys = {
 "values": [ 11 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Container/Colliders/Hitboxes/Kick/Collider:disabled")
+tracks/1/path = NodePath("../Pivot/Colliders/Hitboxes/Kick/Collider:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -151,7 +152,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Container/Colliders/Hitboxes/Kick:position")
+tracks/2/path = NodePath("../Pivot/Colliders/Hitboxes/Kick:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -163,7 +164,7 @@ tracks/2/keys = {
 "values": [ Vector2( 28, -26 ) ]
 }
 tracks/3/type = "method"
-tracks/3/path = NodePath("SoundController")
+tracks/3/path = NodePath("SoundBox")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -180,7 +181,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id=10]
 length = 0.9
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Billy:frame")
+tracks/0/path = NodePath("../Pivot/Billy:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -192,7 +193,7 @@ tracks/0/keys = {
 "values": [ 40, 41, 42, 43, 42, 32, 34 ]
 }
 tracks/1/type = "method"
-tracks/1/path = NodePath("SoundController")
+tracks/1/path = NodePath("SoundBox")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -209,7 +210,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=11]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Billy:frame")
+tracks/0/path = NodePath("../Pivot/Billy:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -225,7 +226,7 @@ tracks/0/keys = {
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Billy:frame")
+tracks/0/path = NodePath("../Pivot/Billy:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -240,7 +241,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=13]
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Billy:frame")
+tracks/0/path = NodePath("../Pivot/Billy:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -252,7 +253,7 @@ tracks/0/keys = {
 "values": [ 16, 17, 18, 19 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Container/Colliders/Hitboxes/Kick/Collider:disabled")
+tracks/1/path = NodePath("../Pivot/Colliders/Hitboxes/Kick/Collider:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -264,7 +265,7 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Container/Colliders/Hitboxes/Kick:position")
+tracks/2/path = NodePath("../Pivot/Colliders/Hitboxes/Kick:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -276,7 +277,7 @@ tracks/2/keys = {
 "values": [ Vector2( 17, -48 ) ]
 }
 tracks/3/type = "method"
-tracks/3/path = NodePath("SoundController")
+tracks/3/path = NodePath("SoundBox")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -293,7 +294,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id=14]
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Billy:frame")
+tracks/0/path = NodePath("../Pivot/Billy:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -305,7 +306,7 @@ tracks/0/keys = {
 "values": [ 32, 33, 34 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Container/Colliders/Hitboxes/Punch/Collider:disabled")
+tracks/1/path = NodePath("../Pivot/Colliders/Hitboxes/Punch/Collider:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -317,7 +318,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Container/Colliders/Hitboxes/Punch:position")
+tracks/2/path = NodePath("../Pivot/Colliders/Hitboxes/Punch:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -329,7 +330,7 @@ tracks/2/keys = {
 "values": [ Vector2( 25, -50 ) ]
 }
 tracks/3/type = "method"
-tracks/3/path = NodePath("SoundController")
+tracks/3/path = NodePath("SoundBox")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -347,7 +348,7 @@ tracks/3/keys = {
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Billy:frame")
+tracks/0/path = NodePath("../Pivot/Billy:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -374,34 +375,35 @@ position = Vector2( 0, 4 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
-[node name="Reach" type="Area2D" parent="."]
+[node name="RangeBox" type="Area2D" parent="."]
 position = Vector2( 0, 4 )
 collision_layer = 0
 collision_mask = 2560
 script = ExtResource( 3 )
 
-[node name="Collider" type="CollisionShape2D" parent="Reach"]
+[node name="Collider" type="CollisionShape2D" parent="RangeBox"]
 modulate = Color( 1, 0, 0, 1 )
 rotation = 1.5708
 shape = SubResource( 2 )
 
-[node name="Container" type="KinematicBody2D" parent="."]
+[node name="Pivot" type="KinematicBody2D" parent="."]
 position = Vector2( 0, 4 )
 collision_layer = 0
 collision_mask = 0
+script = ExtResource( 15 )
 
-[node name="Billy" type="Sprite" parent="Container"]
+[node name="Billy" type="Sprite" parent="Pivot"]
 texture = ExtResource( 2 )
 offset = Vector2( 0, -32 )
 vframes = 6
 hframes = 8
 frame = 32
 
-[node name="Colliders" type="Node2D" parent="Container"]
+[node name="Colliders" type="Node2D" parent="Pivot"]
 
-[node name="Hitboxes" type="Node2D" parent="Container/Colliders"]
+[node name="Hitboxes" type="Node2D" parent="Pivot/Colliders"]
 
-[node name="Punch" type="Area2D" parent="Container/Colliders/Hitboxes" groups=[
+[node name="Punch" type="Area2D" parent="Pivot/Colliders/Hitboxes" groups=[
 "Hitboxes",
 ]]
 position = Vector2( 8, -57 )
@@ -410,12 +412,12 @@ collision_mask = 10240
 script = ExtResource( 9 )
 DAMAGE = 20
 
-[node name="Collider" type="CollisionShape2D" parent="Container/Colliders/Hitboxes/Punch"]
+[node name="Collider" type="CollisionShape2D" parent="Pivot/Colliders/Hitboxes/Punch"]
 modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 3 )
 disabled = true
 
-[node name="Kick" type="Area2D" parent="Container/Colliders/Hitboxes" groups=[
+[node name="Kick" type="Area2D" parent="Pivot/Colliders/Hitboxes" groups=[
 "Hitboxes",
 ]]
 collision_layer = 2
@@ -423,48 +425,76 @@ collision_mask = 10240
 script = ExtResource( 9 )
 DAMAGE = 30
 
-[node name="Collider" type="CollisionShape2D" parent="Container/Colliders/Hitboxes/Kick"]
+[node name="Collider" type="CollisionShape2D" parent="Pivot/Colliders/Hitboxes/Kick"]
 modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 4 )
 
-[node name="Hurtboxes" type="Node2D" parent="Container/Colliders"]
+[node name="Hurtboxes" type="Node2D" parent="Pivot/Colliders"]
 visible = false
 
-[node name="Body" type="Area2D" parent="Container/Colliders/Hurtboxes" groups=[
+[node name="Body" type="Area2D" parent="Pivot/Colliders/Hurtboxes" groups=[
 "Hurtboxes",
 ]]
 collision_layer = 4
 collision_mask = 0
 
-[node name="Collider" type="CollisionShape2D" parent="Container/Colliders/Hurtboxes/Body"]
+[node name="Collider" type="CollisionShape2D" parent="Pivot/Colliders/Hurtboxes/Body"]
 modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 0, -33 )
 shape = SubResource( 5 )
 
-[node name="Head" type="Area2D" parent="Container/Colliders/Hurtboxes" groups=[
+[node name="Head" type="Area2D" parent="Pivot/Colliders/Hurtboxes" groups=[
 "Hurtboxes",
 ]]
 collision_layer = 4
 collision_mask = 0
 
-[node name="Collider" type="CollisionShape2D" parent="Container/Colliders/Hurtboxes/Head"]
+[node name="Collider" type="CollisionShape2D" parent="Pivot/Colliders/Hurtboxes/Head"]
 modulate = Color( 0, 1, 0, 1 )
 position = Vector2( -0.5, -49 )
 shape = SubResource( 6 )
 
-[node name="SpawnPoints" type="Node2D" parent="Container"]
+[node name="SpawnPoints" type="Node2D" parent="Pivot"]
 
-[node name="Fireball" type="Position2D" parent="Container/SpawnPoints"]
+[node name="Fireball" type="Position2D" parent="Pivot/SpawnPoints"]
 position = Vector2( 15, -35 )
 
-[node name="NotUsed" type="CollisionShape2D" parent="Container"]
+[node name="NotUsed" type="CollisionShape2D" parent="Pivot"]
 visible = false
 shape = SubResource( 7 )
 disabled = true
 
 [node name="Controllers" type="Node" parent="."]
 
-[node name="Animation" type="AnimationPlayer" parent="Controllers"]
+[node name="StateMachine" type="Node" parent="Controllers"]
+script = ExtResource( 10 )
+START_STATE = "Idle"
+
+[node name="Idle" type="Node" parent="Controllers/StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Walk" type="Node" parent="Controllers/StateMachine"]
+script = ExtResource( 5 )
+
+[node name="Jump" type="Node" parent="Controllers/StateMachine"]
+script = ExtResource( 6 )
+
+[node name="Kick" type="Node" parent="Controllers/StateMachine"]
+script = ExtResource( 8 )
+
+[node name="Punch" type="Node" parent="Controllers/StateMachine"]
+script = ExtResource( 7 )
+
+[node name="Hadouken" type="Node" parent="Controllers/StateMachine"]
+script = ExtResource( 13 )
+
+[node name="Combo" type="Node" parent="Controllers/StateMachine"]
+script = ExtResource( 14 )
+
+[node name="Flags" type="Node" parent="Controllers"]
+script = ExtResource( 12 )
+
+[node name="Animations" type="AnimationPlayer" parent="Controllers"]
 autoplay = "Idle"
 anims/Combo = SubResource( 8 )
 anims/Flying_kick = SubResource( 9 )
@@ -475,34 +505,6 @@ anims/Kick = SubResource( 13 )
 anims/Punch = SubResource( 14 )
 anims/Walk = SubResource( 15 )
 
-[node name="StateController" type="Node" parent="Controllers"]
-script = ExtResource( 10 )
-START_STATE = "Idle"
-
-[node name="Idle" type="Node" parent="Controllers/StateController"]
-script = ExtResource( 4 )
-
-[node name="Walk" type="Node" parent="Controllers/StateController"]
-script = ExtResource( 5 )
-
-[node name="Jump" type="Node" parent="Controllers/StateController"]
-script = ExtResource( 6 )
-
-[node name="Kick" type="Node" parent="Controllers/StateController"]
-script = ExtResource( 8 )
-
-[node name="Punch" type="Node" parent="Controllers/StateController"]
-script = ExtResource( 7 )
-
-[node name="Hadouken" type="Node" parent="Controllers/StateController"]
-script = ExtResource( 13 )
-
-[node name="Combo" type="Node" parent="Controllers/StateController"]
-script = ExtResource( 14 )
-
-[node name="FlagController" type="Node" parent="Controllers"]
-script = ExtResource( 12 )
-
-[node name="SoundController" type="AudioStreamPlayer" parent="Controllers"]
+[node name="SoundBox" type="AudioStreamPlayer" parent="Controllers"]
 bus = "Sounds"
 script = ExtResource( 11 )

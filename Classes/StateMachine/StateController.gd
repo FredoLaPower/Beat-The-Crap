@@ -31,7 +31,7 @@ export(String) var START_STATE
 
 var _current_state: String = ""
 var _states = {} # No static typing for dictionary
-var _states_stack = [] # Use to store the hierachy of states
+var _pushdown = [] # Use to store the hierachy of states
 
 
 #------------------------------------------------------------
@@ -42,7 +42,7 @@ var _states_stack = [] # Use to store the hierachy of states
 # VIRTUAL
 #------------------------------
 
-func _ready() -> void:
+func initialize() -> void:
 	# Subscribe to state signals and initialize states
 	for child in get_children():
 		child.connect("finished", self, "__change_state")
@@ -56,12 +56,12 @@ func _ready() -> void:
 
 # Process the current state logic
 func _physics_process(delta: float) -> void:
-	_states[_states_stack[0]].update(delta)
+	_states[_pushdown[0]].update(delta)
 
 
 # Forward input to the current state
 func _unhandled_input(event: InputEvent) -> void:
-	_states[_states_stack[0]].handle_input(event)
+	_states[_pushdown[0]].handle_input(event)
 
 
 #------------------------------
@@ -79,15 +79,15 @@ func __change_state(new_state: String, is_sub_state: bool = false) -> void:
 		return
 	
 	# Exit current state
-	if ! is_sub_state && _states_stack.size() > 0:
+	if ! is_sub_state && _pushdown.size() > 0:
 		_states[_current_state].exit()
-		_states_stack.pop_front()
+		_pushdown.pop_front()
 	
 	# Return to previous state
 	if new_state == "Previous":
-		new_state = _states_stack[0]
+		new_state = _pushdown[0]
 	else:
-		_states_stack.push_front(new_state)
+		_pushdown.push_front(new_state)
 	
 	# Enter new state
 	_current_state = new_state
@@ -112,5 +112,5 @@ func get_state() -> String:
 
 
 # Return the state machine stack
-func get_states_stack() -> Array:
-	return _states_stack
+func get_pushdown() -> Array:
+	return _pushdown

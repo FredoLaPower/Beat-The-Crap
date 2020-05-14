@@ -36,7 +36,7 @@ func _ready() -> void:
 #------------------------------
 
 func __area_entered(area: Area2D) -> void:
-	if owner._threats.find(area.get_owner().get_instance_id()) != -1 && area.is_in_group("Hurtboxes"):
+	if owner.RangeBox.find_threat(area.get_owner().get_instance_id()) != -1 && area.is_in_group("Hurtboxes"):
 		area.get_owner().take_damage(DAMAGE)
 		
 		__area_entered_callback()

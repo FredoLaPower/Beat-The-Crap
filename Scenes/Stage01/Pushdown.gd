@@ -5,11 +5,11 @@ onready var Billy = owner.get_node("Ground/Renderer/Billy")
 
 
 func _ready() -> void:
-	Billy.get_node("Controllers/StateController").connect("state_changed", self, "_on_Controller_state_changed")
+	Billy.Automaton.connect("state_changed", self, "_on_Controller_state_changed")
 
 func _on_Controller_state_changed(_new_state: String) -> void:
 	var index = -1
-	var stack = Billy.get_node("Controllers/StateController").get_states_stack()
+	var stack = Billy.Automaton.get_pushdown()
 	
 	$Stack.text = ""
 	

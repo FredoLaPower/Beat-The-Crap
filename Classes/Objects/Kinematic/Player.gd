@@ -14,7 +14,7 @@ extends "res://Classes/Objects/Kinematic/Character.gd"
 # PRIVATE
 #------------------------------
 
-var _special_moves = {}
+var _special_moves: Dictionary = {}
 
 
 #------------------------------------------------------------
@@ -32,8 +32,9 @@ func __add_special_move(name: String, signature: String) -> void:
 #------------------------------
 # PUBLIC
 #------------------------------
+
 func disable_hitboxes(disable: bool = true) -> void:
-	for hitbox in $Container/Colliders/Hitboxes.get_children():
+	for hitbox in Pivot.get_node("Colliders/Hitboxes").get_children():
 		if disable:
 			hitbox.position = Vector2.ZERO
 		

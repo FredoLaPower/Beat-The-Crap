@@ -2,8 +2,8 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name FlagController
-extends Node
+class_name Pivot
+extends KinematicBody2D
 
 
 #------------------------------------------------------------
@@ -11,10 +11,10 @@ extends Node
 #------------------------------------------------------------
 
 #------------------------------
-# PRIVATE
+# PUBLIC
 #------------------------------
 
-var _flags: Dictionary = {}
+var velocity: Vector2 = Vector2.ZERO
 
 
 #------------------------------------------------------------
@@ -22,18 +22,10 @@ var _flags: Dictionary = {}
 #------------------------------------------------------------
 
 #------------------------------
-# PUBLIC
+# VIRTUAL
 #------------------------------
 
-func add_flag(name: String, value: bool) -> void:
-	_flags[name] = value
-
-
-func get_flag(flag_name: String) -> bool:
-	return _flags[flag_name]
-
-func get_flag_dictionnary() -> Dictionary:
-	return _flags
-
-func set_flag(flag_name: String, value: bool) -> void:
-	_flags[flag_name] = value
+func _physics_process(delta: float) -> void:
+	if !owner.Flags.get_flag("is_on_floor"):
+		velocity.y += Constants.GRAVITY * delta
+		velocity = move_and_slide(velocity, Vector2.UP)

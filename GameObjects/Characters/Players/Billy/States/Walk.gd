@@ -3,8 +3,8 @@ extends "res://Classes/StateMachine/State.gd"
 
 func enter() -> void:
 	owner.disable_hitboxes()
-	owner.set_flag("is_in_motion", true)
-	owner.get_node("Controllers/Animation").play("Walk")
+	owner.Flags.set_flag("is_in_motion", true)
+	owner.Animations.play("Walk")
 
 
 # warning-ignore:unused_argument
@@ -15,11 +15,11 @@ func update(delta: float):
 	owner.velocity.x = lerp(owner.velocity.x, x_input * owner.MAX_SPEED.x, Constants.MOTION_ACCELERATION)
 	owner.velocity.y = lerp(owner.velocity.y, -y_input * owner.MAX_SPEED.y, Constants.MOTION_ACCELERATION)
 	
-	if x_input < 0 && !owner.get_flag("is_looking_left"):
-		owner.set_flag("is_looking_left", true)
+	if x_input < 0 && !owner.Flags.get_flag("is_looking_left"):
+		owner.Flags.set_flag("is_looking_left", true)
 		owner.flip_object("x", -1)
-	elif x_input > 0 && owner.get_flag("is_looking_left"):
-		owner.set_flag("is_looking_left", false)
+	elif x_input > 0 && owner.Flags.get_flag("is_looking_left"):
+		owner.Flags.set_flag("is_looking_left", false)
 		owner.flip_object("x", 1)
 	
 	if x_input == 0 && y_input == 0:
