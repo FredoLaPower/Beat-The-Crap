@@ -216,11 +216,11 @@ texture = ExtResource( 2 )
 offset = Vector2( 9, -43 )
 vframes = 4
 hframes = 4
-frame = 3
 
 [node name="Hitbox" type="Area2D" parent="Wrapper" groups=[
 "Hitboxes",
 ]]
+visible = false
 collision_layer = 4096
 collision_mask = 2052
 script = ExtResource( 3 )
@@ -234,6 +234,7 @@ shape = SubResource( 2 )
 [node name="Hurtbox" type="Area2D" parent="Wrapper" groups=[
 "Hurtboxes",
 ]]
+visible = false
 collision_layer = 8192
 collision_mask = 0
 script = ExtResource( 13 )
