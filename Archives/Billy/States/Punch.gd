@@ -2,17 +2,20 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name State
-extends Node
+extends "res://Classes/StateMachine/State.gd"
 
 
 #------------------------------------------------------------
-# SIGNALS
+# PROPERTIES
 #------------------------------------------------------------
 
-# warning-ignore:unused_signal
-signal finished(next_state, is_sub_state)
+#------------------------------
+# EXPORT
+#------------------------------
 
+export(NodePath) var FLAGS
+export(NodePath) var ANIMATIONS
+export(NodePath) var SPECIAL_MOVES
 
 #------------------------------------------------------------
 # METHODS
@@ -21,9 +24,10 @@ signal finished(next_state, is_sub_state)
 #------------------------------
 # PRIVATE
 #------------------------------
-# warning-ignore:unused_argument
+
 func __on_animation_finished(anim_name: String) -> void:
-	pass
+	if anim_name == "Punch":
+		emit_signal("finished", "Previous")
 
 
 #------------------------------
@@ -31,22 +35,14 @@ func __on_animation_finished(anim_name: String) -> void:
 #------------------------------
 
 func initialize() -> void:
-	pass
+	# warning-ignore:return_value_discarded
+	get_node(ANIMATIONS).connect("animation_finished", self, "__on_animation_finished")
 
 
 func enter() -> void:
-	pass
-
-
-func exit() -> void:
-	pass
-
-
-# warning-ignore:unused_argument
-func update(delta: float) -> void:
-	pass
-
-
-# warning-ignore:unused_argument
-func handle_input(event: InputEvent) -> void:
-	pass
+	if get_node(SPECIAL_MOVES).special_move("Hadouken"):
+		emit_signal("finished", "Hadouken")
+		return
+	
+	get_node(FLAGS).set_flag("is_in_motion", false)
+	get_node(ANIMATIONS).play("Punch")

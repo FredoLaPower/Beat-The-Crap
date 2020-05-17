@@ -2,8 +2,8 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name Hitbox
-extends Area2D
+class_name SpecialMovesComponent
+extends Node
 
 
 #------------------------------------------------------------
@@ -11,11 +11,10 @@ extends Area2D
 #------------------------------------------------------------
 
 #------------------------------
-# EXPORT
+# PRIVATE
 #------------------------------
-export(NodePath) var THICKNESS
-export(int) var DAMAGE
-export(String) var SOUND
+
+var _special_moves: Dictionary = {}
 
 
 #------------------------------------------------------------
@@ -23,8 +22,26 @@ export(String) var SOUND
 #------------------------------------------------------------
 
 #------------------------------
+# PRIVATE
+#------------------------------
+
+func __add_special_move(name: String, signature: String) -> void:
+	_special_moves[name] = signature
+
+
+#------------------------------
 # PUBLIC
 #------------------------------
 
-func get_thickness() -> int:
-	return get_node(THICKNESS).THICKNESS
+func initialize() -> void:
+	pass
+
+
+func special_move(name: String) -> bool:
+	var input_strings: Array = _special_moves[name].split("||")
+	
+	for input_string in input_strings:
+		if Globals.Controller.get_encoded_inputs().find(input_string) != -1:
+			return true
+
+	return false

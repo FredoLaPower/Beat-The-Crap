@@ -2,8 +2,9 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name Character
-extends "res://Classes/Objects/Kinematic/Kinematic.gd"
+class_name JumpComponent
+extends Node
+
 
 #------------------------------------------------------------
 # PROPERTIES
@@ -13,16 +14,16 @@ extends "res://Classes/Objects/Kinematic/Kinematic.gd"
 # EXPORT
 #------------------------------
 
-export(Vector2) var MAX_SPEED = Vector2(0, 0)
-export(int) var JUMP_FORCE = 0
-export(int) var HEALTH
+export(NodePath) var WRAPPER
+export(NodePath) var FLAGS
+export(int) var JUMP_FORCE
 
 
 #------------------------------
-# PRIVATE
+# PUBLIC
 #------------------------------
 
-var _current_health = 0
+var velocity: Vector2 = Vector2.ZERO
 
 
 #------------------------------------------------------------
@@ -34,24 +35,14 @@ var _current_health = 0
 #------------------------------
 
 func _physics_process(delta: float) -> void:
-	if !Flags.get_flag("is_in_motion"):
-		velocity = lerp(velocity, Vector2.ZERO, Constants.MOTION_ACCELERATION)
-	
-	._physics_process(delta)
+	if !get_node(FLAGS).get_flag("is_on_floor"):
+		velocity.y += Constants.GRAVITY * delta
+		velocity = get_node(WRAPPER).move_and_slide(velocity, Vector2.UP)
 
 
 #------------------------------
 # PUBLIC
 #------------------------------
 
-# warning-ignore:unused_argument
-func take_damage(damage: int) -> void:
+func initialize() -> void:
 	pass
-
-
-func get_health() -> int:
-	return _current_health
-
-
-func get_max_health() -> int:
-	return HEALTH

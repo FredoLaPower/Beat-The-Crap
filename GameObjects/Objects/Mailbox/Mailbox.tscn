@@ -1,9 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/graphics/spritesheets/mailbox.png" type="Texture" id=1]
-[ext_resource path="res://Classes/Colliders/Hurtbox.gd" type="Script" id=2]
-[ext_resource path="res://GameObjects/Objects/Mailbox/Mailbox.gd" type="Script" id=3]
-[ext_resource path="res://Classes/Controllers/SoundController.gd" type="Script" id=4]
+[ext_resource path="res://GameObjects/Objects/Mailbox/States/Listen.gd" type="Script" id=2]
+[ext_resource path="res://Classes/GameObject.gd" type="Script" id=3]
+[ext_resource path="res://Classes/Controllers/Sounds.gd" type="Script" id=4]
+[ext_resource path="res://Classes/Components/Thickness.gd" type="Script" id=5]
+[ext_resource path="res://Classes/StateMachine/PushdownAutomaton.gd" type="Script" id=6]
+[ext_resource path="res://GameObjects/Objects/Mailbox/States/Destroyed.gd" type="Script" id=7]
+[ext_resource path="res://Classes/Components/Health.gd" type="Script" id=8]
+[ext_resource path="res://Classes/Colliders/Hurtbox.gd" type="Script" id=10]
+[ext_resource path="res://GameObjects/Objects/Mailbox/Label.gd" type="Script" id=11]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 3 )
@@ -12,38 +19,11 @@ extents = Vector2( 16, 3 )
 extents = Vector2( 16, 32 )
 
 [sub_resource type="Animation" id=3]
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Mailbox:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 2, 0 ), Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Container/Mailbox:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
-}
-
-[sub_resource type="Animation" id=4]
+resource_name = "Destroy"
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Hurtbox/Collider:disabled")
+tracks/0/path = NodePath("../Wrapper/Hurtbox/Collider:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -67,36 +47,24 @@ tracks/1/keys = {
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Container/Mailbox:frame")
+tracks/2/path = NodePath("../Wrapper/Mailbox:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 2 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("../Container/Mailbox:self_modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.745098 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.498039 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.25098 ), Color( 1, 1, 1, 0 ) ]
 }
-tracks/4/type = "method"
-tracks/4/path = NodePath("SoundController")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/3/type = "method"
+tracks/3/path = NodePath("Sounds")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -105,11 +73,12 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
+resource_name = "Hit"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Mailbox:position")
+tracks/0/path = NodePath("../Wrapper/Mailbox:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -121,7 +90,7 @@ tracks/0/keys = {
 "values": [ Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 2, 0 ), Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "method"
-tracks/1/path = NodePath("SoundController")
+tracks/1/path = NodePath("Sounds")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -135,77 +104,12 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Mailbox:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Body:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../Container/Hurtbox/Collider:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("../Container/Mailbox:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("../Container/Mailbox:self_modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-
 [node name="Mailbox" type="StaticBody2D" groups=[
 "Objects",
 ]]
 collision_layer = 2048
 collision_mask = 513
 script = ExtResource( 3 )
-START_ANIMATION = "Intact"
-HEALTH = 100
 
 [node name="Body" type="CollisionShape2D" parent="."]
 modulate = Color( 0, 0, 1, 1 )
@@ -213,39 +117,71 @@ position = Vector2( 0, 3 )
 shape = SubResource( 1 )
 disabled = true
 
-[node name="Container" type="Node2D" parent="."]
+[node name="Wrapper" type="Node2D" parent="."]
 position = Vector2( 0, 6 )
 
-[node name="Hurtbox" type="Area2D" parent="Container" groups=[
+[node name="Hurtbox" type="Area2D" parent="Wrapper" groups=[
 "Hurtboxes",
 ]]
-visible = false
 collision_layer = 0
 collision_mask = 2
-script = ExtResource( 2 )
+script = ExtResource( 10 )
+THICKNESS = NodePath("../../Components/Thickness")
+HEALTH = NodePath("../../Components/Health")
 
-[node name="Collider" type="CollisionShape2D" parent="Container/Hurtbox"]
+[node name="Collider" type="CollisionShape2D" parent="Wrapper/Hurtbox"]
 position = Vector2( 0, -32 )
 shape = SubResource( 2 )
-disabled = true
 
-[node name="Mailbox" type="Sprite" parent="Container"]
-position = Vector2( 3, 0 )
+[node name="Mailbox" type="Sprite" parent="Wrapper"]
 texture = ExtResource( 1 )
 offset = Vector2( 0, -32 )
 hframes = 3
-frame = 2
+
+[node name="Components" type="Node" parent="."]
+
+[node name="Automaton" type="Node" parent="Components"]
+script = ExtResource( 6 )
+START_STATE = "Listening"
+
+[node name="Listening" type="Node" parent="Components/Automaton"]
+script = ExtResource( 2 )
+ANIMATIONS = NodePath("../../../Controllers/Animations")
+SPRITESHEET = NodePath("../../../Wrapper/Mailbox")
+HEALTH = NodePath("../../Health")
+HURTBOX = NodePath("../../../Wrapper/Hurtbox")
+
+[node name="Destroyed" type="Node" parent="Components/Automaton"]
+script = ExtResource( 7 )
+ANIMATIONS = NodePath("../../../Controllers/Animations")
+SPRITESHEET = NodePath("../../../Wrapper/Mailbox")
+
+[node name="Thickness" type="Node" parent="Components"]
+script = ExtResource( 5 )
+THICKNESS = 6
+
+[node name="Health" type="Node" parent="Components"]
+script = ExtResource( 8 )
+MAX_HEALTH = 100
 
 [node name="Controllers" type="Node" parent="."]
 
-[node name="Animation" type="AnimationPlayer" parent="Controllers"]
-autoplay = "Intact"
-anims/Damaged = SubResource( 3 )
-anims/Destroyed = SubResource( 4 )
-anims/Hit = SubResource( 5 )
-anims/Intact = SubResource( 6 )
+[node name="Animations" type="AnimationPlayer" parent="Controllers"]
+anims/Destroy = SubResource( 3 )
+anims/Hit = SubResource( 4 )
 
-[node name="SoundController" type="AudioStreamPlayer" parent="Controllers"]
+[node name="Sounds" type="AudioStreamPlayer" parent="Controllers"]
 bus = "Sounds"
 script = ExtResource( 4 )
-[connection signal="animation_finished" from="Controllers/Animation" to="." method="_on_Animation_animation_finished"]
+
+[node name="Label" type="Label" parent="."]
+margin_left = -20.1468
+margin_top = -74.1636
+margin_right = 19.8532
+margin_bottom = -60.1636
+grow_horizontal = 2
+align = 1
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

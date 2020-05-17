@@ -2,9 +2,8 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name Hitbox
-extends Area2D
-
+class_name PlayerComponent
+extends Node
 
 #------------------------------------------------------------
 # PROPERTIES
@@ -13,9 +12,8 @@ extends Area2D
 #------------------------------
 # EXPORT
 #------------------------------
-export(NodePath) var THICKNESS
-export(int) var DAMAGE
-export(String) var SOUND
+
+export(NodePath) var HITBOXES
 
 
 #------------------------------------------------------------
@@ -26,5 +24,13 @@ export(String) var SOUND
 # PUBLIC
 #------------------------------
 
-func get_thickness() -> int:
-	return get_node(THICKNESS).THICKNESS
+func initialize() -> void:
+	pass
+
+
+func disable_hitboxes(disable: bool = true) -> void:
+	for hitbox in get_node(HITBOXES).get_children():
+		if disable:
+			hitbox.position = Vector2.ZERO
+
+		hitbox.get_node("Collider").disabled = disable

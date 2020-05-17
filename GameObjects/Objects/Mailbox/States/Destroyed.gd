@@ -2,8 +2,7 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name Hitbox
-extends Area2D
+extends "res://Classes/StateMachine/State.gd"
 
 
 #------------------------------------------------------------
@@ -13,18 +12,31 @@ extends Area2D
 #------------------------------
 # EXPORT
 #------------------------------
-export(NodePath) var THICKNESS
-export(int) var DAMAGE
-export(String) var SOUND
 
+export(NodePath) var ANIMATIONS
+export(NodePath) var SPRITESHEET
 
 #------------------------------------------------------------
 # METHODS
 #------------------------------------------------------------
 
 #------------------------------
+# PRIVATE
+#------------------------------
+
+func __on_animation_finished(anim_name: String) -> void:
+	if anim_name == "Destroy":
+		owner.queue_free()
+
+
+#------------------------------
 # PUBLIC
 #------------------------------
 
-func get_thickness() -> int:
-	return get_node(THICKNESS).THICKNESS
+func initialize() -> void:
+	# warning-ignore:return_value_discarded
+	get_node(ANIMATIONS).connect("animation_finished", self, "__on_animation_finished")
+
+
+func enter() -> void:
+	get_node(ANIMATIONS).play("Destroy")

@@ -2,8 +2,8 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name Hitbox
-extends Area2D
+class_name HealthComponent
+extends Node
 
 
 #------------------------------------------------------------
@@ -13,9 +13,15 @@ extends Area2D
 #------------------------------
 # EXPORT
 #------------------------------
-export(NodePath) var THICKNESS
-export(int) var DAMAGE
-export(String) var SOUND
+
+export(int) var MAX_HEALTH
+
+
+#------------------------------
+# PRIVATE
+#------------------------------
+
+var _current_health: int = 0
 
 
 #------------------------------------------------------------
@@ -23,8 +29,19 @@ export(String) var SOUND
 #------------------------------------------------------------
 
 #------------------------------
+# VIRTUAL
+#------------------------------
+func _ready() -> void:
+	_current_health = MAX_HEALTH
+
+
+#------------------------------
 # PUBLIC
 #------------------------------
 
-func get_thickness() -> int:
-	return get_node(THICKNESS).THICKNESS
+func take_damage(damage: int) -> void:
+	_current_health -= damage
+
+
+func get_health() -> int:
+		return _current_health

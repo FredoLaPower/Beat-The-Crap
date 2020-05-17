@@ -2,8 +2,8 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name Hitbox
-extends Area2D
+class_name FlagsComponent
+extends Node
 
 
 #------------------------------------------------------------
@@ -11,11 +11,10 @@ extends Area2D
 #------------------------------------------------------------
 
 #------------------------------
-# EXPORT
+# PRIVATE
 #------------------------------
-export(NodePath) var THICKNESS
-export(int) var DAMAGE
-export(String) var SOUND
+
+var _flags: Dictionary = {}
 
 
 #------------------------------------------------------------
@@ -23,8 +22,28 @@ export(String) var SOUND
 #------------------------------------------------------------
 
 #------------------------------
+# PRIVATE
+#------------------------------
+
+func __add_flag(name: String, value: bool) -> void:
+	_flags[name] = value
+
+
+#------------------------------
 # PUBLIC
 #------------------------------
 
-func get_thickness() -> int:
-	return get_node(THICKNESS).THICKNESS
+func initialize() -> void:
+	pass
+
+
+func get_flag(flag_name: String) -> bool:
+	return _flags[flag_name]
+
+
+func set_flag(flag_name: String, value: bool) -> void:
+	_flags[flag_name] = value
+
+
+func get_dictionnary() -> Dictionary:
+	return _flags

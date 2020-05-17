@@ -2,8 +2,7 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name StateMachine
-
+class_name PushdownAutomaton
 extends Node
 
 
@@ -30,8 +29,8 @@ export(String) var START_STATE
 #------------------------------
 
 var _current_state: String = ""
-var _states = {} # No static typing for dictionary
-var _pushdown = [] # Use to store the hierachy of states
+var _states: Dictionary = {}
+var _pushdown: Array = []
 
 
 #------------------------------------------------------------

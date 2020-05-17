@@ -1,27 +1,23 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/graphics/spritesheets/fireball.png" type="Texture" id=1]
 [ext_resource path="res://GameObjects/Bullets/Fireball/Fireball.gd" type="Script" id=2]
 [ext_resource path="res://GameObjects/Bullets/Fireball/Hitbox.gd" type="Script" id=3]
-[ext_resource path="res://Classes/Colliders/RangeBox.gd" type="Script" id=4]
-[ext_resource path="res://Classes/Controllers/SoundController.gd" type="Script" id=5]
+[ext_resource path="res://Classes/Controllers/Sounds.gd" type="Script" id=5]
+[ext_resource path="res://Archives/RangeBox.gd" type="Script" id=6]
+
 
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.0
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 6.0
-height = 12.0
+[sub_resource type="CircleShape2D" id=2]
+radius = 8.0
 
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 6.0
-height = 6.0
-
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Fireball:frame")
+tracks/0/path = NodePath("../Pivot/Fireball:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -32,26 +28,12 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 4, 5, 6 ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath("SoundController")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "fireball_explosion" ],
-"method": "play_sound"
-} ]
-}
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Container/Fireball:frame")
+tracks/0/path = NodePath("../Pivot/Fireball:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -69,56 +51,54 @@ tracks/0/keys = {
 collision_layer = 16
 collision_mask = 2560
 script = ExtResource( 2 )
-SPEED = 150
+SPEED = 20
 LIFETIME = 3
 
 [node name="Body" type="CollisionShape2D" parent="."]
 modulate = Color( 0, 0, 1, 1 )
+position = Vector2( 7, 6 )
 rotation = 1.5708
 shape = SubResource( 1 )
+disabled = true
+script = ExtResource( 6 )
+THICKNESS = 6
 
-[node name="Reach" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 2560
-script = ExtResource( 4 )
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2( 0, 6 )
 
-[node name="Collider" type="CollisionShape2D" parent="Reach"]
-modulate = Color( 1, 0, 0, 1 )
-rotation = 1.5708
-shape = SubResource( 2 )
-
-[node name="Container" type="Node2D" parent="."]
-
-[node name="Fireball" type="Sprite" parent="Container"]
-position = Vector2( -6, 0 )
+[node name="Fireball" type="Sprite" parent="Pivot"]
+modulate = Color( 1, 1, 1, 0.207843 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -0.5 )
 hframes = 7
-frame = 6
 
-[node name="Hitbox" type="Area2D" parent="Container" groups=[
+[node name="Hitbox" type="Area2D" parent="Pivot" groups=[
 "Hitboxes",
 ]]
-visible = false
+position = Vector2( 7, 0 )
 collision_layer = 2
 collision_mask = 10240
 script = ExtResource( 3 )
 DAMAGE = 100
+SOUND = "fireball"
 
-[node name="Collider" type="CollisionShape2D" parent="Container/Hitbox"]
+[node name="Collider" type="CollisionShape2D" parent="Pivot/Hitbox"]
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Controllers" type="Node" parent="."]
 
-[node name="Animation" type="AnimationPlayer" parent="Controllers"]
-anims/Explode = SubResource( 4 )
-anims/Fire = SubResource( 5 )
+[node name="Animations" type="AnimationPlayer" parent="Controllers"]
+anims/Explode = SubResource( 3 )
+anims/Fire = SubResource( 4 )
+
+[node name="SoundBox" type="AudioStreamPlayer" parent="Controllers"]
+bus = "Sounds"
+script = ExtResource( 5 )
 
 [node name="Timer" type="Timer" parent="Controllers"]
 
-[node name="SoundController" type="AudioStreamPlayer" parent="Controllers"]
-bus = "Sounds"
-script = ExtResource( 5 )
-[connection signal="animation_finished" from="Controllers/Animation" to="." method="_on_Animation_animation_finished"]
+[node name="StateMachine" type="Node" parent="Controllers"]
+
+[node name="Flags" type="Node" parent="Controllers"]
+[connection signal="animation_finished" from="Controllers/Animations" to="." method="_on_Animation_animation_finished"]

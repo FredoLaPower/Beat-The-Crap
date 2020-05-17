@@ -81,7 +81,10 @@ func stop_motion() -> void:
 
 func spawn(direction: int, pos: Vector2, offset: Vector2) -> void:
 	position = pos
-	$Container.position = offset
+	position.y -= Body.THICKNESS
+	Pivot.position = offset
+	Pivot.position.y += Body.THICKNESS
+	
 	_velocity.x = SPEED * direction
 	
 	flip_object("x", direction)
