@@ -1,12 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/graphics/spritesheets/fireball.png" type="Texture" id=1]
 [ext_resource path="res://GameObjects/Bullets/Fireball/Fireball.gd" type="Script" id=2]
-[ext_resource path="res://GameObjects/Bullets/Fireball/Hitbox.gd" type="Script" id=3]
+[ext_resource path="res://Classes/Colliders/Hitbox.gd" type="Script" id=3]
+[ext_resource path="res://Classes/StateMachine/PushdownAutomaton.gd" type="Script" id=4]
 [ext_resource path="res://Classes/Controllers/Sounds.gd" type="Script" id=5]
-[ext_resource path="res://Archives/RangeBox.gd" type="Script" id=6]
-
-
+[ext_resource path="res://Classes/Components/Thickness.gd" type="Script" id=6]
+[ext_resource path="res://GameObjects/Bullets/Fireball/States/Explode.gd" type="Script" id=7]
+[ext_resource path="res://Classes/Components/Move.gd" type="Script" id=8]
+[ext_resource path="res://GameObjects/Bullets/Fireball/States/Listening.gd" type="Script" id=9]
+[ext_resource path="res://Classes/Components/Flags.gd" type="Script" id=10]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.0
@@ -17,7 +20,7 @@ radius = 8.0
 [sub_resource type="Animation" id=3]
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Pivot/Fireball:frame")
+tracks/0/path = NodePath("../Wrapper/Fireball:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -28,12 +31,26 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 4, 5, 6 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sounds")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "fireball" ],
+"method": "play_sound"
+} ]
+}
 
 [sub_resource type="Animation" id=4]
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Pivot/Fireball:frame")
+tracks/0/path = NodePath("../Wrapper/Fireball:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -51,8 +68,10 @@ tracks/0/keys = {
 collision_layer = 16
 collision_mask = 2560
 script = ExtResource( 2 )
-SPEED = 20
-LIFETIME = 3
+BODY = NodePath(".")
+WRAPPER = NodePath("Wrapper")
+THICKNESS = NodePath("Components/Thickness")
+MOVE = NodePath("Components/Move")
 
 [node name="Body" type="CollisionShape2D" parent="."]
 modulate = Color( 0, 0, 1, 1 )
@@ -60,31 +79,63 @@ position = Vector2( 7, 6 )
 rotation = 1.5708
 shape = SubResource( 1 )
 disabled = true
-script = ExtResource( 6 )
-THICKNESS = 6
 
-[node name="Pivot" type="Node2D" parent="."]
+[node name="Wrapper" type="Node2D" parent="."]
 position = Vector2( 0, 6 )
 
-[node name="Fireball" type="Sprite" parent="Pivot"]
-modulate = Color( 1, 1, 1, 0.207843 )
+[node name="Fireball" type="Sprite" parent="Wrapper"]
 texture = ExtResource( 1 )
 offset = Vector2( 0, -0.5 )
 hframes = 7
+frame = 4
 
-[node name="Hitbox" type="Area2D" parent="Pivot" groups=[
+[node name="Hitbox" type="Area2D" parent="Wrapper" groups=[
 "Hitboxes",
 ]]
+visible = false
 position = Vector2( 7, 0 )
 collision_layer = 2
 collision_mask = 10240
 script = ExtResource( 3 )
+THICKNESS = NodePath("../../Components/Thickness")
 DAMAGE = 100
-SOUND = "fireball"
+DAMAGE_TYPE = 1
 
-[node name="Collider" type="CollisionShape2D" parent="Pivot/Hitbox"]
+[node name="Collider" type="CollisionShape2D" parent="Wrapper/Hitbox"]
 rotation = 1.5708
 shape = SubResource( 2 )
+
+[node name="Components" type="Node" parent="."]
+
+[node name="Automaton" type="Node" parent="Components"]
+script = ExtResource( 4 )
+START_STATE = "Listening"
+
+[node name="Listening" type="Node" parent="Components/Automaton"]
+script = ExtResource( 9 )
+ANIMATIONS = NodePath("../../../Controllers/Animations")
+FLAGS = NodePath("../../Flags")
+HITBOX = NodePath("../../../Wrapper/Hitbox")
+MOVE = NodePath("../../Move")
+
+[node name="Explode" type="Node" parent="Components/Automaton"]
+script = ExtResource( 7 )
+ANIMATIONS = NodePath("../../../Controllers/Animations")
+FLAGS = NodePath("../../Flags")
+
+[node name="Thickness" type="Node" parent="Components"]
+script = ExtResource( 6 )
+THICKNESS = 12
+
+[node name="Move" type="Node" parent="Components"]
+script = ExtResource( 8 )
+BODY = NodePath("../..")
+WRAPPER = NodePath("../../Wrapper")
+FLAGS = NodePath("../Flags")
+MAX_SPEED = Vector2( 160, 0 )
+
+[node name="Flags" type="Node" parent="Components"]
+script = ExtResource( 10 )
 
 [node name="Controllers" type="Node" parent="."]
 
@@ -92,13 +143,8 @@ shape = SubResource( 2 )
 anims/Explode = SubResource( 3 )
 anims/Fire = SubResource( 4 )
 
-[node name="SoundBox" type="AudioStreamPlayer" parent="Controllers"]
+[node name="Sounds" type="AudioStreamPlayer" parent="Controllers"]
 bus = "Sounds"
 script = ExtResource( 5 )
 
-[node name="Timer" type="Timer" parent="Controllers"]
-
-[node name="StateMachine" type="Node" parent="Controllers"]
-
-[node name="Flags" type="Node" parent="Controllers"]
-[connection signal="animation_finished" from="Controllers/Animations" to="." method="_on_Animation_animation_finished"]
+[node name="Time" type="Timer" parent="Controllers"]

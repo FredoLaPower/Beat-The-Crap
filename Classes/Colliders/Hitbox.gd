@@ -7,6 +7,14 @@ extends Area2D
 
 
 #------------------------------------------------------------
+# SIGNALS
+#------------------------------------------------------------
+
+# warning-ignore:unused_signal
+signal hit
+
+
+#------------------------------------------------------------
 # PROPERTIES
 #------------------------------------------------------------
 
@@ -15,8 +23,7 @@ extends Area2D
 #------------------------------
 export(NodePath) var THICKNESS
 export(int) var DAMAGE
-export(String) var SOUND
-
+export(Constants.DAMAGE_TYPE) var DAMAGE_TYPE
 
 #------------------------------------------------------------
 # METHODS
@@ -28,3 +35,8 @@ export(String) var SOUND
 
 func get_thickness() -> int:
 	return get_node(THICKNESS).THICKNESS
+
+
+# warning-ignore:unused_argument
+func callback(hit: bool) -> void:
+	pass

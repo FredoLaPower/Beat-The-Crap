@@ -2,7 +2,7 @@
 # DECLARATION
 #------------------------------------------------------------
 
-extends "res://Classes/GameObject.gd"
+extends "res://Classes/StateMachine/State.gd"
 
 
 #------------------------------------------------------------
@@ -13,21 +13,31 @@ extends "res://Classes/GameObject.gd"
 # EXPORT
 #------------------------------
 
-export(NodePath) var BODY
-export(NodePath) var WRAPPER
-export(NodePath) var THICKNESS
-export(NodePath) var MOVE
-
+export(NodePath) var ANIMATIONS
+export(NodePath) var FLAGS
 
 #------------------------------------------------------------
 # METHODS
 #------------------------------------------------------------
 
 #------------------------------
+# PRIVATE
+#------------------------------
+
+func __on_animation_finished(anim_name: String) -> void:
+	if anim_name == "Explode":
+		owner.queue_free()
+
+
+#------------------------------
 # PUBLIC
 #------------------------------
 
-func initialize(direction: int, pos: Vector2, offset: Vector2) -> void:
-	get_node(BODY).position = pos
-	get_node(WRAPPER).position = offset
-	get_node(MOVE).flip("x", direction)
+func initialize() -> void:
+	# warning-ignore:return_value_discarded
+	get_node(ANIMATIONS).connect("animation_finished", self, "__on_animation_finished")
+
+
+func enter() -> void:
+	get_node(FLAGS).set_flag("is_in_motion", false)
+	get_node(ANIMATIONS).play("Explode")

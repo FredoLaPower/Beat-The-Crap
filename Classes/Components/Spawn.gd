@@ -2,7 +2,8 @@
 # DECLARATION
 #------------------------------------------------------------
 
-extends "res://Classes/GameObject.gd"
+class_name SpawnComponent
+extends Node
 
 
 #------------------------------------------------------------
@@ -13,10 +14,7 @@ extends "res://Classes/GameObject.gd"
 # EXPORT
 #------------------------------
 
-export(NodePath) var BODY
-export(NodePath) var WRAPPER
-export(NodePath) var THICKNESS
-export(NodePath) var MOVE
+export(PackedScene) var SCENE
 
 
 #------------------------------------------------------------
@@ -27,7 +25,9 @@ export(NodePath) var MOVE
 # PUBLIC
 #------------------------------
 
-func initialize(direction: int, pos: Vector2, offset: Vector2) -> void:
-	get_node(BODY).position = pos
-	get_node(WRAPPER).position = offset
-	get_node(MOVE).flip("x", direction)
+func spawn(direction: int, pos: Vector2, offset: Vector2) -> void:
+	var object = SCENE.instance()
+	
+	object.initialize(direction, pos, offset)
+	
+	Globals.Renderer.add_child(object)

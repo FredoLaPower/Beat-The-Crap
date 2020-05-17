@@ -25,16 +25,12 @@ var _flags: Dictionary = {}
 # PRIVATE
 #------------------------------
 
-func __add_flag(name: String, value: bool) -> void:
-	_flags[name] = value
-
-
-#------------------------------
-# PUBLIC
-#------------------------------
-
 func initialize() -> void:
 	pass
+
+
+func add_flag(name: String, value: bool) -> void:
+	_flags[name] = value
 
 
 func get_flag(flag_name: String) -> bool:

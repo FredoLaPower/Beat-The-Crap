@@ -47,7 +47,9 @@ func _physics_process(delta: float) -> void:
 # PUBLIC
 #------------------------------
 func initialize() -> void:
-	pass
+	get_node(FLAGS).add_flag("is_in_motion", false)
+	get_node(FLAGS).add_flag("is_looking_left", false)
+	get_node(FLAGS).add_flag("is_looking_up", false)
 
 
 func flip(axis: String, direction: int) -> void:

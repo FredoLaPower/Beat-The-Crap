@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Classes/GameObject.gd" type="Script" id=1]
 [ext_resource path="res://Classes/Components/Health.gd" type="Script" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://Classes/Colliders/Hitbox.gd" type="Script" id=7]
 [ext_resource path="res://Archives/Billy/States/Kick.gd" type="Script" id=8]
 [ext_resource path="res://Archives/Billy/States/Jump.gd" type="Script" id=9]
-[ext_resource path="res://GameObjects/Characters/Players/Billy/Flags.gd" type="Script" id=10]
+[ext_resource path="res://Classes/Components/Flags.gd" type="Script" id=10]
 [ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=11]
 [ext_resource path="res://Classes/Components/Move.gd" type="Script" id=12]
 [ext_resource path="res://Classes/Components/Jump.gd" type="Script" id=13]
@@ -20,7 +20,8 @@
 [ext_resource path="res://Classes/Components/Thickness.gd" type="Script" id=18]
 [ext_resource path="res://Classes/Controllers/Sounds.gd" type="Script" id=19]
 [ext_resource path="res://Classes/StateMachine/PushdownAutomaton.gd" type="Script" id=20]
-
+[ext_resource path="res://Classes/Components/Spawn.gd" type="Script" id=21]
+[ext_resource path="res://GameObjects/Bullets/Fireball/Fireball.tscn" type="PackedScene" id=22]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -384,11 +385,12 @@ texture = ExtResource( 11 )
 offset = Vector2( 0, -32 )
 vframes = 6
 hframes = 8
+frame = 40
 
 [node name="Colliders" type="Node2D" parent="Wrapper"]
+visible = false
 
 [node name="Hitboxes" type="Node2D" parent="Wrapper/Colliders"]
-visible = false
 
 [node name="Punch" type="Area2D" parent="Wrapper/Colliders/Hitboxes" groups=[
 "Hitboxes",
@@ -399,7 +401,6 @@ collision_mask = 10240
 script = ExtResource( 7 )
 THICKNESS = NodePath("../../../../Components/Thickness")
 DAMAGE = 20
-SOUND = "punch"
 
 [node name="Collider" type="CollisionShape2D" parent="Wrapper/Colliders/Hitboxes/Punch"]
 modulate = Color( 1, 0, 0, 1 )
@@ -414,7 +415,6 @@ collision_mask = 10240
 script = ExtResource( 7 )
 THICKNESS = NodePath("../../../../Components/Thickness")
 DAMAGE = 30
-SOUND = "kick"
 
 [node name="Collider" type="CollisionShape2D" parent="Wrapper/Colliders/Hitboxes/Kick"]
 modulate = Color( 1, 0, 0, 1 )
@@ -504,6 +504,8 @@ SPECIAL_MOVES = NodePath("../../SpecialMoves")
 script = ExtResource( 4 )
 FLAGS = NodePath("../../Flags")
 ANIMATIONS = NodePath("../../../Controllers/Animations")
+SPAWNER = NodePath("../../Spawn")
+SPAWN_POINT = NodePath("../../../Wrapper/SpawnPoints/Fireball")
 
 [node name="Combo" type="Node" parent="Components/Automaton"]
 script = ExtResource( 15 )
@@ -540,6 +542,10 @@ script = ExtResource( 5 )
 [node name="Thickness" type="Node" parent="Components"]
 script = ExtResource( 18 )
 THICKNESS = 8
+
+[node name="Spawn" type="Node" parent="Components"]
+script = ExtResource( 21 )
+SCENE = ExtResource( 22 )
 
 [node name="Controllers" type="Node" parent="."]
 

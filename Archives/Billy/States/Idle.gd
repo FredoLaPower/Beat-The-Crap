@@ -25,7 +25,6 @@ export(NodePath) var PLAYER
 #------------------------------
 # PUBLIC
 #------------------------------
-
 func enter() -> void:
 	get_node(PLAYER).disable_hitboxes()
 	get_node(FLAGS).set_flag("is_in_motion", false)

@@ -45,4 +45,4 @@ func _physics_process(delta: float) -> void:
 #------------------------------
 
 func initialize() -> void:
-	pass
+	get_node(FLAGS).add_flag("is_on_floor", true)

@@ -2,7 +2,7 @@
 # DECLARATION
 #------------------------------------------------------------
 
-extends "res://Classes/Components/Flags.gd"
+extends "res://Classes/Colliders/Hurtbox.gd"
 
 
 #------------------------------------------------------------
@@ -10,10 +10,9 @@ extends "res://Classes/Components/Flags.gd"
 #------------------------------------------------------------
 
 #------------------------------
-# PUBLIC
+# PRIVATE
 #------------------------------
 
-func initialize() -> void:
-	__add_flag("is_looking_left", false)
-	__add_flag("is_on_floor", true)
-	__add_flag("is_in_motion", false)
+# warning-ignore:unused_argument
+func __evaluate_damage(damage: int, type: int = 1) -> int:
+	return damage

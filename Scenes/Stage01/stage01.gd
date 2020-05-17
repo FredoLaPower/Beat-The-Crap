@@ -36,7 +36,7 @@ func _input(event) -> void:
 
 func fireball() -> void:
 	var bullet: Node2D = Fireball.instance()
-	
+
 	Globals.Renderer.add_child(bullet)
-	
-	bullet.spawn(1, get_global_mouse_position(), Vector2.ZERO)
+
+	bullet.initialize(1, get_global_mouse_position(), Vector2.ZERO)

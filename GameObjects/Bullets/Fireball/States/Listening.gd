@@ -13,35 +13,37 @@ extends "res://Classes/StateMachine/State.gd"
 # EXPORT
 #------------------------------
 
-export(NodePath) var FLAGS
 export(NodePath) var ANIMATIONS
-export(NodePath) var SPAWNER
-export(NodePath) var SPAWN_POINT
+export(NodePath) var FLAGS
+export(NodePath) var HITBOX
+export(NodePath) var MOVE
+
 
 #------------------------------------------------------------
 # METHODS
 #------------------------------------------------------------
 
 #------------------------------
+# PRIVATE
+#------------------------------
+func initialize() -> void:
+	# warning-ignore:return_value_discarded
+	get_node(HITBOX).connect("hit", self, "__hit")
+
+
+func __hit() -> void:
+	emit_signal("finished", "Explode")
+
+
+#------------------------------
 # PUBLIC
 #------------------------------
 
-func initialize() -> void:
-	# warning-ignore:return_value_discarded
-	get_node(ANIMATIONS).connect("animation_finished", self, "__on_animation_finished")
-
-
 func enter() -> void:
-	var direction = -1 if get_node(FLAGS).get_flag("is_looking_left") else 1
-	var pos = Vector2(get_node(SPAWN_POINT).global_position.x, owner.global_position.y)
-	var offset = Vector2(0, get_node(SPAWN_POINT).position.y)
-	
-	get_node(SPAWNER).spawn(direction, pos, offset)
-	
-	get_node(FLAGS).set_flag("is_in_motion", false)
-	get_node(ANIMATIONS).play("Hadouken")
+	get_node(FLAGS).set_flag("is_in_motion", true)
+	get_node(ANIMATIONS).play("Fire")
 
 
-func __on_animation_finished(anim_name: String) -> void:
-	if anim_name == "Hadouken":
-		emit_signal("finished", "Previous")
+# warning-ignore:unused_argument
+func update(delta: float) -> void:
+	get_node(MOVE).velocity.x = get_node(MOVE).MAX_SPEED.x
