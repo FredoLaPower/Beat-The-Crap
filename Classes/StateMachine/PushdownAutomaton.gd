@@ -113,3 +113,8 @@ func get_state() -> String:
 # Return the state machine stack
 func get_pushdown() -> Array:
 	return _pushdown
+
+
+func interrupt(new_state: String) -> void:
+	_pushdown.clear()
+	__change_state(new_state)

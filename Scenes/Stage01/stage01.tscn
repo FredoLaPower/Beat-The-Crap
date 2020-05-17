@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/graphics/stages/stage_1/stage_1_layer_fg.png" type="Texture" id=1]
 [ext_resource path="res://assets/graphics/stages/stage_1/stage_1_layer_bg.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Classes/Controllers/Inputs.gd" type="Script" id=8]
 [ext_resource path="res://GameObjects/Characters/Players/Billy/Billy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Stage01/Debug.gd" type="Script" id=10]
+[ext_resource path="res://GameObjects/Characters/NonPlayers/Donovan/Donovan.tscn" type="PackedScene" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 10
@@ -166,3 +167,6 @@ shape = SubResource( 4 )
 
 [node name="Controller" type="Node" parent="."]
 script = ExtResource( 8 )
+
+[node name="Donovan" parent="." instance=ExtResource( 11 )]
+position = Vector2( 140.239, 180.607 )

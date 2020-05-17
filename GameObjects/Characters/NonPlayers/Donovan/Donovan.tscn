@@ -1,22 +1,20 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://Archives/RangeBox.gd" type="Script" id=1]
+[ext_resource path="res://Classes/GameObject.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/spritesheets/donovan.png" type="Texture" id=2]
 [ext_resource path="res://Classes/Colliders/Hitbox.gd" type="Script" id=3]
 [ext_resource path="res://GameObjects/Characters/NonPlayers/Donovan/States/Jab.gd" type="Script" id=4]
 [ext_resource path="res://GameObjects/Characters/NonPlayers/Donovan/States/Uppercut.gd" type="Script" id=5]
 [ext_resource path="res://GameObjects/Characters/NonPlayers/Donovan/States/Idle.gd" type="Script" id=6]
 [ext_resource path="res://GameObjects/Characters/NonPlayers/Donovan/States/Chase.gd" type="Script" id=7]
-[ext_resource path="res://GameObjects/Characters/NonPlayers/Donovan/Donovan.gd" type="Script" id=8]
+[ext_resource path="res://Classes/Components/Flags.gd" type="Script" id=8]
 [ext_resource path="res://Classes/Controllers/Sounds.gd" type="Script" id=9]
 [ext_resource path="res://GameObjects/Characters/NonPlayers/Donovan/States/Hurt.gd" type="Script" id=10]
-[ext_resource path="res://Archives/FlagController.gd" type="Script" id=11]
+[ext_resource path="res://Classes/Components/Move.gd" type="Script" id=11]
 [ext_resource path="res://Classes/StateMachine/PushdownAutomaton.gd" type="Script" id=12]
 [ext_resource path="res://Classes/Colliders/Hurtbox.gd" type="Script" id=13]
-
-
-
-
+[ext_resource path="res://Classes/Components/Thickness.gd" type="Script" id=14]
+[ext_resource path="res://Classes/Components/Health.gd" type="Script" id=15]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
@@ -35,7 +33,7 @@ resource_name = "Hurt_1"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Pivot/Donovan:frame")
+tracks/0/path = NodePath("../Wrapper/Donovan:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -47,7 +45,7 @@ tracks/0/keys = {
 "values": [ 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Pivot/Donovan:position")
+tracks/1/path = NodePath("../Wrapper/Donovan:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -62,7 +60,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=6]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Pivot/Donovan:frame")
+tracks/0/path = NodePath("../Wrapper/Donovan:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -74,7 +72,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Pivot/Donovan:position")
+tracks/1/path = NodePath("../Wrapper/Donovan:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -89,7 +87,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=7]
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Pivot/Donovan:frame")
+tracks/0/path = NodePath("../Wrapper/Donovan:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -101,7 +99,7 @@ tracks/0/keys = {
 "values": [ 9, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Pivot/Hitbox/Collider:disabled")
+tracks/1/path = NodePath("../Wrapper/Hitbox/Collider:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -113,7 +111,7 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Pivot/Hitbox:position")
+tracks/2/path = NodePath("../Wrapper/Hitbox:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -143,7 +141,7 @@ tracks/3/keys = {
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Pivot/Donovan:frame")
+tracks/0/path = NodePath("../Wrapper/Donovan:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -155,7 +153,7 @@ tracks/0/keys = {
 "values": [ 10, 11, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Pivot/Hitbox:position")
+tracks/1/path = NodePath("../Wrapper/Hitbox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -167,7 +165,7 @@ tracks/1/keys = {
 "values": [ Vector2( 35, -55 ), Vector2( 6, -82 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Pivot/Hitbox/Collider:disabled")
+tracks/2/path = NodePath("../Wrapper/Hitbox/Collider:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -183,7 +181,7 @@ tracks/2/keys = {
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Pivot/Donovan:frame")
+tracks/0/path = NodePath("../Wrapper/Donovan:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -200,56 +198,97 @@ tracks/0/keys = {
 ]]
 collision_layer = 512
 collision_mask = 3593
-script = ExtResource( 8 )
-HEALTH = 1000
+script = ExtResource( 1 )
 
 [node name="Body" type="CollisionShape2D" parent="."]
 modulate = Color( 0, 0, 1, 1 )
 position = Vector2( 0, 6 )
 rotation = 1.5708
 shape = SubResource( 1 )
-script = ExtResource( 1 )
-THICKNESS = 12
 
-[node name="Pivot" type="KinematicBody2D" parent="."]
+[node name="Wrapper" type="KinematicBody2D" parent="."]
 position = Vector2( 0, 6 )
 collision_layer = 0
 collision_mask = 0
 
-[node name="Donovan" type="Sprite" parent="Pivot"]
+[node name="Donovan" type="Sprite" parent="Wrapper"]
 texture = ExtResource( 2 )
 offset = Vector2( 9, -43 )
 vframes = 4
 hframes = 4
 frame = 3
 
-[node name="Hitbox" type="Area2D" parent="Pivot" groups=[
+[node name="Hitbox" type="Area2D" parent="Wrapper" groups=[
 "Hitboxes",
 ]]
 collision_layer = 4096
 collision_mask = 2052
 script = ExtResource( 3 )
+THICKNESS = NodePath("../../Components/Thickness")
+DAMAGE = 20
 
-[node name="Collider" type="CollisionShape2D" parent="Pivot/Hitbox"]
+[node name="Collider" type="CollisionShape2D" parent="Wrapper/Hitbox"]
 modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 2 )
 
-[node name="Hurtbox" type="Area2D" parent="Pivot" groups=[
+[node name="Hurtbox" type="Area2D" parent="Wrapper" groups=[
 "Hurtboxes",
 ]]
 collision_layer = 8192
 collision_mask = 0
 script = ExtResource( 13 )
+THICKNESS = NodePath("../../Components/Thickness")
+HEALTH = NodePath("../../Components/Health")
 
-[node name="Collider" type="CollisionShape2D" parent="Pivot/Hurtbox"]
+[node name="Collider" type="CollisionShape2D" parent="Wrapper/Hurtbox"]
 modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 0, -34 )
 shape = SubResource( 3 )
 
-[node name="NotUsed" type="CollisionShape2D" parent="Pivot"]
+[node name="NotUsed" type="CollisionShape2D" parent="Wrapper"]
 visible = false
 shape = SubResource( 4 )
 disabled = true
+
+[node name="Components" type="Node" parent="."]
+
+[node name="StateMachine" type="Node" parent="Components"]
+script = ExtResource( 12 )
+START_STATE = "Idle"
+
+[node name="Idle" type="Node" parent="Components/StateMachine"]
+script = ExtResource( 6 )
+FLAGS = NodePath("../../Flags")
+ANIMATIONS = NodePath("../../../Controllers/Animations")
+
+[node name="Hurt" type="Node" parent="Components/StateMachine"]
+script = ExtResource( 10 )
+
+[node name="Chase" type="Node" parent="Components/StateMachine"]
+script = ExtResource( 7 )
+
+[node name="Jump" type="Node" parent="Components/StateMachine"]
+script = ExtResource( 5 )
+
+[node name="Jab" type="Node" parent="Components/StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Move" type="Node" parent="Components"]
+script = ExtResource( 11 )
+BODY = NodePath("../..")
+WRAPPER = NodePath("../../Wrapper")
+FLAGS = NodePath("../Flags")
+
+[node name="Thickness" type="Node" parent="Components"]
+script = ExtResource( 14 )
+THICKNESS = 12
+
+[node name="Health" type="Node" parent="Components"]
+script = ExtResource( 15 )
+MAX_HEALTH = 200
+
+[node name="Flags" type="Node" parent="Components"]
+script = ExtResource( 8 )
 
 [node name="Controllers" type="Node" parent="."]
 
@@ -261,28 +300,6 @@ anims/Jab = SubResource( 7 )
 anims/Uppercut = SubResource( 8 )
 anims/Walk = SubResource( 9 )
 
-[node name="SoundBox" type="AudioStreamPlayer" parent="Controllers"]
+[node name="Sounds" type="AudioStreamPlayer" parent="Controllers"]
 bus = "Sounds"
 script = ExtResource( 9 )
-
-[node name="StateMachine" type="Node" parent="Controllers"]
-script = ExtResource( 12 )
-START_STATE = "Idle"
-
-[node name="Idle" type="Node" parent="Controllers/StateMachine"]
-script = ExtResource( 6 )
-
-[node name="Hurt" type="Node" parent="Controllers/StateMachine"]
-script = ExtResource( 10 )
-
-[node name="Chase" type="Node" parent="Controllers/StateMachine"]
-script = ExtResource( 7 )
-
-[node name="Jump" type="Node" parent="Controllers/StateMachine"]
-script = ExtResource( 5 )
-
-[node name="Jab" type="Node" parent="Controllers/StateMachine"]
-script = ExtResource( 4 )
-
-[node name="Flags" type="Node" parent="Controllers"]
-script = ExtResource( 11 )

@@ -1,8 +1,29 @@
+#------------------------------------------------------------
+# DECLARATION
+#------------------------------------------------------------
+
 extends "res://Classes/StateMachine/State.gd"
 
 
+#------------------------------------------------------------
+# PROPERTIES
+#------------------------------------------------------------
+
+#------------------------------
+# EXPORT
+#------------------------------
+
+export(NodePath) var FLAGS
+export(NodePath) var ANIMATIONS
+
+
+#------------------------------------------------------------
+# METHODS
+#------------------------------------------------------------
+
+#------------------------------
+# PUBLIC
+#------------------------------
 func enter() -> void:
-	#owner.velocity = Vector2.ZERO
-	#owner.disable_hitboxes()
-	owner.Flags.set_flag("is_in_motion", false)
-	owner.Animations.play("Idle")
+	get_node(FLAGS).set_flag("is_in_motion", false)
+	get_node(ANIMATIONS).play("Idle")

@@ -9,26 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
-"class": "Bullet",
-"language": "GDScript",
-"path": "res://Archives/Objects/Kinematic/Bullet.gd"
-}, {
-"base": "",
-"class": "Character",
-"language": "GDScript",
-"path": "res://Archives/Objects/Kinematic/Character.gd"
-}, {
-"base": "",
-"class": "Destructible",
-"language": "GDScript",
-"path": "res://Archives/Objects/Static/Destructible.gd"
-}, {
-"base": "Reference",
-"class": "FlagController",
-"language": "GDScript",
-"path": "res://Archives/FlagController.gd"
-}, {
 "base": "Node",
 "class": "FlagsComponent",
 "language": "GDScript",
@@ -64,11 +44,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Classes/Components/Jump.gd"
 }, {
-"base": "KinematicBody2D",
-"class": "Kinematic",
-"language": "GDScript",
-"path": "res://Archives/Objects/Kinematic/Kinematic.gd"
-}, {
 "base": "Node",
 "class": "MoveComponent",
 "language": "GDScript",
@@ -79,16 +54,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Classes/template.gd"
 }, {
-"base": "",
-"class": "NonPlayer",
-"language": "GDScript",
-"path": "res://Archives/Objects/Kinematic/NonPlayer.gd"
-}, {
-"base": "",
-"class": "Player",
-"language": "GDScript",
-"path": "res://Archives/Objects/Kinematic/Player.gd"
-}, {
 "base": "Node",
 "class": "PlayerComponent",
 "language": "GDScript",
@@ -98,11 +63,6 @@ _global_script_classes=[ {
 "class": "PushdownAutomaton",
 "language": "GDScript",
 "path": "res://Classes/StateMachine/PushdownAutomaton.gd"
-}, {
-"base": "CollisionShape2D",
-"class": "RangeBox",
-"language": "GDScript",
-"path": "res://Archives/RangeBox.gd"
 }, {
 "base": "AudioStreamPlayer",
 "class": "SoundController",
@@ -129,26 +89,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Classes/StateMachine/State.gd"
 }, {
-"base": "StaticBody2D",
-"class": "Static",
-"language": "GDScript",
-"path": "res://Archives/Objects/Static/Static.gd"
-}, {
 "base": "Node",
 "class": "ThicknessComponent",
 "language": "GDScript",
 "path": "res://Classes/Components/Thickness.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "Wrapper",
-"language": "GDScript",
-"path": "res://Archives/Objects/Kinematic/Wrapper.gd"
 } ]
 _global_script_class_icons={
-"Bullet": "",
-"Character": "",
-"Destructible": "",
-"FlagController": "",
 "FlagsComponent": "",
 "GameObject": "",
 "HealthComponent": "",
@@ -156,22 +102,16 @@ _global_script_class_icons={
 "Hurtbox": "",
 "InputController": "",
 "JumpComponent": "",
-"Kinematic": "",
 "MoveComponent": "",
 "MyClass": "",
-"NonPlayer": "",
-"Player": "",
 "PlayerComponent": "",
 "PushdownAutomaton": "",
-"RangeBox": "",
 "SoundController": "",
 "SpawnComponent": "",
 "SpecialMovesComponent": "",
 "Stage": "",
 "State": "",
-"Static": "",
-"ThicknessComponent": "",
-"Wrapper": ""
+"ThicknessComponent": ""
 }
 
 [application]

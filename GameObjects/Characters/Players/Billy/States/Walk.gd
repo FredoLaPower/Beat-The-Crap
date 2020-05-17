@@ -1,10 +1,36 @@
+#------------------------------------------------------------
+# DECLARATION
+#------------------------------------------------------------
+
 extends "res://Classes/StateMachine/State.gd"
 
 
+#------------------------------------------------------------
+# PROPERTIES
+#------------------------------------------------------------
+
+#------------------------------
+# EXPORT
+#------------------------------
+
+export(NodePath) var FLAGS
+export(NodePath) var ANIMATIONS
+export(NodePath) var MOVE
+export(NodePath) var PLAYER
+
+
+#------------------------------------------------------------
+# METHODS
+#------------------------------------------------------------
+
+#------------------------------
+# PUBLIC
+#------------------------------
+
 func enter() -> void:
-	owner.disable_hitboxes()
-	owner.Flags.set_flag("is_in_motion", true)
-	owner.Animations.play("Walk")
+	get_node(PLAYER).disable_hitboxes()
+	get_node(FLAGS).set_flag("is_in_motion", true)
+	get_node(ANIMATIONS).play("Walk")
 
 
 # warning-ignore:unused_argument
@@ -12,15 +38,15 @@ func update(delta: float):
 	var x_input = Input.get_action_strength("Right") - Input.get_action_strength("Left")
 	var y_input = Input.get_action_strength("Up") - Input.get_action_strength("Down")
 	
-	owner.velocity.x = lerp(owner.velocity.x, x_input * owner.MAX_SPEED.x, Constants.MOTION_ACCELERATION)
-	owner.velocity.y = lerp(owner.velocity.y, -y_input * owner.MAX_SPEED.y, Constants.MOTION_ACCELERATION)
+	get_node(MOVE).velocity.x = lerp(get_node(MOVE).velocity.x, x_input * get_node(MOVE).MAX_SPEED.x, Constants.MOTION_ACCELERATION)
+	get_node(MOVE).velocity.y = lerp(get_node(MOVE).velocity.y, -y_input * get_node(MOVE).MAX_SPEED.y, Constants.MOTION_ACCELERATION)
 	
-	if x_input < 0 && !owner.Flags.get_flag("is_looking_left"):
-		owner.Flags.set_flag("is_looking_left", true)
-		owner.flip_object("x", -1)
-	elif x_input > 0 && owner.Flags.get_flag("is_looking_left"):
-		owner.Flags.set_flag("is_looking_left", false)
-		owner.flip_object("x", 1)
+	if x_input < 0 && !get_node(FLAGS).get_flag("is_looking_left"):
+		get_node(FLAGS).set_flag("is_looking_left", true)
+		get_node(MOVE).flip("x", -1)
+	elif x_input > 0 && get_node(FLAGS).get_flag("is_looking_left"):
+		get_node(FLAGS).set_flag("is_looking_left", false)
+		get_node(MOVE).flip("x", 1)
 	
 	if x_input == 0 && y_input == 0:
 		emit_signal("finished","Idle")

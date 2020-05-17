@@ -3,20 +3,20 @@
 [ext_resource path="res://Classes/GameObject.gd" type="Script" id=1]
 [ext_resource path="res://Classes/Components/Health.gd" type="Script" id=2]
 [ext_resource path="res://Classes/Colliders/Hurtbox.gd" type="Script" id=3]
-[ext_resource path="res://Archives/Billy/States/Hadouken.gd" type="Script" id=4]
+[ext_resource path="res://GameObjects/Characters/Players/Billy/States/Jump.gd" type="Script" id=4]
 [ext_resource path="res://GameObjects/Characters/Players/Billy/SpecialMoves.gd" type="Script" id=5]
-[ext_resource path="res://Archives/Billy/States/Punch.gd" type="Script" id=6]
+[ext_resource path="res://GameObjects/Characters/Players/Billy/States/Kick.gd" type="Script" id=6]
 [ext_resource path="res://Classes/Colliders/Hitbox.gd" type="Script" id=7]
-[ext_resource path="res://Archives/Billy/States/Kick.gd" type="Script" id=8]
-[ext_resource path="res://Archives/Billy/States/Jump.gd" type="Script" id=9]
+[ext_resource path="res://GameObjects/Characters/Players/Billy/States/Punch.gd" type="Script" id=8]
+[ext_resource path="res://GameObjects/Characters/Players/Billy/States/Hadouken.gd" type="Script" id=9]
 [ext_resource path="res://Classes/Components/Flags.gd" type="Script" id=10]
 [ext_resource path="res://assets/graphics/spritesheets/billy.png" type="Texture" id=11]
 [ext_resource path="res://Classes/Components/Move.gd" type="Script" id=12]
 [ext_resource path="res://Classes/Components/Jump.gd" type="Script" id=13]
 [ext_resource path="res://Classes/Components/Player.gd" type="Script" id=14]
-[ext_resource path="res://Archives/Billy/States/Combo.gd" type="Script" id=15]
-[ext_resource path="res://Archives/Billy/States/Walk.gd" type="Script" id=16]
-[ext_resource path="res://Archives/Billy/States/Idle.gd" type="Script" id=17]
+[ext_resource path="res://GameObjects/Characters/Players/Billy/States/Idle.gd" type="Script" id=15]
+[ext_resource path="res://GameObjects/Characters/Players/Billy/States/Combo.gd" type="Script" id=16]
+[ext_resource path="res://GameObjects/Characters/Players/Billy/States/Walk.gd" type="Script" id=17]
 [ext_resource path="res://Classes/Components/Thickness.gd" type="Script" id=18]
 [ext_resource path="res://Classes/Controllers/Sounds.gd" type="Script" id=19]
 [ext_resource path="res://Classes/StateMachine/PushdownAutomaton.gd" type="Script" id=20]
@@ -469,46 +469,46 @@ script = ExtResource( 20 )
 START_STATE = "Idle"
 
 [node name="Idle" type="Node" parent="Components/Automaton"]
-script = ExtResource( 17 )
+script = ExtResource( 15 )
 FLAGS = NodePath("../../Flags")
 ANIMATIONS = NodePath("../../../Controllers/Animations")
 PLAYER = NodePath("../../Player")
 
 [node name="Walk" type="Node" parent="Components/Automaton"]
-script = ExtResource( 16 )
+script = ExtResource( 17 )
 FLAGS = NodePath("../../Flags")
 ANIMATIONS = NodePath("../../../Controllers/Animations")
 MOVE = NodePath("../../Move")
 PLAYER = NodePath("../../Player")
 
 [node name="Jump" type="Node" parent="Components/Automaton"]
-script = ExtResource( 9 )
+script = ExtResource( 4 )
 FLAGS = NodePath("../../Flags")
 ANIMATIONS = NodePath("../../../Controllers/Animations")
 WRAPPER = NodePath("../../../Wrapper")
 JUMP = NodePath("../../Jump")
 
 [node name="Kick" type="Node" parent="Components/Automaton"]
-script = ExtResource( 8 )
-FLAGS = NodePath("../../Flags")
-ANIMATIONS = NodePath("../../../Controllers/Animations")
-SPECIAL_MOVES = NodePath("../../SpecialMoves")
-
-[node name="Punch" type="Node" parent="Components/Automaton"]
 script = ExtResource( 6 )
 FLAGS = NodePath("../../Flags")
 ANIMATIONS = NodePath("../../../Controllers/Animations")
 SPECIAL_MOVES = NodePath("../../SpecialMoves")
 
-[node name="Hadouken" type="Node" parent="Components/Automaton"]
-script = ExtResource( 4 )
+[node name="Punch" type="Node" parent="Components/Automaton"]
+script = ExtResource( 8 )
 FLAGS = NodePath("../../Flags")
 ANIMATIONS = NodePath("../../../Controllers/Animations")
-SPAWNER = NodePath("../../Spawn")
+SPECIAL_MOVES = NodePath("../../SpecialMoves")
+
+[node name="Hadouken" type="Node" parent="Components/Automaton"]
+script = ExtResource( 9 )
+FLAGS = NodePath("../../Flags")
+ANIMATIONS = NodePath("../../../Controllers/Animations")
+SPAWNER = NodePath("../../Spawner")
 SPAWN_POINT = NodePath("../../../Wrapper/SpawnPoints/Fireball")
 
 [node name="Combo" type="Node" parent="Components/Automaton"]
-script = ExtResource( 15 )
+script = ExtResource( 16 )
 FLAGS = NodePath("../../Flags")
 ANIMATIONS = NodePath("../../../Controllers/Animations")
 
@@ -543,7 +543,7 @@ script = ExtResource( 5 )
 script = ExtResource( 18 )
 THICKNESS = 8
 
-[node name="Spawn" type="Node" parent="Components"]
+[node name="Spawner" type="Node" parent="Components"]
 script = ExtResource( 21 )
 SCENE = ExtResource( 22 )
 

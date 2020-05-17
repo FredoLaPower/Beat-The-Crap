@@ -2,8 +2,7 @@
 # DECLARATION
 #------------------------------------------------------------
 
-class_name FlagController
-extends Node
+extends Node2D
 
 
 #------------------------------------------------------------
@@ -11,10 +10,12 @@ extends Node
 #------------------------------------------------------------
 
 #------------------------------
-# PRIVATE
+# EXPORT
 #------------------------------
 
-var _flags: Dictionary = {}
+export(NodePath) var HURTBOX
+export(NodePath) var HEALTH
+export(NodePath) var HEALTH_BAR
 
 
 #------------------------------------------------------------
@@ -25,15 +26,11 @@ var _flags: Dictionary = {}
 # PUBLIC
 #------------------------------
 
-func add_flag(name: String, value: bool) -> void:
-	_flags[name] = value
+func initialize() -> void:
+	# warning-ignore:return_value_discarded
+	get_node(HURTBOX).connect("taking_damage", self, "update")
+	$ProgressBar.value = get_node(HEALTH).MAX_HEALTH
+	$ProgressBar.max_value = get_node(HEALTH).MAX_HEALTH
 
-
-func get_flag(flag_name: String) -> bool:
-	return _flags[flag_name]
-
-func get_flag_dictionnary() -> Dictionary:
-	return _flags
-
-func set_flag(flag_name: String, value: bool) -> void:
-	_flags[flag_name] = value
+func update() -> void:
+	$ProgressBar.value = get_node(HEALTH).get_health()

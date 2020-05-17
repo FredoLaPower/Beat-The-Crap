@@ -1,10 +1,34 @@
+#------------------------------------------------------------
+# DECLARATION
+#------------------------------------------------------------
+
 extends "res://Classes/StateMachine/State.gd"
 
 
+#------------------------------------------------------------
+# PROPERTIES
+#------------------------------------------------------------
+
+#------------------------------
+# EXPORT
+#------------------------------
+
+export(NodePath) var FLAGS
+export(NodePath) var ANIMATIONS
+export(NodePath) var PLAYER
+
+
+#------------------------------------------------------------
+# METHODS
+#------------------------------------------------------------
+
+#------------------------------
+# PUBLIC
+#------------------------------
 func enter() -> void:
-	owner.disable_hitboxes()
-	owner.Flags.set_flag("is_in_motion", false)
-	owner.Animations.play("Idle")
+	get_node(PLAYER).disable_hitboxes()
+	get_node(FLAGS).set_flag("is_in_motion", false)
+	get_node(ANIMATIONS).play("Idle")
 
 
 # warning-ignore:unused_argument
