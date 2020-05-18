@@ -80,6 +80,9 @@ position = Vector2( 537.149, 197.092 )
 [node name="Billy" parent="Ground/Renderer" instance=ExtResource( 9 )]
 position = Vector2( 81.3586, 184.534 )
 
+[node name="Donovan" parent="Ground/Renderer" instance=ExtResource( 11 )]
+position = Vector2( 140.239, 180.607 )
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Pushdown" type="Panel" parent="HUD"]
@@ -167,6 +170,3 @@ shape = SubResource( 4 )
 
 [node name="Controller" type="Node" parent="."]
 script = ExtResource( 8 )
-
-[node name="Donovan" parent="." instance=ExtResource( 11 )]
-position = Vector2( 140.239, 180.607 )
