@@ -19,6 +19,13 @@ export(NodePath) var MOVE
 export(NodePath) var PLAYER
 
 
+#------------------------------
+# PRIVATE
+#------------------------------
+
+var _direction:Vector2 = Vector2.ZERO
+
+
 #------------------------------------------------------------
 # METHODS
 #------------------------------------------------------------
@@ -32,23 +39,23 @@ func enter() -> void:
 	get_node(FLAGS).set_flag("is_in_motion", true)
 	get_node(ANIMATIONS).play("Walk")
 
-
 # warning-ignore:unused_argument
 func update(delta: float):
-	var x_input = Input.get_action_strength("Right") - Input.get_action_strength("Left")
-	var y_input = Input.get_action_strength("Up") - Input.get_action_strength("Down")
+	_direction.x = int(Input.is_action_pressed("Right")) - int(Input.is_action_pressed("Left"))
+	_direction.y = int(Input.is_action_pressed("Up")) - int(Input.is_action_pressed("Down"))
 	
-	get_node(MOVE).velocity.x = lerp(get_node(MOVE).velocity.x, x_input * get_node(MOVE).MAX_SPEED.x, Constants.MOTION_ACCELERATION)
-	get_node(MOVE).velocity.y = lerp(get_node(MOVE).velocity.y, -y_input * get_node(MOVE).MAX_SPEED.y, Constants.MOTION_ACCELERATION)
+	if _direction.length() > 1: # _direction is a normalized vector as we use is_action_ressed instead of get_action_strength
+		_direction *= Constants.DIAGONAL_MOTION_FACTOR
 	
-	if x_input < 0 && !get_node(FLAGS).get_flag("is_looking_left"):
-		get_node(FLAGS).set_flag("is_looking_left", true)
-		get_node(MOVE).flip("x", -1)
-	elif x_input > 0 && get_node(FLAGS).get_flag("is_looking_left"):
-		get_node(FLAGS).set_flag("is_looking_left", false)
-		get_node(MOVE).flip("x", 1)
+	if _direction.x < 0 && not get_node(FLAGS).get_flag("is_looking_left"):
+		get_node(MOVE).flip(-1)
+	elif _direction.x > 0 && get_node(FLAGS).get_flag("is_looking_left"):
+		get_node(MOVE).flip(1)
 	
-	if x_input == 0 && y_input == 0:
+	get_node(MOVE).velocity.x = lerp(get_node(MOVE).velocity.x, _direction.x * get_node(MOVE).MAX_SPEED.x, Constants.MOTION_ACCELERATION)
+	get_node(MOVE).velocity.y = lerp(get_node(MOVE).velocity.y, -_direction.y * get_node(MOVE).MAX_SPEED.y, Constants.MOTION_ACCELERATION)
+	
+	if _direction == Vector2.ZERO:
 		emit_signal("finished","Idle")
 
 

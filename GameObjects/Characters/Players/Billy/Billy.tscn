@@ -385,10 +385,8 @@ texture = ExtResource( 11 )
 offset = Vector2( 0, -32 )
 vframes = 6
 hframes = 8
-frame = 40
 
 [node name="Colliders" type="Node2D" parent="Wrapper"]
-visible = false
 
 [node name="Hitboxes" type="Node2D" parent="Wrapper/Colliders"]
 
@@ -452,13 +450,11 @@ position = Vector2( -0.5, -49 )
 shape = SubResource( 5 )
 
 [node name="SpawnPoints" type="Node2D" parent="Wrapper"]
-visible = false
 
 [node name="Fireball" type="Position2D" parent="Wrapper/SpawnPoints"]
 position = Vector2( 15, -35 )
 
 [node name="NotUsed" type="CollisionShape2D" parent="Wrapper"]
-visible = false
 shape = SubResource( 6 )
 disabled = true
 

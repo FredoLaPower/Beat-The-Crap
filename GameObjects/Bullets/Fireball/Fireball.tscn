@@ -72,6 +72,7 @@ BODY = NodePath(".")
 WRAPPER = NodePath("Wrapper")
 THICKNESS = NodePath("Components/Thickness")
 MOVE = NodePath("Components/Move")
+FLAGS = NodePath("Components/Flags")
 
 [node name="Body" type="CollisionShape2D" parent="."]
 modulate = Color( 0, 0, 1, 1 )

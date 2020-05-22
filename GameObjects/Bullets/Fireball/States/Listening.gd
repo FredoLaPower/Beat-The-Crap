@@ -40,10 +40,5 @@ func __hit() -> void:
 #------------------------------
 
 func enter() -> void:
-	get_node(FLAGS).set_flag("is_in_motion", true)
+	get_node(MOVE).velocity.x = - get_node(MOVE).MAX_SPEED.x if get_node(FLAGS).get_flag("is_looking_left") else get_node(MOVE).MAX_SPEED.x
 	get_node(ANIMATIONS).play("Fire")
-
-
-# warning-ignore:unused_argument
-func update(delta: float) -> void:
-	get_node(MOVE).velocity.x = get_node(MOVE).MAX_SPEED.x

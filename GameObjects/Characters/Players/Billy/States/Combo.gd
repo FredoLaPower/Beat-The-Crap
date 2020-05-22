@@ -35,6 +35,7 @@ func enter() -> void:
 	get_node(FLAGS).set_flag("is_in_motion", false)
 	get_node(ANIMATIONS).play("Combo")
 
+
 func __on_animation_finished(anim_name: String) -> void:
 	if anim_name == "Combo":
 		emit_signal("finished", "Previous")
