@@ -43,7 +43,6 @@ func enter() -> void:
 	_start_position = get_node(WRAPPER).position.y
 	get_node(JUMP).velocity.y = -get_node(JUMP).JUMP_FORCE
 	
-	get_node(FLAGS).set_flag("is_in_motion", false)
 	get_node(FLAGS).set_flag("is_on_floor", false)
 	get_node(ANIMATIONS).play("Jump")
 
